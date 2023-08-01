@@ -2,7 +2,6 @@ import requests
 import pandas as pd
 import os
 import time
-from bs4 import BeautifulSoup
 
 while True:
     
@@ -155,59 +154,89 @@ while True:
         # HTML 코드로 변환
         html = df.to_html(classes='dataframe', index=False)  # index=False 추가
 
-        # Parse the HTML with BeautifulSoup
-        soup = BeautifulSoup(html, 'html.parser')
-
-        # Add dropdown menus to the header row (3rd and 4th columns)
-        header_row = soup.find('thead').find('tr')
-        header_row.find_all('th')[2].append('''<select id="binance-dropdown" onchange="filterTable('binance')">
-        <option value="ALL" selected>All</option><option value="O">O</option><option value="X">X</option></select>''')
-        header_row.find_all('th')[3].append('''<select id="krw-dropdown" onchange="filterTable('krw')">
-        <option value="ALL" selected>All</option><option value="O">O</option><option value="X">X</option></select>''')
-
-        # HTML structure
-        html_structure = f'''
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                /* Existing styles */
-            </style>
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-            <script>
-                function filterTable(column) {{
-                    var value;
-                    if (column === 'binance') {{
-                        value = document.getElementById('binance-dropdown').value;
-                    }} else {{
-                        value = document.getElementById('krw-dropdown').value;
-                    }}
-                    var rows = document.querySelectorAll('.dataframe tbody tr');
-                    rows.forEach(row => {{
-                        var column_value = row.cells[column === 'binance' ? 2 : 3].innerText;
-                        if (value === 'ALL' || value === column_value) {{
-                            row.style.display = '';
-                        }} else {{
-                            row.style.display = 'none';
-                        }}
-                    }});
-                }}
-            </script>
-        </head>
-        <body>
-            <div class="dataTables_wrapper">
-                {str(soup)}
-            </div>
-            <!-- Existing scripts -->
-        </body>
-        </html>
-        '''
-
-        # Save the modified HTML
+        # HTML 파일로 저장
         with open(output_html_name, 'w', encoding='utf-8') as f:
-            f.write(html_structure)
+            f.write('''
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body {{
+                        margin: 0;
+                        padding: 0;
+                    }}
+                    .dataframe {{
+                        width: 60%;
+                        height: 80%;
+                    }}
+                    .dataTables_wrapper {{
+                        width: 90%;
+                        margin: auto;
+                    }}
+                    .dataframe td:nth-child(2) {{
+                        text-align: center;
+                        width: 50px;
+                    }}
+                    .dataframe td:nth-child(3) {{
+                        text-align: center;
+                        width: 100px;
+                    }}
+                    .dataframe td:nth-child(4) {{
+                        text-align: center;
+                        width: 50px;
+                    }}
+                        .dataframe td:nth-child(5) {{
+                        width: 50px;
+                    }}
+                    .dataframe td:nth-child(6) {{
+                        width: 100px;
+                    }}
+                    .dataframe td:nth-child(7) {{
+                        width: 50px;
+                    }}
+                    .dataframe td:nth-child(8) {{
+                        width: 50px;
+                    }}
+                </style>
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+            </head>
+            <body>
+            <div class="dataTables_wrapper">
+            {table}
+            </div>
+            <script>
+            $(document).ready( function () {{
+                var t = $('.dataframe').DataTable({{
+                    "searching": true,
+                    "paging": false,
+                    "info": false,
+                    "lengthChange": false,
+                    "scrollY": '80vh',
+                    "scrollX": true,
+                    "scrollCollapse": true,
+                    "fixedHeader": true,
+                    "autoWidth": false,
+                    "order": [[ 1, "asc" ]],  // 2nd column as the initial sorting column
+                    "columnDefs": [ {{
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": 0
+                    }} ]
+                }});
+
+                // This will add numbers on the leftmost column
+                t.on( 'order.dt search.dt', function () {{
+                    t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
+                        cell.innerHTML = i+1;
+                    }});
+                }}).draw();
+            }});
+            </script>
+            </body>
+            </html>
+            '''.format(table=html))
 
         print(f"Data retrieval successful and saved to {output_html_name}!")
         
