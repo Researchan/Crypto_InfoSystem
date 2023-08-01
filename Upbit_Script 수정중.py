@@ -183,8 +183,8 @@ while True:
             </head>
             <body>
             <div class="dataTables_wrapper">
-                <div id="filter"></div>
-                {table}
+            <div id="filter"></div>
+            {table}
             </div>
             <script>
             $(document).ready( function () {{
