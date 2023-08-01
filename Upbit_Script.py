@@ -139,8 +139,8 @@ while True:
 
         df = df.reindex(columns=['UpbitTicker', 'Binance_Future_listing', 'KRW_Listing', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
         df.rename(columns={
-            'Binance_Future_listing': '바낸 선물 상장',
-            'KRW_Listing': '원화 상장',
+            'Binance_Future_listing': '바낸 선물',
+            'KRW_Listing': '원화',
             'CG_MarketCap': '유통 시가총액 (코인 개코)',
             'CMC_MarketCap': '유통 시가총액 (코인 마켓캡)',
             'CG_FDV': '총 시가총액 (코인 개코)',
@@ -175,9 +175,15 @@ while True:
                     }}
                     .dataframe td:nth-child(2) {{
                         text-align: center;
+                        width: 50px;
                     }}
                     .dataframe td:nth-child(3) {{
                         text-align: center;
+                        width: 100px;
+                    }}
+                    .dataframe td:nth-child(4) {{
+                        text-align: center;
+                        width: 100px;
                     }}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
