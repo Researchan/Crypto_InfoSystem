@@ -173,30 +173,6 @@ while True:
                         width: 90%;
                         margin: auto;
                     }}
-                    .dataframe td:nth-child(2) {{
-                        text-align: center;
-                        width: 50px;
-                    }}
-                    .dataframe td:nth-child(3) {{
-                        text-align: center;
-                        width: 100px;
-                    }}
-                    .dataframe td:nth-child(4) {{
-                        text-align: center;
-                        width: 50px;
-                    }}
-                        .dataframe td:nth-child(5) {{
-                        width: 50px;
-                    }}
-                    .dataframe td:nth-child(6) {{
-                        width: 100px;
-                    }}
-                    .dataframe td:nth-child(7) {{
-                        width: 50px;
-                    }}
-                    .dataframe td:nth-child(8) {{
-                        width: 50px;
-                    }}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
                 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -225,15 +201,66 @@ while True:
                         "targets": 0
                     }} ]
                 }});
-
+            
                 // This will add numbers on the leftmost column
                 t.on( 'order.dt search.dt', function () {{
                     t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
                         cell.innerHTML = i+1;
                     }});
                 }}).draw();
+                
             }});
             </script>
+            <script>
+            // 기존 filterTable 함수 ...
+
+            // ## DROPDOWN CODE ##
+            $(document).ready( function () {{
+                var t = $('.dataframe').DataTable({{
+                    initComplete: function () {{
+                        // 3열에 드롭다운 메뉴 추가
+                        this.api().columns(2).every( function () {{
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.header()) )
+                                .on( 'change', function () {{
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }} );
+
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            }} );
+                        }} );
+
+                        // 4열에 드롭다운 메뉴 추가
+                        this.api().columns(3).every( function () {{
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.header()) )
+                                .on( 'change', function () {{
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }} );
+
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            }} );
+                        }} );
+                    }}
+                }});
+            }});
+        </script>
             </body>
             </html>
             '''.format(table=html))

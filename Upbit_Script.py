@@ -173,34 +173,6 @@ while True:
                         width: 90%;
                         margin: auto;
                     }}
-                    .dataframe td:nth-child(1) {{
-                        text-align: center;
-                        width: 30px;
-                    }}
-                    .dataframe td:nth-child(2) {{
-                        text-align: center;
-                        width: 50px;
-                    }}
-                    .dataframe td:nth-child(3) {{
-                        text-align: center;
-                        width: 100px;
-                    }}
-                    .dataframe td:nth-child(4) {{
-                        text-align: center;
-                        width: 50px;
-                    }}
-                    .dataframe td:nth-child(5) {{
-                        width: 200px;
-                    }}
-                    .dataframe td:nth-child(6) {{
-                        width: 200px;
-                    }}
-                    .dataframe td:nth-child(7) {{
-                        width: 200px;
-                    }}
-                    .dataframe td:nth-child(8) {{
-                        width: 200px;
-                    }}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
                 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -229,7 +201,7 @@ while True:
                         "targets": 0
                     }} ]
                 }});
-
+            
                 // This will add numbers on the leftmost column
                 t.on( 'order.dt search.dt', function () {{
                     t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
