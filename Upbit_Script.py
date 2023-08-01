@@ -173,6 +173,10 @@ while True:
                         width: 90%;
                         margin: auto;
                     }}
+                    .dataframe td:nth-child(1) {{
+                        text-align: center;
+                        width: 30px;
+                    }}
                     .dataframe td:nth-child(2) {{
                         text-align: center;
                         width: 50px;
@@ -185,17 +189,17 @@ while True:
                         text-align: center;
                         width: 50px;
                     }}
-                        .dataframe td:nth-child(5) {{
-                        width: 50px;
+                    .dataframe td:nth-child(5) {{
+                        width: 200px;
                     }}
                     .dataframe td:nth-child(6) {{
-                        width: 100px;
+                        width: 200px;
                     }}
                     .dataframe td:nth-child(7) {{
-                        width: 50px;
+                        width: 200px;
                     }}
                     .dataframe td:nth-child(8) {{
-                        width: 50px;
+                        width: 200px;
                     }}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
