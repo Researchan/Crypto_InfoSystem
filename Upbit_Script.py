@@ -173,7 +173,10 @@ while True:
                         width: 90%;
                         margin: auto;
                     }}
-                    .dataframe td:nth-child(2), .dataframe td:nth-child(3) {{
+                    .dataframe td:nth-child(2) {{
+                        text-align: center;
+                    }}
+                    .dataframe td:nth-child(3) {{
                         text-align: center;
                     }}
                 </style>
