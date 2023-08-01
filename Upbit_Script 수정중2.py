@@ -221,10 +221,11 @@ while True:
                                         .draw();
                                 }} );
 
-                                column.data().unique().sort().each( function ( d, j ) {{
-                                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                                }} );
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
                             }} );
+                        }} );
+                    }},
                     "searching": true,
                     "paging": false,
                     "info": false,
@@ -241,16 +242,15 @@ while True:
                         "targets": 0
                     }} ]
                 }});
-            
+
                 // This will add numbers on the leftmost column
                 t.on( 'order.dt search.dt', function () {{
                     t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
                         cell.innerHTML = i+1;
                     }});
                 }}).draw();
-                
-            }});
 
+            }});
             </script>
             </body>
             </html>
