@@ -185,6 +185,47 @@ while True:
             <script>
             $(document).ready( function () {{
                 var t = $('.dataframe').DataTable({{
+                    initComplete: function () {{
+                        // 3열에 드롭다운 메뉴 추가
+                        this.api().columns(2).every( function () {{
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.header()) )
+                                .on( 'change', function () {{
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }} );
+
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            }} );
+                        }} );
+
+                        // 4열에 드롭다운 메뉴 추가
+                        this.api().columns(3).every( function () {{
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.header()) )
+                                .on( 'change', function () {{
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }} );
+
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            }} );
+                        }} );
+                    }},
                     "searching": true,
                     "paging": false,
                     "info": false,
@@ -201,13 +242,14 @@ while True:
                         "targets": 0
                     }} ]
                 }});
-            
+
                 // This will add numbers on the leftmost column
                 t.on( 'order.dt search.dt', function () {{
                     t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
                         cell.innerHTML = i+1;
                     }});
                 }}).draw();
+
             }});
             </script>
             </body>
