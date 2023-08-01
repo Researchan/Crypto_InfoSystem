@@ -161,21 +161,21 @@ while True:
             <html>
             <head>
                 <style>
-                    body {
+                    body {{
                         margin: 0;
                         padding: 0;
-                    }
-                    .dataframe {
+                    }}
+                    .dataframe {{
                         width: 60%;
                         height: 80%;
-                    }
-                    .dataTables_wrapper {
+                    }}
+                    .dataTables_wrapper {{
                         width: 90%;
                         margin: auto;
-                    }
-                    .dataframe td:nth-child(2), .dataframe td:nth-child(3) {
+                    }}
+                    .dataframe td:nth-child(2), .dataframe td:nth-child(3) {{
                         text-align: center;
-                    }
+                    }}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
                 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -187,8 +187,8 @@ while True:
                 {table}
             </div>
             <script>
-            $(document).ready( function () {
-                var t = $('.dataframe').DataTable({
+            $(document).ready( function () {{
+                var t = $('.dataframe').DataTable({{
                     "searching": true,
                     "paging": false,
                     "info": false,
@@ -199,12 +199,12 @@ while True:
                     "fixedHeader": true,
                     "autoWidth": false,
                     "order": [[ 1, "asc" ]],  // 2nd column as the initial sorting column
-                    "columnDefs": [ {
+                    "columnDefs": [ {{
                         "searchable": false,
                         "orderable": false,
                         "targets": 0
-                    }]
-                });
+                    }} ]
+                }});
 
                 $('#filter').html('바낸 선물 상장: <select id="filterBinance"></select> 원화 상장: <select id="filterKRW"></select>');
                 $('#filterBinance').append('<option value="">전체</option>');
@@ -223,12 +223,12 @@ while True:
                 });
 
                 // This will add numbers on the leftmost column
-                t.on( 'order.dt search.dt', function () {
-                    t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                t.on( 'order.dt search.dt', function () {{
+                    t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
                         cell.innerHTML = i+1;
-                    });
-                }).draw();
-            });
+                    }});
+                }}).draw();
+            }});
             </script>
             </body>
             </html>
