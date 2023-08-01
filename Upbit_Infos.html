@@ -1,1968 +1,1935 @@
 
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <style>
-                    body {
-                        margin: 0;
-                        padding: 0;
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                /* Existing styles */
+            </style>
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+            <script>
+                function filterTable(column) {
+                    var value;
+                    if (column === 'binance') {
+                        value = document.getElementById('binance-dropdown').value;
+                    } else {
+                        value = document.getElementById('krw-dropdown').value;
                     }
-                    .dataframe {
-                        width: 60%;
-                        height: 80%;
-                    }
-                    .dataTables_wrapper {
-                        width: 90%;
-                        margin: auto;
-                    }
-                    .filter-dropdown {
-                        margin: 10px;
-                    }
-                    /* Add other styles as needed */
-                </style>
-                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-                <script>
-                    function filterTable() {
-                        var value_binance = document.getElementById('binance-dropdown').value;
-                        var value_krw = document.getElementById('krw-dropdown').value;
-                        var rows = document.querySelectorAll('.dataframe tbody tr');
-                        rows.forEach(row => {
-                            var binance_column = row.cells[3].innerText; // Adjust the index as needed
-                            var krw_column = row.cells[4].innerText; // Adjust the index as needed
-                            if ((value_binance === 'ALL' || value_binance === binance_column) &&
-                                (value_krw === 'ALL' || value_krw === krw_column)) {
-                                row.style.display = '';
-                            } else {
-                                row.style.display = 'none';
-                            }
-                        });
-                    }
-                </script>
-            </head>
-            <body>
-                <div class="filter-dropdown">
-                    <label for="binance-dropdown">Binance Future Listing:</label>
-                    <select id="binance-dropdown" onchange="filterTable()">
-                        <option value="ALL">All</option>
-                        <option value="O">O</option>
-                        <option value="X">X</option>
-                    </select>
-                    <label for="krw-dropdown">KRW Listing:</label>
-                    <select id="krw-dropdown" onchange="filterTable()">
-                        <option value="ALL">All</option>
-                        <option value="O">O</option>
-                        <option value="X">X</option>
-                    </select>
-                </div>
-                <div class="dataTables_wrapper">
-                <table border="1" class="dataframe dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>UpbitTicker</th>
-      <th>바낸 선물</th>
-      <th>원화</th>
-      <th>유통 시가총액 (CG)</th>
-      <th>유통 시가총액 (CMC)</th>
-      <th>총 시가총액 (CG)</th>
-      <th>총 시가총액(CMC)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>1INCH</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$319,510,215</td>
-      <td>$319,421,380</td>
-      <td>$466,637,069</td>
-      <td>$466,507,327</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>AAVE</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$932,293,853</td>
-      <td>$927,991,088</td>
-      <td>$1,028,329,292</td>
-      <td>$1,023,583,332</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>ACM</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$12,533,996</td>
-      <td>$12,475,460</td>
-      <td>$48,268,935</td>
-      <td>$48,139,790</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>ACS</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$65,656,474</td>
-      <td>$0</td>
-      <td>$217,798,375</td>
-      <td>$217,654,952</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>ADA</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$10,674,053,294</td>
-      <td>$10,667,067,060</td>
-      <td>$13,706,152,454</td>
-      <td>$13,711,181,143</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>AERGO</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$47,618,037</td>
-      <td>$47,691,479</td>
-      <td>$54,733,376</td>
-      <td>$54,817,792</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>AFC</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$15,962,288</td>
-      <td>$7,530,906</td>
-      <td>$64,088,602</td>
-      <td>$63,934,613</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>AGLD</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$47,591,210</td>
-      <td>$43,058,040</td>
-      <td>$49,266,262</td>
-      <td>$43,058,040</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>AHT</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$32,465,546</td>
-      <td>$31,963,688</td>
-      <td>$86,528,164</td>
-      <td>$85,694,011</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>ALGO</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$847,019,335</td>
-      <td>$845,223,052</td>
-      <td>$1,085,196,620</td>
-      <td>$1,082,895,224</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>ANKR</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$202,273,535</td>
-      <td>$247,562,278</td>
-      <td>$247,796,189</td>
-      <td>$247,562,278</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>APE</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$662,157,895</td>
-      <td>$660,455,323</td>
-      <td>$1,796,443,632</td>
-      <td>$1,791,824,532</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>API3</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$83,233,242</td>
-      <td>$83,235,313</td>
-      <td>$121,103,075</td>
-      <td>$120,703,455</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>APT</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$1,504,933,758</td>
-      <td>$1,505,598,167</td>
-      <td>$7,215,668,570</td>
-      <td>$7,219,225,551</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td>AQT</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$27,075,437</td>
-      <td>$26,503,134</td>
-      <td>$30,489,458</td>
-      <td>$29,844,993</td>
-    </tr>
-    <tr>
-      <td>15</td>
-      <td>ARB</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$1,453,537,038</td>
-      <td>$1,452,900,367</td>
-      <td>$11,400,290,495</td>
-      <td>$11,395,296,996</td>
-    </tr>
-    <tr>
-      <td>16</td>
-      <td>ARDR</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$76,902,109</td>
-      <td>$75,909,995</td>
-      <td>$76,902,109</td>
-      <td>$75,909,995</td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td>ARK</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$50,882,442</td>
-      <td>$50,939,491</td>
-      <td>$0</td>
-      <td>$50,939,491</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>ARPA</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$49,856,943</td>
-      <td>$63,020,540</td>
-      <td>$101,523,584</td>
-      <td>$101,409,773</td>
-    </tr>
-    <tr>
-      <td>19</td>
-      <td>ASTR</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$242,606,017</td>
-      <td>$242,756,693</td>
-      <td>$436,476,182</td>
-      <td>$428,660,597</td>
-    </tr>
-    <tr>
-      <td>20</td>
-      <td>ATM</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$10,939,919</td>
-      <td>$10,924,922</td>
-      <td>$28,421,692</td>
-      <td>$28,382,733</td>
-    </tr>
-    <tr>
-      <td>21</td>
-      <td>ATOM</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$2,572,290,020</td>
-      <td>$3,047,084,074</td>
-      <td>$0</td>
-      <td>$0</td>
-    </tr>
-    <tr>
-      <td>22</td>
-      <td>AUCTION</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$42,137,138</td>
-      <td>$42,367,152</td>
-      <td>$64,826,165</td>
-      <td>$65,180,034</td>
-    </tr>
-    <tr>
-      <td>23</td>
-      <td>AUDIO</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$190,774,063</td>
-      <td>$190,871,053</td>
-      <td>$203,229,714</td>
-      <td>$206,001,505</td>
-    </tr>
-    <tr>
-      <td>24</td>
-      <td>AVAX</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$4,400,533,513</td>
-      <td>$4,393,331,692</td>
-      <td>$9,154,949,604</td>
-      <td>$9,140,049,516</td>
-    </tr>
-    <tr>
-      <td>25</td>
-      <td>AXS</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$781,021,223</td>
-      <td>$838,482,738</td>
-      <td>$1,613,550,216</td>
-      <td>$1,611,247,555</td>
-    </tr>
-    <tr>
-      <td>26</td>
-      <td>BAR</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$28,012,692</td>
-      <td>$27,973,058</td>
-      <td>$107,114,178</td>
-      <td>$107,069,695</td>
-    </tr>
-    <tr>
-      <td>27</td>
-      <td>BAT</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$297,837,513</td>
-      <td>$298,147,961</td>
-      <td>$299,866,191</td>
-      <td>$300,178,753</td>
-    </tr>
-    <tr>
-      <td>28</td>
-      <td>BCH</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$4,713,923,305</td>
-      <td>$4,706,535,425</td>
-      <td>$5,085,806,263</td>
-      <td>$5,077,845,307</td>
-    </tr>
-    <tr>
-      <td>29</td>
-      <td>BFC</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$59,941,922</td>
-      <td>$61,390,349</td>
-      <td>$102,272,008</td>
-      <td>$104,863,810</td>
-    </tr>
-    <tr>
-      <td>30</td>
-      <td>BLUR</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$240,972,423</td>
-      <td>$240,612,463</td>
-      <td>$893,191,885</td>
-      <td>$892,004,364</td>
-    </tr>
-    <tr>
-      <td>31</td>
-      <td>BNT</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$55,392,277</td>
-      <td>$55,478,561</td>
-      <td>$55,392,277</td>
-      <td>$59,615,492</td>
-    </tr>
-    <tr>
-      <td>32</td>
-      <td>BORA</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$147,300,718</td>
-      <td>$145,613,262</td>
-      <td>$178,724,871</td>
-      <td>$176,677,425</td>
-    </tr>
-    <tr>
-      <td>33</td>
-      <td>BSV</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$728,977,692</td>
-      <td>$728,488,263</td>
-      <td>$794,584,793</td>
-      <td>$794,051,316</td>
-    </tr>
-    <tr>
-      <td>34</td>
-      <td>BTC</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$561,390,183,757</td>
-      <td>$561,212,280,750</td>
-      <td>$606,285,635,031</td>
-      <td>$606,094,876,250</td>
-    </tr>
-    <tr>
-      <td>35</td>
-      <td>BTG</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$308,134,015</td>
-      <td>$309,532,036</td>
-      <td>$369,466,850</td>
-      <td>$371,143,150</td>
-    </tr>
-    <tr>
-      <td>36</td>
-      <td>BTT</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$440,984,394</td>
-      <td>$440,466,473</td>
-      <td>$458,865,446</td>
-      <td>$458,326,525</td>
-    </tr>
-    <tr>
-      <td>37</td>
-      <td>CBK</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$47,301,505</td>
-      <td>$46,859,259</td>
-      <td>$61,874,446</td>
-      <td>$61,295,950</td>
-    </tr>
-    <tr>
-      <td>38</td>
-      <td>CELO</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$251,183,219</td>
-      <td>$250,820,982</td>
-      <td>$494,019,312</td>
-      <td>$493,306,876</td>
-    </tr>
-    <tr>
-      <td>39</td>
-      <td>CHR</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$59,278,634</td>
-      <td>$71,006,275</td>
-      <td>$103,580,301</td>
-      <td>$103,424,784</td>
-    </tr>
-    <tr>
-      <td>40</td>
-      <td>CHZ</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$535,476,837</td>
-      <td>$544,402,159</td>
-      <td>$682,344,447</td>
-      <td>$680,714,736</td>
-    </tr>
-    <tr>
-      <td>41</td>
-      <td>CITY</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$22,898,796</td>
-      <td>$22,853,583</td>
-      <td>$67,819,178</td>
-      <td>$66,805,362</td>
-    </tr>
-    <tr>
-      <td>42</td>
-      <td>COMP</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$441,296,832</td>
-      <td>$499,358,797</td>
-      <td>$643,657,106</td>
-      <td>$640,894,946</td>
-    </tr>
-    <tr>
-      <td>43</td>
-      <td>CRE</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$35,778,340</td>
-      <td>$38,378,106</td>
-      <td>$40,579,219</td>
-      <td>$39,133,653</td>
-    </tr>
-    <tr>
-      <td>44</td>
-      <td>CRO</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$1,536,869,023</td>
-      <td>$1,482,115,120</td>
-      <td>$1,760,387,736</td>
-      <td>$1,775,452,078</td>
-    </tr>
-    <tr>
-      <td>45</td>
-      <td>CRV</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$533,240,468</td>
-      <td>$533,202,474</td>
-      <td>$1,979,843,214</td>
-      <td>$1,979,783,254</td>
-    </tr>
-    <tr>
-      <td>46</td>
-      <td>CTC</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$46,885,504</td>
-      <td>$46,934,484</td>
-      <td>$383,577,543</td>
-      <td>$115,193,478</td>
-    </tr>
-    <tr>
-      <td>47</td>
-      <td>CTSI</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$107,609,150</td>
-      <td>$107,173,589</td>
-      <td>$144,743,716</td>
-      <td>$144,331,346</td>
-    </tr>
-    <tr>
-      <td>48</td>
-      <td>CVC</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$68,915,204</td>
-      <td>$85,582,523</td>
-      <td>$85,929,181</td>
-      <td>$85,582,523</td>
-    </tr>
-    <tr>
-      <td>49</td>
-      <td>DAD</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$0</td>
-      <td>$7,503,273</td>
-      <td>$12,568,916</td>
-      <td>$12,462,185</td>
-    </tr>
-    <tr>
-      <td>50</td>
-      <td>DAI</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$4,141,470,204</td>
-      <td>$4,561,157,396</td>
-      <td>$4,141,470,204</td>
-      <td>$4,561,157,396</td>
-    </tr>
-    <tr>
-      <td>51</td>
-      <td>DAWN</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$47,528,819</td>
-      <td>$43,554,134</td>
-      <td>$48,884,450</td>
-      <td>$54,669,814</td>
-    </tr>
-    <tr>
-      <td>52</td>
-      <td>DENT</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$70,239,186</td>
-      <td>$72,674,414</td>
-      <td>$73,429,737</td>
-      <td>$73,402,722</td>
-    </tr>
-    <tr>
-      <td>53</td>
-      <td>DGB</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$130,269,871</td>
-      <td>$130,951,951</td>
-      <td>$166,774,372</td>
-      <td>$167,648,780</td>
-    </tr>
-    <tr>
-      <td>54</td>
-      <td>DKA</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$95,570,687</td>
-      <td>$96,474,054</td>
-      <td>$156,203,792</td>
-      <td>$157,680,285</td>
-    </tr>
-    <tr>
-      <td>55</td>
-      <td>DNT</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$20,815,342</td>
-      <td>$28,374,906</td>
-      <td>$27,708,653</td>
-      <td>$28,374,906</td>
-    </tr>
-    <tr>
-      <td>56</td>
-      <td>DOGE</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$10,780,097,201</td>
-      <td>$10,781,470,567</td>
-      <td>$10,780,100,272</td>
-      <td>$10,781,470,567</td>
-    </tr>
-    <tr>
-      <td>57</td>
-      <td>DOT</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$6,400,903,116</td>
-      <td>$6,149,356,133</td>
-      <td>$6,812,370,603</td>
-      <td>$6,806,981,501</td>
-    </tr>
-    <tr>
-      <td>58</td>
-      <td>EGLD</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$815,798,905</td>
-      <td>$815,564,105</td>
-      <td>$994,215,576</td>
-      <td>$993,929,425</td>
-    </tr>
-    <tr>
-      <td>59</td>
-      <td>ELF</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$128,261,160</td>
-      <td>$173,076,593</td>
-      <td>$244,661,785</td>
-      <td>$277,911,512</td>
-    </tr>
-    <tr>
-      <td>60</td>
-      <td>ENJ</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$293,317,462</td>
-      <td>$293,357,704</td>
-      <td>$293,317,462</td>
-      <td>$293,357,704</td>
-    </tr>
-    <tr>
-      <td>61</td>
-      <td>ENS</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$245,575,101</td>
-      <td>$273,641,940</td>
-      <td>$952,460,452</td>
-      <td>$951,924,218</td>
-    </tr>
-    <tr>
-      <td>62</td>
-      <td>EOS</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$819,941,384</td>
-      <td>$807,749,486</td>
-      <td>$0</td>
-      <td>$807,749,486</td>
-    </tr>
-    <tr>
-      <td>63</td>
-      <td>ETC</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$2,586,138,864</td>
-      <td>$2,585,406,410</td>
-      <td>$3,830,213,396</td>
-      <td>$3,829,146,173</td>
-    </tr>
-    <tr>
-      <td>64</td>
-      <td>ETH</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$221,722,310,175</td>
-      <td>$221,627,111,190</td>
-      <td>$221,722,310,175</td>
-      <td>$221,627,111,190</td>
-    </tr>
-    <tr>
-      <td>65</td>
-      <td>FCT2</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$44,043,390</td>
-      <td>$43,722,518</td>
-      <td>$46,788,517</td>
-      <td>$46,447,646</td>
-    </tr>
-    <tr>
-      <td>66</td>
-      <td>FIL</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$1,847,607,006</td>
-      <td>$1,845,416,562</td>
-      <td>$8,263,445,422</td>
-      <td>$8,253,713,998</td>
-    </tr>
-    <tr>
-      <td>67</td>
-      <td>FLOW</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$599,367,433</td>
-      <td>$598,574,552</td>
-      <td>$837,538,446</td>
-      <td>$836,430,498</td>
-    </tr>
-    <tr>
-      <td>68</td>
-      <td>FOR</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$10,589,358</td>
-      <td>$101,549</td>
-      <td>$18,784,848</td>
-      <td>$520,746</td>
-    </tr>
-    <tr>
-      <td>69</td>
-      <td>FX</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$90,978,992</td>
-      <td>$58,728,971</td>
-      <td>$271,732,859</td>
-      <td>$272,141,328</td>
-    </tr>
-    <tr>
-      <td>70</td>
-      <td>GAL</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$58,523,652</td>
-      <td>$93,643,360</td>
-      <td>$251,469,494</td>
-      <td>$250,776,693</td>
-    </tr>
-    <tr>
-      <td>71</td>
-      <td>GAS</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$37,577,389</td>
-      <td>$27,260,006</td>
-      <td>$269,659,677</td>
-      <td>$269,144,911</td>
-    </tr>
-    <tr>
-      <td>72</td>
-      <td>GLM</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$206,161,901</td>
-      <td>$204,687,374</td>
-      <td>$206,161,901</td>
-      <td>$204,687,374</td>
-    </tr>
-    <tr>
-      <td>73</td>
-      <td>GMT</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$214,087,468</td>
-      <td>$214,048,865</td>
-      <td>$1,272,359,735</td>
-      <td>$1,272,130,312</td>
-    </tr>
-    <tr>
-      <td>74</td>
-      <td>GO</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$4,497,881</td>
-      <td>$5,294,251</td>
-      <td>$3,740,761</td>
-      <td>$5,294,251</td>
-    </tr>
-    <tr>
-      <td>75</td>
-      <td>GRS</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$29,837,642</td>
-      <td>$29,100,709</td>
-      <td>$37,706,975</td>
-      <td>$36,775,840</td>
-    </tr>
-    <tr>
-      <td>76</td>
-      <td>GRT</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$987,583,135</td>
-      <td>$987,076,047</td>
-      <td>$1,083,256,490</td>
-      <td>$1,160,383,370</td>
-    </tr>
-    <tr>
-      <td>77</td>
-      <td>GTC</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$61,201,561</td>
-      <td>$63,594,636</td>
-      <td>$100,555,654</td>
-      <td>$100,433,100</td>
-    </tr>
-    <tr>
-      <td>78</td>
-      <td>HBAR</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$1,661,687,756</td>
-      <td>$1,661,182,520</td>
-      <td>$2,556,623,108</td>
-      <td>$2,555,845,768</td>
-    </tr>
-    <tr>
-      <td>79</td>
-      <td>HBD</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$0</td>
-      <td>$0</td>
-      <td>$0</td>
-      <td>$0</td>
-    </tr>
-    <tr>
-      <td>80</td>
-      <td>HIFI</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$33,029,771</td>
-      <td>$30,340,406</td>
-      <td>$38,392,450</td>
-      <td>$37,658,378</td>
-    </tr>
-    <tr>
-      <td>81</td>
-      <td>HIVE</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$133,672,360</td>
-      <td>$178,241,615</td>
-      <td>$0</td>
-      <td>$178,241,615</td>
-    </tr>
-    <tr>
-      <td>82</td>
-      <td>HPO</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$0</td>
-      <td>$0</td>
-      <td>$85,972,931</td>
-      <td>$332,414,461</td>
-    </tr>
-    <tr>
-      <td>83</td>
-      <td>HUNT</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$71,967,855</td>
-      <td>$39,255,815</td>
-      <td>$71,967,855</td>
-      <td>$70,802,281</td>
-    </tr>
-    <tr>
-      <td>84</td>
-      <td>ICX</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$209,643,875</td>
-      <td>$209,692,680</td>
-      <td>$211,920,908</td>
-      <td>$209,692,680</td>
-    </tr>
-    <tr>
-      <td>85</td>
-      <td>IMX</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$828,413,957</td>
-      <td>$828,587,297</td>
-      <td>$1,531,422,483</td>
-      <td>$1,531,742,924</td>
-    </tr>
-    <tr>
-      <td>86</td>
-      <td>INJ</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$642,420,576</td>
-      <td>$641,489,022</td>
-      <td>$767,018,464</td>
-      <td>$765,906,234</td>
-    </tr>
-    <tr>
-      <td>87</td>
-      <td>INTER</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$11,767,342</td>
-      <td>$7,383,551</td>
-      <td>$41,486,218</td>
-      <td>$41,168,689</td>
-    </tr>
-    <tr>
-      <td>88</td>
-      <td>IOST</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$166,126,207</td>
-      <td>$166,314,130</td>
-      <td>$799,157,795</td>
-      <td>$166,314,130</td>
-    </tr>
-    <tr>
-      <td>89</td>
-      <td>IOTA</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$481,806,117</td>
-      <td>$481,506,010</td>
-      <td>$481,806,117</td>
-      <td>$481,506,010</td>
-    </tr>
-    <tr>
-      <td>90</td>
-      <td>IOTX</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$170,664,667</td>
-      <td>$170,887,450</td>
-      <td>$171,579,478</td>
-      <td>$180,916,835</td>
-    </tr>
-    <tr>
-      <td>91</td>
-      <td>IQ</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$84,946,027</td>
-      <td>$17,973</td>
-      <td>$111,317,311</td>
-      <td>$85,490</td>
-    </tr>
-    <tr>
-      <td>92</td>
-      <td>JST</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$212,257,485</td>
-      <td>$212,167,981</td>
-      <td>$236,051,474</td>
-      <td>$235,951,936</td>
-    </tr>
-    <tr>
-      <td>93</td>
-      <td>JUV</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$10,600,711</td>
-      <td>$10,609,689</td>
-      <td>$48,048,950</td>
-      <td>$48,089,660</td>
-    </tr>
-    <tr>
-      <td>94</td>
-      <td>KAVA</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$572,675,452</td>
-      <td>$572,248,885</td>
-      <td>$572,644,065</td>
-      <td>$572,248,885</td>
-    </tr>
-    <tr>
-      <td>95</td>
-      <td>KNC</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$126,583,979</td>
-      <td>$118,465,866</td>
-      <td>$175,795,981</td>
-      <td>$175,521,270</td>
-    </tr>
-    <tr>
-      <td>96</td>
-      <td>LINA</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$72,031,483</td>
-      <td>$72,149,033</td>
-      <td>$131,193,028</td>
-      <td>$131,407,126</td>
-    </tr>
-    <tr>
-      <td>97</td>
-      <td>LINK</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$4,012,842,320</td>
-      <td>$4,013,314,175</td>
-      <td>$7,457,428,980</td>
-      <td>$7,458,305,883</td>
-    </tr>
-    <tr>
-      <td>98</td>
-      <td>LOOM</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$0</td>
-      <td>$56,954,762</td>
-      <td>$47,191,289</td>
-      <td>$61,220,123</td>
-    </tr>
-    <tr>
-      <td>99</td>
-      <td>LPT</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$114,590,427</td>
-      <td>$114,311,466</td>
-      <td>$114,590,427</td>
-      <td>$114,311,466</td>
-    </tr>
-    <tr>
-      <td>100</td>
-      <td>LRC</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$263,894,981</td>
-      <td>$282,053,977</td>
-      <td>$291,115,411</td>
-      <td>$291,155,254</td>
-    </tr>
-    <tr>
-      <td>101</td>
-      <td>LSK</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$125,955,322</td>
-      <td>$111,217,666</td>
-      <td>$0</td>
-      <td>$124,952,291</td>
-    </tr>
-    <tr>
-      <td>102</td>
-      <td>MAGIC</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$161,148,310</td>
-      <td>$160,887,000</td>
-      <td>$253,268,217</td>
-      <td>$252,858,790</td>
-    </tr>
-    <tr>
-      <td>103</td>
-      <td>MANA</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$701,050,596</td>
-      <td>$720,308,815</td>
-      <td>$834,660,065</td>
-      <td>$834,488,545</td>
-    </tr>
-    <tr>
-      <td>104</td>
-      <td>MARO</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$17,383,513</td>
-      <td>$17,341,615</td>
-      <td>$20,836,277</td>
-      <td>$20,819,510</td>
-    </tr>
-    <tr>
-      <td>105</td>
-      <td>MASK</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$282,719,216</td>
-      <td>$282,554,430</td>
-      <td>$344,307,159</td>
-      <td>$344,106,476</td>
-    </tr>
-    <tr>
-      <td>106</td>
-      <td>MATIC</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$6,352,685,036</td>
-      <td>$6,346,053,805</td>
-      <td>$6,816,573,980</td>
-      <td>$6,809,458,520</td>
-    </tr>
-    <tr>
-      <td>107</td>
-      <td>MBL</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$51,324,916</td>
-      <td>$51,396,894</td>
-      <td>$93,325,347</td>
-      <td>$93,456,226</td>
-    </tr>
-    <tr>
-      <td>108</td>
-      <td>MED</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$83,919,443</td>
-      <td>$83,955,243</td>
-      <td>$122,830,576</td>
-      <td>$102,484,103</td>
-    </tr>
-    <tr>
-      <td>109</td>
-      <td>META</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$46,311,841</td>
-      <td>$0</td>
-      <td>$54,892,349</td>
-      <td>$3,759,907</td>
-    </tr>
-    <tr>
-      <td>110</td>
-      <td>MINA</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$411,546,827</td>
-      <td>$410,846,519</td>
-      <td>$461,839,885</td>
-      <td>$461,063,174</td>
-    </tr>
-    <tr>
-      <td>111</td>
-      <td>MKR</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$1,098,033,212</td>
-      <td>$1,190,667,669</td>
-      <td>$1,225,056,621</td>
-      <td>$1,224,703,367</td>
-    </tr>
-    <tr>
-      <td>112</td>
-      <td>MLK</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$99,740,143</td>
-      <td>$99,156,580</td>
-      <td>$433,720,305</td>
-      <td>$327,116,854</td>
-    </tr>
-    <tr>
-      <td>113</td>
-      <td>MOC</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$35,628,768</td>
-      <td>$34,000,963</td>
-      <td>$44,704,756</td>
-      <td>$44,279,591</td>
-    </tr>
-    <tr>
-      <td>114</td>
-      <td>MTL</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$85,711,343</td>
-      <td>$87,651,257</td>
-      <td>$88,303,912</td>
-      <td>$87,651,257</td>
-    </tr>
-    <tr>
-      <td>115</td>
-      <td>MVL</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$81,499,770</td>
-      <td>$83,097,507</td>
-      <td>$104,250,944</td>
-      <td>$106,294,699</td>
-    </tr>
-    <tr>
-      <td>116</td>
-      <td>NAP</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$6,058,914</td>
-      <td>$4,741,567</td>
-      <td>$28,305,501</td>
-      <td>$28,724,830</td>
-    </tr>
-    <tr>
-      <td>117</td>
-      <td>NEAR</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$1,302,426,913</td>
-      <td>$1,302,126,590</td>
-      <td>$1,383,101,101</td>
-      <td>$1,382,782,177</td>
-    </tr>
-    <tr>
-      <td>118</td>
-      <td>NEO</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$607,260,660</td>
-      <td>$607,043,876</td>
-      <td>$860,996,257</td>
-      <td>$860,581,140</td>
-    </tr>
-    <tr>
-      <td>119</td>
-      <td>NKN</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$60,430,002</td>
-      <td>$70,184,310</td>
-      <td>$92,969,233</td>
-      <td>$92,980,120</td>
-    </tr>
-    <tr>
-      <td>120</td>
-      <td>NMR</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$84,628,120</td>
-      <td>$84,723,962</td>
-      <td>$148,197,659</td>
-      <td>$148,365,494</td>
-    </tr>
-    <tr>
-      <td>121</td>
-      <td>OBSR</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$6,724,869</td>
-      <td>$6,785,460</td>
-      <td>$16,212,648</td>
-      <td>$16,358,726</td>
-    </tr>
-    <tr>
-      <td>122</td>
-      <td>OCEAN</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$149,914,543</td>
-      <td>$211,297,374</td>
-      <td>$487,019,437</td>
-      <td>$485,939,838</td>
-    </tr>
-    <tr>
-      <td>123</td>
-      <td>OGN</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$50,321,961</td>
-      <td>$55,979,390</td>
-      <td>$100,097,737</td>
-      <td>$100,093,722</td>
-    </tr>
-    <tr>
-      <td>124</td>
-      <td>ONG</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$0</td>
-      <td>$83,645,186</td>
-      <td>$239,370,597</td>
-      <td>$239,810,847</td>
-    </tr>
-    <tr>
-      <td>125</td>
-      <td>ONIT</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$20,827,705</td>
-      <td>$20,990,673</td>
-      <td>$21,363,496</td>
-      <td>$21,530,657</td>
-    </tr>
-    <tr>
-      <td>126</td>
-      <td>ONT</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$169,256,606</td>
-      <td>$166,965,498</td>
-      <td>$190,908,954</td>
-      <td>$190,763,312</td>
-    </tr>
-    <tr>
-      <td>127</td>
-      <td>ORBS</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$85,236,357</td>
-      <td>$82,663,643</td>
-      <td>$264,915,977</td>
-      <td>$260,956,252</td>
-    </tr>
-    <tr>
-      <td>128</td>
-      <td>OXT</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$29,872,843</td>
-      <td>$48,798,179</td>
-      <td>$50,499,719</td>
-      <td>$50,692,595</td>
-    </tr>
-    <tr>
-      <td>129</td>
-      <td>PLA</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$97,652,647</td>
-      <td>$692,730</td>
-      <td>$122,037,770</td>
-      <td>$15,394,006</td>
-    </tr>
-    <tr>
-      <td>130</td>
-      <td>POLYX</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$111,627,645</td>
-      <td>$95,020,357</td>
-      <td>$111,627,645</td>
-      <td>$112,152,865</td>
-    </tr>
-    <tr>
-      <td>131</td>
-      <td>POWR</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$71,711,191</td>
-      <td>$88,193,566</td>
-      <td>$166,881,638</td>
-      <td>$165,907,574</td>
-    </tr>
-    <tr>
-      <td>132</td>
-      <td>PROM</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$75,074,304</td>
-      <td>$75,376,627</td>
-      <td>$79,187,965</td>
-      <td>$79,506,853</td>
-    </tr>
-    <tr>
-      <td>133</td>
-      <td>PSG</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$18,665,538</td>
-      <td>$18,633,261</td>
-      <td>$77,124,059</td>
-      <td>$77,422,531</td>
-    </tr>
-    <tr>
-      <td>134</td>
-      <td>PUNDIX</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$101,716,831</td>
-      <td>$101,185,827</td>
-      <td>$101,716,831</td>
-      <td>$101,199,529</td>
-    </tr>
-    <tr>
-      <td>135</td>
-      <td>QKC</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$66,764,293</td>
-      <td>$61,510,348</td>
-      <td>$97,116,164</td>
-      <td>$96,111,324</td>
-    </tr>
-    <tr>
-      <td>136</td>
-      <td>QTCON</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$21,660,551</td>
-      <td>$21,494,119</td>
-      <td>$41,052,611</td>
-      <td>$40,737,177</td>
-    </tr>
-    <tr>
-      <td>137</td>
-      <td>QTUM</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$274,941,936</td>
-      <td>$274,701,625</td>
-      <td>$282,972,911</td>
-      <td>$282,743,087</td>
-    </tr>
-    <tr>
-      <td>138</td>
-      <td>RAD</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$78,301,479</td>
-      <td>$78,190,174</td>
-      <td>$157,140,029</td>
-      <td>$156,916,060</td>
-    </tr>
-    <tr>
-      <td>139</td>
-      <td>RAY</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$45,739,822</td>
-      <td>$45,634,094</td>
-      <td>$114,744,180</td>
-      <td>$114,478,948</td>
-    </tr>
-    <tr>
-      <td>140</td>
-      <td>REI</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$23,183,393</td>
-      <td>$22,814,661</td>
-      <td>$24,078,328</td>
-      <td>$24,015,432</td>
-    </tr>
-    <tr>
-      <td>141</td>
-      <td>RFR</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$98,216,889</td>
-      <td>$96,145,521</td>
-      <td>$100,681,855</td>
-      <td>$96,154,558</td>
-    </tr>
-    <tr>
-      <td>142</td>
-      <td>RLC</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$85,939,180</td>
-      <td>$85,832,353</td>
-      <td>$103,294,100</td>
-      <td>$103,165,700</td>
-    </tr>
-    <tr>
-      <td>143</td>
-      <td>RLY</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$32,288,816</td>
-      <td>$32,594,143</td>
-      <td>$97,100,004</td>
-      <td>$97,605,959</td>
-    </tr>
-    <tr>
-      <td>144</td>
-      <td>RNDR</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$645,804,099</td>
-      <td>$645,286,983</td>
-      <td>$927,826,445</td>
-      <td>$937,290,804</td>
-    </tr>
-    <tr>
-      <td>145</td>
-      <td>RSR</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$94,835,796</td>
-      <td>$94,695,017</td>
-      <td>$187,422,522</td>
-      <td>$187,144,303</td>
-    </tr>
-    <tr>
-      <td>146</td>
-      <td>RVN</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$214,391,471</td>
-      <td>$230,792,090</td>
-      <td>$214,388,097</td>
-      <td>$378,291,521</td>
-    </tr>
-    <tr>
-      <td>147</td>
-      <td>SAND</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$809,948,220</td>
-      <td>$809,367,888</td>
-      <td>$1,255,777,853</td>
-      <td>$1,254,878,081</td>
-    </tr>
-    <tr>
-      <td>148</td>
-      <td>SBD</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$28,430,846</td>
-      <td>$28,177,294</td>
-      <td>$0</td>
-      <td>$28,177,294</td>
-    </tr>
-    <tr>
-      <td>149</td>
-      <td>SC</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$174,855,409</td>
-      <td>$186,126,703</td>
-      <td>$0</td>
-      <td>$186,204,619</td>
-    </tr>
-    <tr>
-      <td>150</td>
-      <td>SHIB</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$4,892,671,009</td>
-      <td>$4,885,196,057</td>
-      <td>$8,301,892,819</td>
-      <td>$4,887,203,077</td>
-    </tr>
-    <tr>
-      <td>151</td>
-      <td>SNT</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$99,676,563</td>
-      <td>$96,705,176</td>
-      <td>$171,263,439</td>
-      <td>$170,528,309</td>
-    </tr>
-    <tr>
-      <td>152</td>
-      <td>SNX</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$804,022,904</td>
-      <td>$671,344,852</td>
-      <td>$805,835,230</td>
-      <td>$771,444,765</td>
-    </tr>
-    <tr>
-      <td>153</td>
-      <td>SOL</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$9,462,719,830</td>
-      <td>$9,438,854,368</td>
-      <td>$12,956,660,272</td>
-      <td>$12,923,981,984</td>
-    </tr>
-    <tr>
-      <td>154</td>
-      <td>SOLVE</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$11,911,933</td>
-      <td>$11,627,394</td>
-      <td>$21,083,067</td>
-      <td>$20,950,260</td>
-    </tr>
-    <tr>
-      <td>155</td>
-      <td>SSX</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$48,881,195</td>
-      <td>$48,301,004</td>
-      <td>$104,020,370</td>
-      <td>$85,654,788</td>
-    </tr>
-    <tr>
-      <td>156</td>
-      <td>STEEM</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$81,004,690</td>
-      <td>$81,096,635</td>
-      <td>$0</td>
-      <td>$75,376,756</td>
-    </tr>
-    <tr>
-      <td>157</td>
-      <td>STMX</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$65,968,506</td>
-      <td>$59,878,216</td>
-      <td>$74,964,211</td>
-      <td>$74,847,770</td>
-    </tr>
-    <tr>
-      <td>158</td>
-      <td>STORJ</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$42,227,601</td>
-      <td>$112,321,367</td>
-      <td>$124,814,313</td>
-      <td>$124,890,395</td>
-    </tr>
-    <tr>
-      <td>159</td>
-      <td>STPT</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$86,556,466</td>
-      <td>$86,935,745</td>
-      <td>$86,556,466</td>
-      <td>$86,935,745</td>
-    </tr>
-    <tr>
-      <td>160</td>
-      <td>STRAX</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$71,357,088</td>
-      <td>$71,604,770</td>
-      <td>$0</td>
-      <td>$71,604,770</td>
-    </tr>
-    <tr>
-      <td>161</td>
-      <td>STRK</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$44,040,614</td>
-      <td>$43,130,693</td>
-      <td>$75,312,144</td>
-      <td>$73,756,125</td>
-    </tr>
-    <tr>
-      <td>162</td>
-      <td>STX</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$845,411,600</td>
-      <td>$845,433,796</td>
-      <td>$1,100,347,762</td>
-      <td>$1,100,383,737</td>
-    </tr>
-    <tr>
-      <td>163</td>
-      <td>SUI</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$458,653,084</td>
-      <td>$458,193,017</td>
-      <td>$6,342,326,653</td>
-      <td>$6,335,964,793</td>
-    </tr>
-    <tr>
-      <td>164</td>
-      <td>SUN</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$53,402,407</td>
-      <td>$53,456,390</td>
-      <td>$111,124,420</td>
-      <td>$111,236,753</td>
-    </tr>
-    <tr>
-      <td>165</td>
-      <td>SXP</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$192,956,048</td>
-      <td>$192,783,659</td>
-      <td>$192,955,349</td>
-      <td>$192,783,659</td>
-    </tr>
-    <tr>
-      <td>166</td>
-      <td>T</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$0</td>
-      <td>$209,977,463</td>
-      <td>$248,418,710</td>
-      <td>$236,905,184</td>
-    </tr>
-    <tr>
-      <td>167</td>
-      <td>TFUEL</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$265,183,769</td>
-      <td>$262,310,943</td>
-      <td>$265,183,040</td>
-      <td>$262,310,943</td>
-    </tr>
-    <tr>
-      <td>168</td>
-      <td>THETA</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$767,546,748</td>
-      <td>$766,666,954</td>
-      <td>$767,546,748</td>
-      <td>$766,666,954</td>
-    </tr>
-    <tr>
-      <td>169</td>
-      <td>TON</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$74,235,969</td>
-      <td>$54,065,224</td>
-      <td>$77,139,830</td>
-      <td>$113,376,654</td>
-    </tr>
-    <tr>
-      <td>170</td>
-      <td>TRX</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$6,991,639,366</td>
-      <td>$6,989,083,939</td>
-      <td>$6,991,637,005</td>
-      <td>$6,989,089,671</td>
-    </tr>
-    <tr>
-      <td>171</td>
-      <td>TT</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$39,240,106</td>
-      <td>$38,855,716</td>
-      <td>$39,240,106</td>
-      <td>$38,855,716</td>
-    </tr>
-    <tr>
-      <td>172</td>
-      <td>TUSD</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$3,016,994,289</td>
-      <td>$3,013,903,439</td>
-      <td>$3,016,994,289</td>
-      <td>$3,013,903,439</td>
-    </tr>
-    <tr>
-      <td>173</td>
-      <td>UNI</td>
-      <td>O</td>
-      <td>X</td>
-      <td>$4,854,878,319</td>
-      <td>$3,718,061,768</td>
-      <td>$6,440,823,841</td>
-      <td>$6,438,190,647</td>
-    </tr>
-    <tr>
-      <td>174</td>
-      <td>UPP</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$22,902,732</td>
-      <td>$31,781,933</td>
-      <td>$34,902,736</td>
-      <td>$32,911,808</td>
-    </tr>
-    <tr>
-      <td>175</td>
-      <td>USDP</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$549,271,166</td>
-      <td>$0</td>
-      <td>$549,271,166</td>
-      <td>$105,966,582</td>
-    </tr>
-    <tr>
-      <td>176</td>
-      <td>VAL</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$8,931,701</td>
-      <td>$58,237</td>
-      <td>$16,419,913</td>
-      <td>$14,273,767</td>
-    </tr>
-    <tr>
-      <td>177</td>
-      <td>VET</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$1,341,304,221</td>
-      <td>$1,341,818,420</td>
-      <td>$1,599,515,856</td>
-      <td>$1,600,129,042</td>
-    </tr>
-    <tr>
-      <td>178</td>
-      <td>WAVES</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$189,317,799</td>
-      <td>$212,215,339</td>
-      <td>$189,317,799</td>
-      <td>$212,215,339</td>
-    </tr>
-    <tr>
-      <td>179</td>
-      <td>WAXP</td>
-      <td>X</td>
-      <td>O</td>
-      <td>$172,882,493</td>
-      <td>$173,229,235</td>
-      <td>$195,508,722</td>
-      <td>$209,068,126</td>
-    </tr>
-    <tr>
-      <td>180</td>
-      <td>XEC</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$590,929,414</td>
-      <td>$591,766,377</td>
-      <td>$637,736,676</td>
-      <td>$638,641,782</td>
-    </tr>
-    <tr>
-      <td>181</td>
-      <td>XEM</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$264,958,951</td>
-      <td>$265,123,071</td>
-      <td>$264,958,951</td>
-      <td>$265,123,071</td>
-    </tr>
-    <tr>
-      <td>182</td>
-      <td>XLM</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$4,027,745,999</td>
-      <td>$4,026,198,327</td>
-      <td>$7,375,370,913</td>
-      <td>$7,372,539,787</td>
-    </tr>
-    <tr>
-      <td>183</td>
-      <td>XRP</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$36,258,300,810</td>
-      <td>$36,269,275,157</td>
-      <td>$68,809,357,796</td>
-      <td>$68,830,184,413</td>
-    </tr>
-    <tr>
-      <td>184</td>
-      <td>XTZ</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$763,031,306</td>
-      <td>$770,464,927</td>
-      <td>$0</td>
-      <td>$787,672,134</td>
-    </tr>
-    <tr>
-      <td>185</td>
-      <td>YGG</td>
-      <td>X</td>
-      <td>X</td>
-      <td>$33,253,959</td>
-      <td>$46,245,088</td>
-      <td>$179,629,761</td>
-      <td>$179,533,507</td>
-    </tr>
-    <tr>
-      <td>186</td>
-      <td>ZIL</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$345,835,139</td>
-      <td>$326,416,909</td>
-      <td>$432,098,728</td>
-      <td>$431,994,260</td>
-    </tr>
-    <tr>
-      <td>187</td>
-      <td>ZRX</td>
-      <td>O</td>
-      <td>O</td>
-      <td>$19,593,825</td>
-      <td>$179,002,280</td>
-      <td>$253,300,186</td>
-      <td>$211,213,113</td>
-    </tr>
-  </tbody>
-</table>
-                </div>
-                <script>
-                    $(document).ready( function () {
-                        var t = $('.dataframe').DataTable({
-                            /* DataTables configuration */
-                        });
-
-                        // Additional scripts
+                    var rows = document.querySelectorAll('.dataframe tbody tr');
+                    rows.forEach(row => {
+                        var column_value = row.cells[column === 'binance' ? 2 : 3].innerText;
+                        if (value === 'ALL' || value === column_value) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
                     });
-                </script>
-            </body>
-            </html>
-            
+                }
+            </script>
+        </head>
+        <body>
+            <div class="dataTables_wrapper">
+                <table border="1" class="dataframe dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>UpbitTicker</th>
+<th>바낸 선물&lt;select id="binance-dropdown" onchange="filterTable('binance')"&gt;
+        &lt;option value="ALL" selected&gt;All&lt;/option&gt;&lt;option value="O"&gt;O&lt;/option&gt;&lt;option value="X"&gt;X&lt;/option&gt;&lt;/select&gt;</th>
+<th>원화&lt;select id="krw-dropdown" onchange="filterTable('krw')"&gt;
+        &lt;option value="ALL" selected&gt;All&lt;/option&gt;&lt;option value="O"&gt;O&lt;/option&gt;&lt;option value="X"&gt;X&lt;/option&gt;&lt;/select&gt;</th>
+<th>유통 시가총액 (CG)</th>
+<th>유통 시가총액 (CMC)</th>
+<th>총 시가총액 (CG)</th>
+<th>총 시가총액(CMC)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1INCH</td>
+<td>O</td>
+<td>O</td>
+<td>$319,510,215</td>
+<td>$319,494,172</td>
+<td>$466,637,069</td>
+<td>$466,613,638</td>
+</tr>
+<tr>
+<td>1</td>
+<td>AAVE</td>
+<td>O</td>
+<td>O</td>
+<td>$932,293,853</td>
+<td>$927,305,221</td>
+<td>$1,028,329,292</td>
+<td>$1,022,826,814</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ACM</td>
+<td>X</td>
+<td>X</td>
+<td>$12,533,996</td>
+<td>$12,469,310</td>
+<td>$48,268,935</td>
+<td>$48,116,060</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ACS</td>
+<td>X</td>
+<td>X</td>
+<td>$65,656,474</td>
+<td>$0</td>
+<td>$217,798,375</td>
+<td>$217,699,850</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ADA</td>
+<td>O</td>
+<td>O</td>
+<td>$10,674,053,294</td>
+<td>$10,664,120,802</td>
+<td>$13,706,152,454</td>
+<td>$13,707,394,096</td>
+</tr>
+<tr>
+<td>5</td>
+<td>AERGO</td>
+<td>X</td>
+<td>O</td>
+<td>$47,618,037</td>
+<td>$47,684,002</td>
+<td>$54,733,376</td>
+<td>$54,809,198</td>
+</tr>
+<tr>
+<td>6</td>
+<td>AFC</td>
+<td>X</td>
+<td>X</td>
+<td>$15,962,288</td>
+<td>$7,539,308</td>
+<td>$64,088,602</td>
+<td>$64,005,948</td>
+</tr>
+<tr>
+<td>7</td>
+<td>AGLD</td>
+<td>O</td>
+<td>X</td>
+<td>$47,591,210</td>
+<td>$43,060,811</td>
+<td>$49,266,262</td>
+<td>$43,060,811</td>
+</tr>
+<tr>
+<td>8</td>
+<td>AHT</td>
+<td>X</td>
+<td>O</td>
+<td>$32,465,546</td>
+<td>$31,861,611</td>
+<td>$86,528,164</td>
+<td>$85,420,343</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ALGO</td>
+<td>O</td>
+<td>O</td>
+<td>$847,019,335</td>
+<td>$845,209,244</td>
+<td>$1,085,196,620</td>
+<td>$1,082,877,534</td>
+</tr>
+<tr>
+<td>10</td>
+<td>ANKR</td>
+<td>O</td>
+<td>O</td>
+<td>$202,273,535</td>
+<td>$247,561,617</td>
+<td>$247,796,189</td>
+<td>$247,561,617</td>
+</tr>
+<tr>
+<td>11</td>
+<td>APE</td>
+<td>O</td>
+<td>X</td>
+<td>$662,157,895</td>
+<td>$659,620,035</td>
+<td>$1,796,443,632</td>
+<td>$1,789,558,384</td>
+</tr>
+<tr>
+<td>12</td>
+<td>API3</td>
+<td>O</td>
+<td>X</td>
+<td>$83,233,242</td>
+<td>$83,231,232</td>
+<td>$121,103,075</td>
+<td>$120,697,537</td>
+</tr>
+<tr>
+<td>13</td>
+<td>APT</td>
+<td>O</td>
+<td>O</td>
+<td>$1,504,933,758</td>
+<td>$1,503,684,306</td>
+<td>$7,215,668,570</td>
+<td>$7,210,048,737</td>
+</tr>
+<tr>
+<td>14</td>
+<td>AQT</td>
+<td>X</td>
+<td>O</td>
+<td>$27,075,437</td>
+<td>$26,495,378</td>
+<td>$30,489,458</td>
+<td>$29,836,259</td>
+</tr>
+<tr>
+<td>15</td>
+<td>ARB</td>
+<td>O</td>
+<td>O</td>
+<td>$1,453,537,038</td>
+<td>$1,452,572,748</td>
+<td>$11,400,290,495</td>
+<td>$11,392,727,441</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ARDR</td>
+<td>X</td>
+<td>O</td>
+<td>$76,902,109</td>
+<td>$75,769,314</td>
+<td>$76,902,109</td>
+<td>$75,769,314</td>
+</tr>
+<tr>
+<td>17</td>
+<td>ARK</td>
+<td>X</td>
+<td>O</td>
+<td>$50,882,442</td>
+<td>$51,124,360</td>
+<td>$0</td>
+<td>$51,124,360</td>
+</tr>
+<tr>
+<td>18</td>
+<td>ARPA</td>
+<td>O</td>
+<td>X</td>
+<td>$49,856,943</td>
+<td>$63,075,875</td>
+<td>$101,523,584</td>
+<td>$101,498,815</td>
+</tr>
+<tr>
+<td>19</td>
+<td>ASTR</td>
+<td>O</td>
+<td>X</td>
+<td>$242,606,017</td>
+<td>$242,466,104</td>
+<td>$436,476,182</td>
+<td>$428,147,475</td>
+</tr>
+<tr>
+<td>20</td>
+<td>ATM</td>
+<td>X</td>
+<td>X</td>
+<td>$10,939,919</td>
+<td>$10,916,421</td>
+<td>$28,421,692</td>
+<td>$28,360,646</td>
+</tr>
+<tr>
+<td>21</td>
+<td>ATOM</td>
+<td>O</td>
+<td>O</td>
+<td>$2,572,290,020</td>
+<td>$3,047,813,959</td>
+<td>$0</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>22</td>
+<td>AUCTION</td>
+<td>X</td>
+<td>X</td>
+<td>$42,137,138</td>
+<td>$42,501,758</td>
+<td>$64,826,165</td>
+<td>$65,387,120</td>
+</tr>
+<tr>
+<td>23</td>
+<td>AUDIO</td>
+<td>O</td>
+<td>X</td>
+<td>$190,774,063</td>
+<td>$190,754,709</td>
+<td>$203,229,714</td>
+<td>$205,875,938</td>
+</tr>
+<tr>
+<td>24</td>
+<td>AVAX</td>
+<td>O</td>
+<td>O</td>
+<td>$4,400,533,513</td>
+<td>$4,392,594,275</td>
+<td>$9,154,949,604</td>
+<td>$9,138,515,366</td>
+</tr>
+<tr>
+<td>25</td>
+<td>AXS</td>
+<td>O</td>
+<td>O</td>
+<td>$781,021,223</td>
+<td>$839,042,490</td>
+<td>$1,613,550,216</td>
+<td>$1,612,323,187</td>
+</tr>
+<tr>
+<td>26</td>
+<td>BAR</td>
+<td>X</td>
+<td>X</td>
+<td>$28,012,692</td>
+<td>$27,962,881</td>
+<td>$107,114,178</td>
+<td>$107,030,745</td>
+</tr>
+<tr>
+<td>27</td>
+<td>BAT</td>
+<td>O</td>
+<td>O</td>
+<td>$297,837,513</td>
+<td>$298,078,353</td>
+<td>$299,866,191</td>
+<td>$300,108,671</td>
+</tr>
+<tr>
+<td>28</td>
+<td>BCH</td>
+<td>O</td>
+<td>O</td>
+<td>$4,713,923,305</td>
+<td>$4,705,095,642</td>
+<td>$5,085,806,263</td>
+<td>$5,076,291,936</td>
+</tr>
+<tr>
+<td>29</td>
+<td>BFC</td>
+<td>X</td>
+<td>X</td>
+<td>$59,941,922</td>
+<td>$61,376,880</td>
+<td>$102,272,008</td>
+<td>$104,840,803</td>
+</tr>
+<tr>
+<td>30</td>
+<td>BLUR</td>
+<td>O</td>
+<td>O</td>
+<td>$240,972,423</td>
+<td>$240,568,418</td>
+<td>$893,191,885</td>
+<td>$891,841,080</td>
+</tr>
+<tr>
+<td>31</td>
+<td>BNT</td>
+<td>X</td>
+<td>X</td>
+<td>$55,392,277</td>
+<td>$55,441,127</td>
+<td>$55,392,277</td>
+<td>$59,575,267</td>
+</tr>
+<tr>
+<td>32</td>
+<td>BORA</td>
+<td>X</td>
+<td>O</td>
+<td>$147,300,718</td>
+<td>$145,460,282</td>
+<td>$178,724,871</td>
+<td>$176,491,809</td>
+</tr>
+<tr>
+<td>33</td>
+<td>BSV</td>
+<td>X</td>
+<td>O</td>
+<td>$728,977,692</td>
+<td>$728,388,572</td>
+<td>$794,584,793</td>
+<td>$793,942,653</td>
+</tr>
+<tr>
+<td>34</td>
+<td>BTC</td>
+<td>O</td>
+<td>O</td>
+<td>$561,390,183,757</td>
+<td>$561,213,192,454</td>
+<td>$606,285,635,031</td>
+<td>$606,095,860,867</td>
+</tr>
+<tr>
+<td>35</td>
+<td>BTG</td>
+<td>X</td>
+<td>O</td>
+<td>$308,134,015</td>
+<td>$309,511,891</td>
+<td>$369,466,850</td>
+<td>$371,118,995</td>
+</tr>
+<tr>
+<td>36</td>
+<td>BTT</td>
+<td>X</td>
+<td>O</td>
+<td>$440,984,394</td>
+<td>$440,474,541</td>
+<td>$458,865,446</td>
+<td>$458,334,920</td>
+</tr>
+<tr>
+<td>37</td>
+<td>CBK</td>
+<td>X</td>
+<td>O</td>
+<td>$47,301,505</td>
+<td>$46,765,903</td>
+<td>$61,874,446</td>
+<td>$61,173,833</td>
+</tr>
+<tr>
+<td>38</td>
+<td>CELO</td>
+<td>O</td>
+<td>O</td>
+<td>$251,183,219</td>
+<td>$250,592,879</td>
+<td>$494,019,312</td>
+<td>$492,858,251</td>
+</tr>
+<tr>
+<td>39</td>
+<td>CHR</td>
+<td>O</td>
+<td>X</td>
+<td>$59,278,634</td>
+<td>$70,967,938</td>
+<td>$103,580,301</td>
+<td>$103,368,943</td>
+</tr>
+<tr>
+<td>40</td>
+<td>CHZ</td>
+<td>O</td>
+<td>O</td>
+<td>$535,476,837</td>
+<td>$544,319,801</td>
+<td>$682,344,447</td>
+<td>$680,611,756</td>
+</tr>
+<tr>
+<td>41</td>
+<td>CITY</td>
+<td>X</td>
+<td>X</td>
+<td>$22,898,796</td>
+<td>$22,878,156</td>
+<td>$67,819,178</td>
+<td>$66,877,194</td>
+</tr>
+<tr>
+<td>42</td>
+<td>COMP</td>
+<td>O</td>
+<td>X</td>
+<td>$441,296,832</td>
+<td>$498,472,754</td>
+<td>$643,657,106</td>
+<td>$639,757,767</td>
+</tr>
+<tr>
+<td>43</td>
+<td>CRE</td>
+<td>X</td>
+<td>O</td>
+<td>$35,778,340</td>
+<td>$38,358,897</td>
+<td>$40,579,219</td>
+<td>$39,114,066</td>
+</tr>
+<tr>
+<td>44</td>
+<td>CRO</td>
+<td>X</td>
+<td>O</td>
+<td>$1,536,869,023</td>
+<td>$1,482,187,095</td>
+<td>$1,760,387,736</td>
+<td>$1,775,538,299</td>
+</tr>
+<tr>
+<td>45</td>
+<td>CRV</td>
+<td>O</td>
+<td>X</td>
+<td>$533,240,468</td>
+<td>$533,231,906</td>
+<td>$1,979,843,214</td>
+<td>$1,979,892,536</td>
+</tr>
+<tr>
+<td>46</td>
+<td>CTC</td>
+<td>X</td>
+<td>X</td>
+<td>$46,885,504</td>
+<td>$46,898,385</td>
+<td>$383,577,543</td>
+<td>$115,104,879</td>
+</tr>
+<tr>
+<td>47</td>
+<td>CTSI</td>
+<td>O</td>
+<td>X</td>
+<td>$107,609,150</td>
+<td>$107,286,540</td>
+<td>$144,743,716</td>
+<td>$144,483,458</td>
+</tr>
+<tr>
+<td>48</td>
+<td>CVC</td>
+<td>X</td>
+<td>O</td>
+<td>$68,915,204</td>
+<td>$85,586,471</td>
+<td>$85,929,181</td>
+<td>$85,586,471</td>
+</tr>
+<tr>
+<td>49</td>
+<td>DAD</td>
+<td>X</td>
+<td>X</td>
+<td>$0</td>
+<td>$7,505,210</td>
+<td>$12,568,916</td>
+<td>$12,465,403</td>
+</tr>
+<tr>
+<td>50</td>
+<td>DAI</td>
+<td>X</td>
+<td>X</td>
+<td>$4,141,470,204</td>
+<td>$4,560,391,910</td>
+<td>$4,141,470,204</td>
+<td>$4,560,391,910</td>
+</tr>
+<tr>
+<td>51</td>
+<td>DAWN</td>
+<td>X</td>
+<td>O</td>
+<td>$47,528,819</td>
+<td>$43,551,156</td>
+<td>$48,884,450</td>
+<td>$54,666,076</td>
+</tr>
+<tr>
+<td>52</td>
+<td>DENT</td>
+<td>O</td>
+<td>X</td>
+<td>$70,239,186</td>
+<td>$72,651,726</td>
+<td>$73,429,737</td>
+<td>$73,379,807</td>
+</tr>
+<tr>
+<td>53</td>
+<td>DGB</td>
+<td>O</td>
+<td>X</td>
+<td>$130,269,871</td>
+<td>$131,040,090</td>
+<td>$166,774,372</td>
+<td>$167,761,618</td>
+</tr>
+<tr>
+<td>54</td>
+<td>DKA</td>
+<td>X</td>
+<td>O</td>
+<td>$95,570,687</td>
+<td>$96,479,855</td>
+<td>$156,203,792</td>
+<td>$157,689,767</td>
+</tr>
+<tr>
+<td>55</td>
+<td>DNT</td>
+<td>X</td>
+<td>X</td>
+<td>$20,815,342</td>
+<td>$28,371,185</td>
+<td>$27,708,653</td>
+<td>$28,371,185</td>
+</tr>
+<tr>
+<td>56</td>
+<td>DOGE</td>
+<td>O</td>
+<td>O</td>
+<td>$10,780,097,201</td>
+<td>$10,781,466,219</td>
+<td>$10,780,100,272</td>
+<td>$10,781,466,219</td>
+</tr>
+<tr>
+<td>57</td>
+<td>DOT</td>
+<td>O</td>
+<td>O</td>
+<td>$6,400,903,116</td>
+<td>$6,151,411,965</td>
+<td>$6,812,370,603</td>
+<td>$6,809,257,188</td>
+</tr>
+<tr>
+<td>58</td>
+<td>EGLD</td>
+<td>O</td>
+<td>O</td>
+<td>$815,798,905</td>
+<td>$816,058,102</td>
+<td>$994,215,576</td>
+<td>$994,531,460</td>
+</tr>
+<tr>
+<td>59</td>
+<td>ELF</td>
+<td>X</td>
+<td>O</td>
+<td>$128,261,160</td>
+<td>$173,083,868</td>
+<td>$244,661,785</td>
+<td>$277,923,193</td>
+</tr>
+<tr>
+<td>60</td>
+<td>ENJ</td>
+<td>O</td>
+<td>O</td>
+<td>$293,317,462</td>
+<td>$293,302,781</td>
+<td>$293,317,462</td>
+<td>$293,302,781</td>
+</tr>
+<tr>
+<td>61</td>
+<td>ENS</td>
+<td>O</td>
+<td>X</td>
+<td>$245,575,101</td>
+<td>$273,528,674</td>
+<td>$952,460,452</td>
+<td>$951,530,198</td>
+</tr>
+<tr>
+<td>62</td>
+<td>EOS</td>
+<td>O</td>
+<td>O</td>
+<td>$819,941,384</td>
+<td>$807,381,646</td>
+<td>$0</td>
+<td>$807,381,646</td>
+</tr>
+<tr>
+<td>63</td>
+<td>ETC</td>
+<td>O</td>
+<td>O</td>
+<td>$2,586,138,864</td>
+<td>$2,585,071,417</td>
+<td>$3,830,213,396</td>
+<td>$3,828,650,028</td>
+</tr>
+<tr>
+<td>64</td>
+<td>ETH</td>
+<td>O</td>
+<td>O</td>
+<td>$221,722,310,175</td>
+<td>$221,576,980,414</td>
+<td>$221,722,310,175</td>
+<td>$221,576,980,414</td>
+</tr>
+<tr>
+<td>65</td>
+<td>FCT2</td>
+<td>X</td>
+<td>O</td>
+<td>$44,043,390</td>
+<td>$43,667,365</td>
+<td>$46,788,517</td>
+<td>$46,389,055</td>
+</tr>
+<tr>
+<td>66</td>
+<td>FIL</td>
+<td>O</td>
+<td>X</td>
+<td>$1,847,607,006</td>
+<td>$1,845,501,342</td>
+<td>$8,263,445,422</td>
+<td>$8,254,093,180</td>
+</tr>
+<tr>
+<td>67</td>
+<td>FLOW</td>
+<td>O</td>
+<td>O</td>
+<td>$599,367,433</td>
+<td>$598,719,894</td>
+<td>$837,538,446</td>
+<td>$836,633,595</td>
+</tr>
+<tr>
+<td>68</td>
+<td>FOR</td>
+<td>X</td>
+<td>X</td>
+<td>$10,589,358</td>
+<td>$102,281</td>
+<td>$18,784,848</td>
+<td>$524,496</td>
+</tr>
+<tr>
+<td>69</td>
+<td>FX</td>
+<td>X</td>
+<td>X</td>
+<td>$90,978,992</td>
+<td>$58,698,520</td>
+<td>$271,732,859</td>
+<td>$272,000,220</td>
+</tr>
+<tr>
+<td>70</td>
+<td>GAL</td>
+<td>O</td>
+<td>X</td>
+<td>$58,523,652</td>
+<td>$93,575,906</td>
+<td>$251,469,494</td>
+<td>$250,596,050</td>
+</tr>
+<tr>
+<td>71</td>
+<td>GAS</td>
+<td>X</td>
+<td>O</td>
+<td>$37,577,389</td>
+<td>$27,204,044</td>
+<td>$269,659,677</td>
+<td>$268,592,384</td>
+</tr>
+<tr>
+<td>72</td>
+<td>GLM</td>
+<td>X</td>
+<td>O</td>
+<td>$206,161,901</td>
+<td>$204,556,769</td>
+<td>$206,161,901</td>
+<td>$204,556,769</td>
+</tr>
+<tr>
+<td>73</td>
+<td>GMT</td>
+<td>O</td>
+<td>O</td>
+<td>$214,087,468</td>
+<td>$214,007,973</td>
+<td>$1,272,359,735</td>
+<td>$1,271,887,283</td>
+</tr>
+<tr>
+<td>74</td>
+<td>GO</td>
+<td>X</td>
+<td>X</td>
+<td>$4,497,881</td>
+<td>$5,298,831</td>
+<td>$3,740,761</td>
+<td>$5,298,831</td>
+</tr>
+<tr>
+<td>75</td>
+<td>GRS</td>
+<td>X</td>
+<td>O</td>
+<td>$29,837,642</td>
+<td>$29,112,328</td>
+<td>$37,706,975</td>
+<td>$36,790,523</td>
+</tr>
+<tr>
+<td>76</td>
+<td>GRT</td>
+<td>O</td>
+<td>O</td>
+<td>$987,583,135</td>
+<td>$987,131,719</td>
+<td>$1,083,256,490</td>
+<td>$1,160,448,817</td>
+</tr>
+<tr>
+<td>77</td>
+<td>GTC</td>
+<td>O</td>
+<td>X</td>
+<td>$61,201,561</td>
+<td>$63,598,662</td>
+<td>$100,555,654</td>
+<td>$100,439,458</td>
+</tr>
+<tr>
+<td>78</td>
+<td>HBAR</td>
+<td>O</td>
+<td>O</td>
+<td>$1,661,687,756</td>
+<td>$1,660,496,461</td>
+<td>$2,556,623,108</td>
+<td>$2,554,790,217</td>
+</tr>
+<tr>
+<td>79</td>
+<td>HBD</td>
+<td>X</td>
+<td>X</td>
+<td>$0</td>
+<td>$0</td>
+<td>$0</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>80</td>
+<td>HIFI</td>
+<td>X</td>
+<td>O</td>
+<td>$33,029,771</td>
+<td>$30,281,605</td>
+<td>$38,392,450</td>
+<td>$37,585,394</td>
+</tr>
+<tr>
+<td>81</td>
+<td>HIVE</td>
+<td>X</td>
+<td>O</td>
+<td>$133,672,360</td>
+<td>$178,276,241</td>
+<td>$0</td>
+<td>$178,276,241</td>
+</tr>
+<tr>
+<td>82</td>
+<td>HPO</td>
+<td>X</td>
+<td>O</td>
+<td>$0</td>
+<td>$0</td>
+<td>$85,972,931</td>
+<td>$332,321,358</td>
+</tr>
+<tr>
+<td>83</td>
+<td>HUNT</td>
+<td>X</td>
+<td>O</td>
+<td>$71,967,855</td>
+<td>$39,250,092</td>
+<td>$71,967,855</td>
+<td>$70,791,960</td>
+</tr>
+<tr>
+<td>84</td>
+<td>ICX</td>
+<td>O</td>
+<td>O</td>
+<td>$209,643,875</td>
+<td>$209,646,569</td>
+<td>$211,920,908</td>
+<td>$209,646,569</td>
+</tr>
+<tr>
+<td>85</td>
+<td>IMX</td>
+<td>O</td>
+<td>O</td>
+<td>$828,413,957</td>
+<td>$828,500,632</td>
+<td>$1,531,422,483</td>
+<td>$1,531,582,712</td>
+</tr>
+<tr>
+<td>86</td>
+<td>INJ</td>
+<td>O</td>
+<td>X</td>
+<td>$642,420,576</td>
+<td>$641,913,662</td>
+<td>$767,018,464</td>
+<td>$766,413,233</td>
+</tr>
+<tr>
+<td>87</td>
+<td>INTER</td>
+<td>X</td>
+<td>X</td>
+<td>$11,767,342</td>
+<td>$7,390,402</td>
+<td>$41,486,218</td>
+<td>$41,206,893</td>
+</tr>
+<tr>
+<td>88</td>
+<td>IOST</td>
+<td>O</td>
+<td>O</td>
+<td>$166,126,207</td>
+<td>$166,369,883</td>
+<td>$799,157,795</td>
+<td>$166,369,883</td>
+</tr>
+<tr>
+<td>89</td>
+<td>IOTA</td>
+<td>O</td>
+<td>O</td>
+<td>$481,806,117</td>
+<td>$481,417,129</td>
+<td>$481,806,117</td>
+<td>$481,417,129</td>
+</tr>
+<tr>
+<td>90</td>
+<td>IOTX</td>
+<td>O</td>
+<td>X</td>
+<td>$170,664,667</td>
+<td>$170,788,690</td>
+<td>$171,579,478</td>
+<td>$180,812,280</td>
+</tr>
+<tr>
+<td>91</td>
+<td>IQ</td>
+<td>X</td>
+<td>O</td>
+<td>$84,946,027</td>
+<td>$17,970</td>
+<td>$111,317,311</td>
+<td>$85,476</td>
+</tr>
+<tr>
+<td>92</td>
+<td>JST</td>
+<td>X</td>
+<td>O</td>
+<td>$212,257,485</td>
+<td>$212,124,146</td>
+<td>$236,051,474</td>
+<td>$235,903,187</td>
+</tr>
+<tr>
+<td>93</td>
+<td>JUV</td>
+<td>X</td>
+<td>X</td>
+<td>$10,600,711</td>
+<td>$10,609,571</td>
+<td>$48,048,950</td>
+<td>$48,089,122</td>
+</tr>
+<tr>
+<td>94</td>
+<td>KAVA</td>
+<td>O</td>
+<td>O</td>
+<td>$572,675,452</td>
+<td>$572,125,717</td>
+<td>$572,644,065</td>
+<td>$572,125,717</td>
+</tr>
+<tr>
+<td>95</td>
+<td>KNC</td>
+<td>O</td>
+<td>O</td>
+<td>$126,583,979</td>
+<td>$118,321,569</td>
+<td>$175,795,981</td>
+<td>$175,307,477</td>
+</tr>
+<tr>
+<td>96</td>
+<td>LINA</td>
+<td>O</td>
+<td>X</td>
+<td>$72,031,483</td>
+<td>$72,129,435</td>
+<td>$131,193,028</td>
+<td>$131,371,432</td>
+</tr>
+<tr>
+<td>97</td>
+<td>LINK</td>
+<td>O</td>
+<td>O</td>
+<td>$4,012,842,320</td>
+<td>$4,012,674,300</td>
+<td>$7,457,428,980</td>
+<td>$7,457,116,745</td>
+</tr>
+<tr>
+<td>98</td>
+<td>LOOM</td>
+<td>X</td>
+<td>O</td>
+<td>$0</td>
+<td>$56,946,175</td>
+<td>$47,191,289</td>
+<td>$61,210,893</td>
+</tr>
+<tr>
+<td>99</td>
+<td>LPT</td>
+<td>O</td>
+<td>X</td>
+<td>$114,590,427</td>
+<td>$114,212,218</td>
+<td>$114,590,427</td>
+<td>$114,212,218</td>
+</tr>
+<tr>
+<td>100</td>
+<td>LRC</td>
+<td>O</td>
+<td>X</td>
+<td>$263,894,981</td>
+<td>$282,108,839</td>
+<td>$291,115,411</td>
+<td>$291,211,887</td>
+</tr>
+<tr>
+<td>101</td>
+<td>LSK</td>
+<td>X</td>
+<td>O</td>
+<td>$125,955,322</td>
+<td>$111,073,656</td>
+<td>$0</td>
+<td>$124,790,498</td>
+</tr>
+<tr>
+<td>102</td>
+<td>MAGIC</td>
+<td>O</td>
+<td>X</td>
+<td>$161,148,310</td>
+<td>$160,929,143</td>
+<td>$253,268,217</td>
+<td>$252,925,025</td>
+</tr>
+<tr>
+<td>103</td>
+<td>MANA</td>
+<td>O</td>
+<td>O</td>
+<td>$701,050,596</td>
+<td>$719,995,655</td>
+<td>$834,660,065</td>
+<td>$834,125,745</td>
+</tr>
+<tr>
+<td>104</td>
+<td>MARO</td>
+<td>X</td>
+<td>X</td>
+<td>$17,383,513</td>
+<td>$17,336,717</td>
+<td>$20,836,277</td>
+<td>$20,813,629</td>
+</tr>
+<tr>
+<td>105</td>
+<td>MASK</td>
+<td>O</td>
+<td>O</td>
+<td>$282,719,216</td>
+<td>$282,583,250</td>
+<td>$344,307,159</td>
+<td>$344,141,574</td>
+</tr>
+<tr>
+<td>106</td>
+<td>MATIC</td>
+<td>O</td>
+<td>O</td>
+<td>$6,352,685,036</td>
+<td>$6,347,073,052</td>
+<td>$6,816,573,980</td>
+<td>$6,810,552,195</td>
+</tr>
+<tr>
+<td>107</td>
+<td>MBL</td>
+<td>X</td>
+<td>O</td>
+<td>$51,324,916</td>
+<td>$51,283,585</td>
+<td>$93,325,347</td>
+<td>$93,250,194</td>
+</tr>
+<tr>
+<td>108</td>
+<td>MED</td>
+<td>X</td>
+<td>O</td>
+<td>$83,919,443</td>
+<td>$83,762,487</td>
+<td>$122,830,576</td>
+<td>$102,248,806</td>
+</tr>
+<tr>
+<td>109</td>
+<td>META</td>
+<td>X</td>
+<td>O</td>
+<td>$46,311,841</td>
+<td>$0</td>
+<td>$54,892,349</td>
+<td>$3,751,268</td>
+</tr>
+<tr>
+<td>110</td>
+<td>MINA</td>
+<td>O</td>
+<td>X</td>
+<td>$411,546,827</td>
+<td>$411,321,562</td>
+<td>$461,839,885</td>
+<td>$461,596,279</td>
+</tr>
+<tr>
+<td>111</td>
+<td>MKR</td>
+<td>O</td>
+<td>X</td>
+<td>$1,098,033,212</td>
+<td>$1,192,412,412</td>
+<td>$1,225,056,621</td>
+<td>$1,226,497,984</td>
+</tr>
+<tr>
+<td>112</td>
+<td>MLK</td>
+<td>X</td>
+<td>O</td>
+<td>$99,740,143</td>
+<td>$99,172,992</td>
+<td>$433,720,305</td>
+<td>$327,170,996</td>
+</tr>
+<tr>
+<td>113</td>
+<td>MOC</td>
+<td>X</td>
+<td>O</td>
+<td>$35,628,768</td>
+<td>$33,999,347</td>
+<td>$44,704,756</td>
+<td>$44,277,487</td>
+</tr>
+<tr>
+<td>114</td>
+<td>MTL</td>
+<td>O</td>
+<td>O</td>
+<td>$85,711,343</td>
+<td>$87,626,927</td>
+<td>$88,303,912</td>
+<td>$87,626,927</td>
+</tr>
+<tr>
+<td>115</td>
+<td>MVL</td>
+<td>X</td>
+<td>O</td>
+<td>$81,499,770</td>
+<td>$83,065,297</td>
+<td>$104,250,944</td>
+<td>$106,253,498</td>
+</tr>
+<tr>
+<td>116</td>
+<td>NAP</td>
+<td>X</td>
+<td>X</td>
+<td>$6,058,914</td>
+<td>$4,749,964</td>
+<td>$28,305,501</td>
+<td>$28,775,698</td>
+</tr>
+<tr>
+<td>117</td>
+<td>NEAR</td>
+<td>O</td>
+<td>O</td>
+<td>$1,302,426,913</td>
+<td>$1,301,704,648</td>
+<td>$1,383,101,101</td>
+<td>$1,382,334,099</td>
+</tr>
+<tr>
+<td>118</td>
+<td>NEO</td>
+<td>O</td>
+<td>O</td>
+<td>$607,260,660</td>
+<td>$607,290,710</td>
+<td>$860,996,257</td>
+<td>$860,931,067</td>
+</tr>
+<tr>
+<td>119</td>
+<td>NKN</td>
+<td>O</td>
+<td>X</td>
+<td>$60,430,002</td>
+<td>$70,090,242</td>
+<td>$92,969,233</td>
+<td>$92,855,498</td>
+</tr>
+<tr>
+<td>120</td>
+<td>NMR</td>
+<td>O</td>
+<td>X</td>
+<td>$84,628,120</td>
+<td>$84,765,414</td>
+<td>$148,197,659</td>
+<td>$148,438,082</td>
+</tr>
+<tr>
+<td>121</td>
+<td>OBSR</td>
+<td>X</td>
+<td>X</td>
+<td>$6,724,869</td>
+<td>$6,785,790</td>
+<td>$16,212,648</td>
+<td>$16,359,523</td>
+</tr>
+<tr>
+<td>122</td>
+<td>OCEAN</td>
+<td>O</td>
+<td>X</td>
+<td>$149,914,543</td>
+<td>$211,258,312</td>
+<td>$487,019,437</td>
+<td>$485,850,005</td>
+</tr>
+<tr>
+<td>123</td>
+<td>OGN</td>
+<td>O</td>
+<td>X</td>
+<td>$50,321,961</td>
+<td>$56,018,151</td>
+<td>$100,097,737</td>
+<td>$100,163,028</td>
+</tr>
+<tr>
+<td>124</td>
+<td>ONG</td>
+<td>X</td>
+<td>O</td>
+<td>$0</td>
+<td>$83,523,539</td>
+<td>$239,370,597</td>
+<td>$239,462,084</td>
+</tr>
+<tr>
+<td>125</td>
+<td>ONIT</td>
+<td>X</td>
+<td>X</td>
+<td>$20,827,705</td>
+<td>$20,989,266</td>
+<td>$21,363,496</td>
+<td>$21,529,214</td>
+</tr>
+<tr>
+<td>126</td>
+<td>ONT</td>
+<td>O</td>
+<td>O</td>
+<td>$169,256,606</td>
+<td>$166,914,621</td>
+<td>$190,908,954</td>
+<td>$190,705,184</td>
+</tr>
+<tr>
+<td>127</td>
+<td>ORBS</td>
+<td>X</td>
+<td>O</td>
+<td>$85,236,357</td>
+<td>$82,643,972</td>
+<td>$264,915,977</td>
+<td>$260,894,155</td>
+</tr>
+<tr>
+<td>128</td>
+<td>OXT</td>
+<td>X</td>
+<td>X</td>
+<td>$29,872,843</td>
+<td>$48,796,226</td>
+<td>$50,499,719</td>
+<td>$50,690,566</td>
+</tr>
+<tr>
+<td>129</td>
+<td>PLA</td>
+<td>X</td>
+<td>O</td>
+<td>$97,652,647</td>
+<td>$692,630</td>
+<td>$122,037,770</td>
+<td>$15,391,792</td>
+</tr>
+<tr>
+<td>130</td>
+<td>POLYX</td>
+<td>X</td>
+<td>O</td>
+<td>$111,627,645</td>
+<td>$94,874,762</td>
+<td>$111,627,645</td>
+<td>$111,981,018</td>
+</tr>
+<tr>
+<td>131</td>
+<td>POWR</td>
+<td>X</td>
+<td>O</td>
+<td>$71,711,191</td>
+<td>$88,248,489</td>
+<td>$166,881,638</td>
+<td>$166,010,893</td>
+</tr>
+<tr>
+<td>132</td>
+<td>PROM</td>
+<td>X</td>
+<td>X</td>
+<td>$75,074,304</td>
+<td>$75,342,946</td>
+<td>$79,187,965</td>
+<td>$79,471,326</td>
+</tr>
+<tr>
+<td>133</td>
+<td>PSG</td>
+<td>X</td>
+<td>X</td>
+<td>$18,665,538</td>
+<td>$18,607,564</td>
+<td>$77,124,059</td>
+<td>$77,315,760</td>
+</tr>
+<tr>
+<td>134</td>
+<td>PUNDIX</td>
+<td>X</td>
+<td>O</td>
+<td>$101,716,831</td>
+<td>$101,172,385</td>
+<td>$101,716,831</td>
+<td>$101,186,085</td>
+</tr>
+<tr>
+<td>135</td>
+<td>QKC</td>
+<td>X</td>
+<td>O</td>
+<td>$66,764,293</td>
+<td>$61,501,061</td>
+<td>$97,116,164</td>
+<td>$96,096,812</td>
+</tr>
+<tr>
+<td>136</td>
+<td>QTCON</td>
+<td>X</td>
+<td>X</td>
+<td>$21,660,551</td>
+<td>$21,466,550</td>
+<td>$41,052,611</td>
+<td>$40,684,927</td>
+</tr>
+<tr>
+<td>137</td>
+<td>QTUM</td>
+<td>O</td>
+<td>O</td>
+<td>$274,941,936</td>
+<td>$275,103,016</td>
+<td>$282,972,911</td>
+<td>$283,156,228</td>
+</tr>
+<tr>
+<td>138</td>
+<td>RAD</td>
+<td>O</td>
+<td>X</td>
+<td>$78,301,479</td>
+<td>$78,187,206</td>
+<td>$157,140,029</td>
+<td>$156,910,105</td>
+</tr>
+<tr>
+<td>139</td>
+<td>RAY</td>
+<td>X</td>
+<td>X</td>
+<td>$45,739,822</td>
+<td>$45,652,284</td>
+<td>$114,744,180</td>
+<td>$114,524,579</td>
+</tr>
+<tr>
+<td>140</td>
+<td>REI</td>
+<td>X</td>
+<td>X</td>
+<td>$23,183,393</td>
+<td>$22,780,148</td>
+<td>$24,078,328</td>
+<td>$23,979,103</td>
+</tr>
+<tr>
+<td>141</td>
+<td>RFR</td>
+<td>X</td>
+<td>O</td>
+<td>$98,216,889</td>
+<td>$95,882,320</td>
+<td>$100,681,855</td>
+<td>$95,891,332</td>
+</tr>
+<tr>
+<td>142</td>
+<td>RLC</td>
+<td>O</td>
+<td>X</td>
+<td>$85,939,180</td>
+<td>$85,881,043</td>
+<td>$103,294,100</td>
+<td>$103,224,223</td>
+</tr>
+<tr>
+<td>143</td>
+<td>RLY</td>
+<td>X</td>
+<td>X</td>
+<td>$32,288,816</td>
+<td>$32,582,720</td>
+<td>$97,100,004</td>
+<td>$97,571,751</td>
+</tr>
+<tr>
+<td>144</td>
+<td>RNDR</td>
+<td>O</td>
+<td>X</td>
+<td>$645,804,099</td>
+<td>$644,766,679</td>
+<td>$927,826,445</td>
+<td>$936,535,054</td>
+</tr>
+<tr>
+<td>145</td>
+<td>RSR</td>
+<td>O</td>
+<td>X</td>
+<td>$94,835,796</td>
+<td>$94,713,816</td>
+<td>$187,422,522</td>
+<td>$187,181,456</td>
+</tr>
+<tr>
+<td>146</td>
+<td>RVN</td>
+<td>O</td>
+<td>X</td>
+<td>$214,391,471</td>
+<td>$230,447,971</td>
+<td>$214,388,097</td>
+<td>$377,727,474</td>
+</tr>
+<tr>
+<td>147</td>
+<td>SAND</td>
+<td>O</td>
+<td>O</td>
+<td>$809,948,220</td>
+<td>$809,325,657</td>
+<td>$1,255,777,853</td>
+<td>$1,254,812,606</td>
+</tr>
+<tr>
+<td>148</td>
+<td>SBD</td>
+<td>X</td>
+<td>O</td>
+<td>$28,430,846</td>
+<td>$28,175,956</td>
+<td>$0</td>
+<td>$28,175,956</td>
+</tr>
+<tr>
+<td>149</td>
+<td>SC</td>
+<td>X</td>
+<td>O</td>
+<td>$174,855,409</td>
+<td>$186,081,274</td>
+<td>$0</td>
+<td>$186,159,171</td>
+</tr>
+<tr>
+<td>150</td>
+<td>SHIB</td>
+<td>O</td>
+<td>O</td>
+<td>$4,892,671,009</td>
+<td>$4,884,962,365</td>
+<td>$8,301,892,819</td>
+<td>$4,886,969,289</td>
+</tr>
+<tr>
+<td>151</td>
+<td>SNT</td>
+<td>X</td>
+<td>O</td>
+<td>$99,676,563</td>
+<td>$96,687,252</td>
+<td>$171,263,439</td>
+<td>$170,496,702</td>
+</tr>
+<tr>
+<td>152</td>
+<td>SNX</td>
+<td>O</td>
+<td>X</td>
+<td>$804,022,904</td>
+<td>$671,453,645</td>
+<td>$805,835,230</td>
+<td>$771,569,778</td>
+</tr>
+<tr>
+<td>153</td>
+<td>SOL</td>
+<td>O</td>
+<td>O</td>
+<td>$9,462,719,830</td>
+<td>$9,441,845,048</td>
+<td>$12,956,660,272</td>
+<td>$12,928,076,919</td>
+</tr>
+<tr>
+<td>154</td>
+<td>SOLVE</td>
+<td>X</td>
+<td>X</td>
+<td>$11,911,933</td>
+<td>$11,624,381</td>
+<td>$21,083,067</td>
+<td>$20,944,832</td>
+</tr>
+<tr>
+<td>155</td>
+<td>SSX</td>
+<td>X</td>
+<td>O</td>
+<td>$48,881,195</td>
+<td>$48,102,886</td>
+<td>$104,020,370</td>
+<td>$85,303,455</td>
+</tr>
+<tr>
+<td>156</td>
+<td>STEEM</td>
+<td>X</td>
+<td>O</td>
+<td>$81,004,690</td>
+<td>$81,101,101</td>
+<td>$0</td>
+<td>$75,380,907</td>
+</tr>
+<tr>
+<td>157</td>
+<td>STMX</td>
+<td>O</td>
+<td>O</td>
+<td>$65,968,506</td>
+<td>$59,915,806</td>
+<td>$74,964,211</td>
+<td>$74,894,757</td>
+</tr>
+<tr>
+<td>158</td>
+<td>STORJ</td>
+<td>O</td>
+<td>O</td>
+<td>$42,227,601</td>
+<td>$112,324,927</td>
+<td>$124,814,313</td>
+<td>$124,894,353</td>
+</tr>
+<tr>
+<td>159</td>
+<td>STPT</td>
+<td>X</td>
+<td>O</td>
+<td>$86,556,466</td>
+<td>$86,687,415</td>
+<td>$86,556,466</td>
+<td>$86,687,415</td>
+</tr>
+<tr>
+<td>160</td>
+<td>STRAX</td>
+<td>X</td>
+<td>O</td>
+<td>$71,357,088</td>
+<td>$71,564,493</td>
+<td>$0</td>
+<td>$71,564,493</td>
+</tr>
+<tr>
+<td>161</td>
+<td>STRK</td>
+<td>X</td>
+<td>O</td>
+<td>$44,040,614</td>
+<td>$43,118,246</td>
+<td>$75,312,144</td>
+<td>$73,734,839</td>
+</tr>
+<tr>
+<td>162</td>
+<td>STX</td>
+<td>O</td>
+<td>O</td>
+<td>$845,411,600</td>
+<td>$843,277,719</td>
+<td>$1,100,347,762</td>
+<td>$1,097,577,471</td>
+</tr>
+<tr>
+<td>163</td>
+<td>SUI</td>
+<td>O</td>
+<td>O</td>
+<td>$458,653,084</td>
+<td>$458,249,295</td>
+<td>$6,342,326,653</td>
+<td>$6,336,743,014</td>
+</tr>
+<tr>
+<td>164</td>
+<td>SUN</td>
+<td>X</td>
+<td>X</td>
+<td>$53,402,407</td>
+<td>$53,421,748</td>
+<td>$111,124,420</td>
+<td>$111,164,667</td>
+</tr>
+<tr>
+<td>165</td>
+<td>SXP</td>
+<td>O</td>
+<td>O</td>
+<td>$192,956,048</td>
+<td>$192,831,930</td>
+<td>$192,955,349</td>
+<td>$192,831,930</td>
+</tr>
+<tr>
+<td>166</td>
+<td>T</td>
+<td>O</td>
+<td>O</td>
+<td>$0</td>
+<td>$209,971,148</td>
+<td>$248,418,710</td>
+<td>$236,898,058</td>
+</tr>
+<tr>
+<td>167</td>
+<td>TFUEL</td>
+<td>X</td>
+<td>O</td>
+<td>$265,183,769</td>
+<td>$261,945,434</td>
+<td>$265,183,040</td>
+<td>$261,945,434</td>
+</tr>
+<tr>
+<td>168</td>
+<td>THETA</td>
+<td>O</td>
+<td>O</td>
+<td>$767,546,748</td>
+<td>$767,095,070</td>
+<td>$767,546,748</td>
+<td>$767,095,070</td>
+</tr>
+<tr>
+<td>169</td>
+<td>TON</td>
+<td>X</td>
+<td>O</td>
+<td>$74,235,969</td>
+<td>$54,095,908</td>
+<td>$77,139,830</td>
+<td>$113,440,999</td>
+</tr>
+<tr>
+<td>170</td>
+<td>TRX</td>
+<td>O</td>
+<td>O</td>
+<td>$6,991,639,366</td>
+<td>$6,989,835,178</td>
+<td>$6,991,637,005</td>
+<td>$6,989,840,911</td>
+</tr>
+<tr>
+<td>171</td>
+<td>TT</td>
+<td>X</td>
+<td>O</td>
+<td>$39,240,106</td>
+<td>$38,843,804</td>
+<td>$39,240,106</td>
+<td>$38,843,804</td>
+</tr>
+<tr>
+<td>172</td>
+<td>TUSD</td>
+<td>X</td>
+<td>X</td>
+<td>$3,016,994,289</td>
+<td>$3,013,853,019</td>
+<td>$3,016,994,289</td>
+<td>$3,013,853,019</td>
+</tr>
+<tr>
+<td>173</td>
+<td>UNI</td>
+<td>O</td>
+<td>X</td>
+<td>$4,854,878,319</td>
+<td>$3,717,553,183</td>
+<td>$6,440,823,841</td>
+<td>$6,437,309,981</td>
+</tr>
+<tr>
+<td>174</td>
+<td>UPP</td>
+<td>X</td>
+<td>O</td>
+<td>$22,902,732</td>
+<td>$32,643,213</td>
+<td>$34,902,736</td>
+<td>$33,803,707</td>
+</tr>
+<tr>
+<td>175</td>
+<td>USDP</td>
+<td>X</td>
+<td>X</td>
+<td>$549,271,166</td>
+<td>$0</td>
+<td>$549,271,166</td>
+<td>$105,946,851</td>
+</tr>
+<tr>
+<td>176</td>
+<td>VAL</td>
+<td>X</td>
+<td>X</td>
+<td>$8,931,701</td>
+<td>$58,222</td>
+<td>$16,419,913</td>
+<td>$14,270,065</td>
+</tr>
+<tr>
+<td>177</td>
+<td>VET</td>
+<td>O</td>
+<td>O</td>
+<td>$1,341,304,221</td>
+<td>$1,341,496,112</td>
+<td>$1,599,515,856</td>
+<td>$1,599,744,687</td>
+</tr>
+<tr>
+<td>178</td>
+<td>WAVES</td>
+<td>O</td>
+<td>O</td>
+<td>$189,317,799</td>
+<td>$212,208,012</td>
+<td>$189,317,799</td>
+<td>$212,208,012</td>
+</tr>
+<tr>
+<td>179</td>
+<td>WAXP</td>
+<td>X</td>
+<td>O</td>
+<td>$172,882,493</td>
+<td>$172,970,462</td>
+<td>$195,508,722</td>
+<td>$208,755,816</td>
+</tr>
+<tr>
+<td>180</td>
+<td>XEC</td>
+<td>O</td>
+<td>O</td>
+<td>$590,929,414</td>
+<td>$590,702,209</td>
+<td>$637,736,676</td>
+<td>$637,493,317</td>
+</tr>
+<tr>
+<td>181</td>
+<td>XEM</td>
+<td>O</td>
+<td>O</td>
+<td>$264,958,951</td>
+<td>$265,108,527</td>
+<td>$264,958,951</td>
+<td>$265,108,527</td>
+</tr>
+<tr>
+<td>182</td>
+<td>XLM</td>
+<td>O</td>
+<td>O</td>
+<td>$4,027,745,999</td>
+<td>$4,027,544,940</td>
+<td>$7,375,370,913</td>
+<td>$7,375,005,625</td>
+</tr>
+<tr>
+<td>183</td>
+<td>XRP</td>
+<td>O</td>
+<td>O</td>
+<td>$36,258,300,810</td>
+<td>$36,273,187,221</td>
+<td>$68,809,357,796</td>
+<td>$68,837,608,552</td>
+</tr>
+<tr>
+<td>184</td>
+<td>XTZ</td>
+<td>O</td>
+<td>O</td>
+<td>$763,031,306</td>
+<td>$770,313,555</td>
+<td>$0</td>
+<td>$787,517,381</td>
+</tr>
+<tr>
+<td>185</td>
+<td>YGG</td>
+<td>X</td>
+<td>X</td>
+<td>$33,253,959</td>
+<td>$46,314,141</td>
+<td>$179,629,761</td>
+<td>$179,801,585</td>
+</tr>
+<tr>
+<td>186</td>
+<td>ZIL</td>
+<td>O</td>
+<td>O</td>
+<td>$345,835,139</td>
+<td>$326,421,796</td>
+<td>$432,098,728</td>
+<td>$432,000,729</td>
+</tr>
+<tr>
+<td>187</td>
+<td>ZRX</td>
+<td>O</td>
+<td>O</td>
+<td>$19,593,825</td>
+<td>$178,967,576</td>
+<td>$253,300,186</td>
+<td>$211,172,164</td>
+</tr>
+</tbody>
+</table>
+            </div>
+            <!-- Existing scripts -->
+        </body>
+        </html>
+        

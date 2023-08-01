@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import os
 import time
+from bs4 import BeautifulSoup
 
 while True:
     
@@ -154,81 +155,59 @@ while True:
         # HTML 코드로 변환
         html = df.to_html(classes='dataframe', index=False)  # index=False 추가
 
-        # HTML 파일로 저장
-        with open(output_html_name, 'w', encoding='utf-8') as f:
-            f.write('''
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <style>
-                    body {{
-                        margin: 0;
-                        padding: 0;
-                    }}
-                    .dataframe {{
-                        width: 60%;
-                        height: 80%;
-                    }}
-                    .dataTables_wrapper {{
-                        width: 90%;
-                        margin: auto;
-                    }}
-                    .filter-dropdown {{
-                        margin: 10px;
-                    }}
-                    /* Add other styles as needed */
-                </style>
-                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-                <script>
-                    function filterTable() {{
-                        var value_binance = document.getElementById('binance-dropdown').value;
-                        var value_krw = document.getElementById('krw-dropdown').value;
-                        var rows = document.querySelectorAll('.dataframe tbody tr');
-                        rows.forEach(row => {{
-                            var binance_column = row.cells[3].innerText; // Adjust the index as needed
-                            var krw_column = row.cells[4].innerText; // Adjust the index as needed
-                            if ((value_binance === 'ALL' || value_binance === binance_column) &&
-                                (value_krw === 'ALL' || value_krw === krw_column)) {{
-                                row.style.display = '';
-                            }} else {{
-                                row.style.display = 'none';
-                            }}
-                        }});
-                    }}
-                </script>
-            </head>
-            <body>
-                <div class="filter-dropdown">
-                    <label for="binance-dropdown">Binance Future Listing:</label>
-                    <select id="binance-dropdown" onchange="filterTable()">
-                        <option value="ALL">All</option>
-                        <option value="O">O</option>
-                        <option value="X">X</option>
-                    </select>
-                    <label for="krw-dropdown">KRW Listing:</label>
-                    <select id="krw-dropdown" onchange="filterTable()">
-                        <option value="ALL">All</option>
-                        <option value="O">O</option>
-                        <option value="X">X</option>
-                    </select>
-                </div>
-                <div class="dataTables_wrapper">
-                {table}
-                </div>
-                <script>
-                    $(document).ready( function () {{
-                        var t = $('.dataframe').DataTable({{
-                            /* DataTables configuration */
-                        }});
+        # Parse the HTML with BeautifulSoup
+        soup = BeautifulSoup(html, 'html.parser')
 
-                        // Additional scripts
+        # Add dropdown menus to the header row (3rd and 4th columns)
+        header_row = soup.find('thead').find('tr')
+        header_row.find_all('th')[2].append('''<select id="binance-dropdown" onchange="filterTable('binance')">
+        <option value="ALL" selected>All</option><option value="O">O</option><option value="X">X</option></select>''')
+        header_row.find_all('th')[3].append('''<select id="krw-dropdown" onchange="filterTable('krw')">
+        <option value="ALL" selected>All</option><option value="O">O</option><option value="X">X</option></select>''')
+
+        # HTML structure
+        html_structure = f'''
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                /* Existing styles */
+            </style>
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+            <script>
+                function filterTable(column) {{
+                    var value;
+                    if (column === 'binance') {{
+                        value = document.getElementById('binance-dropdown').value;
+                    }} else {{
+                        value = document.getElementById('krw-dropdown').value;
+                    }}
+                    var rows = document.querySelectorAll('.dataframe tbody tr');
+                    rows.forEach(row => {{
+                        var column_value = row.cells[column === 'binance' ? 2 : 3].innerText;
+                        if (value === 'ALL' || value === column_value) {{
+                            row.style.display = '';
+                        }} else {{
+                            row.style.display = 'none';
+                        }}
                     }});
-                </script>
-            </body>
-            </html>
-            '''.format(table=html))
+                }}
+            </script>
+        </head>
+        <body>
+            <div class="dataTables_wrapper">
+                {str(soup)}
+            </div>
+            <!-- Existing scripts -->
+        </body>
+        </html>
+        '''
+
+        # Save the modified HTML
+        with open(output_html_name, 'w', encoding='utf-8') as f:
+            f.write(html_structure)
 
         print(f"Data retrieval successful and saved to {output_html_name}!")
         
