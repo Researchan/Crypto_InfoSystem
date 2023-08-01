@@ -179,11 +179,11 @@ while True:
                     }}
                     .dataframe td:nth-child(3) {{
                         text-align: center;
-                        width: 100px;
+                        width: 50px;
                     }}
                     .dataframe td:nth-child(4) {{
                         text-align: center;
-                        width: 100px;
+                        width: 30px;
                     }}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
