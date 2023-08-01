@@ -20,6 +20,7 @@ parameters = {
 # Send HTTP GET request
 response = requests.get(url, headers=headers, params=parameters)
 
+symbols = ['FCT']
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the response data in JSON format
@@ -28,17 +29,10 @@ if response.status_code == 200:
     datalist = list(data)
         
     for i in range(0,len(datalist)):
-            if datalist[i]['symbol'] == 'ARKM':
-                print('ARKM : ', datalist[i]['id'])
+        for symbol in symbols:
+            if datalist[i]['symbol'] == symbol:
+                print(symbol, ' :', datalist[i]['id'])
                 
-            if datalist[i]['symbol'] == 'AGLD':
-                print('AGLD : ', datalist[i]['id'])
-                
-            # if datalist[i]['symbol'] == 'NMR':
-            #     print('NMR : ', datalist[i]['id'])
-                
-            # if datalist[i]['symbol'] == 'XVG':
-            #     print('XVG : ', datalist[i]['id'])
     
 else:
     print('error :', response.status_code, response.json())

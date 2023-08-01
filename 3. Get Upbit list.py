@@ -31,4 +31,8 @@ def Get_UpbitAll_Tickers():
     Allmarket_list.sort()
     return Allmarket_list
 
-print(Get_UpbitAll_Tickers())
+Upbittickers = Get_UpbitKRW_Tickers()
+
+# print(Upbittickers)
+for ticker in Upbittickers:
+    print(ticker)
