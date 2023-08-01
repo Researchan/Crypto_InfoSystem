@@ -206,22 +206,6 @@ while True:
                     }} ]
                 }});
 
-                $('#filter').html('바낸 선물 상장: <select id="filterBinance"></select> 원화 상장: <select id="filterKRW"></select>');
-                $('#filterBinance').append('<option value="">전체</option>');
-                $('#filterBinance').append('<option value="O">O</option>');
-                $('#filterBinance').append('<option value="X">X</option>');
-                $('#filterKRW').append('<option value="">전체</option>');
-                $('#filterKRW').append('<option value="O">O</option>');
-                $('#filterKRW').append('<option value="X">X</option>');
-
-                $('#filterBinance').change(function(){
-                    t.column(2).search($(this).val()).draw();
-                });
-
-                $('#filterKRW').change(function(){
-                    t.column(3).search($(this).val()).draw();
-                });
-
                 // This will add numbers on the leftmost column
                 t.on( 'order.dt search.dt', function () {{
                     t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
