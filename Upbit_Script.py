@@ -149,7 +149,7 @@ while True:
         
         # 행 번호를 별도의 열로 만들기
         df.reset_index(inplace=True)
-        df.rename(columns={'index': 'Row Number'}, inplace=True)
+        df.rename(columns={'index': ''}, inplace=True)
 
         # HTML 코드로 변환
         html = df.to_html(classes='dataframe', index=False)  # index=False 추가
@@ -161,13 +161,11 @@ while True:
             <html>
             <head>
                 <style>
-                    .dataframe th:first-child {{
-                        display: none;
-                    }}
                     body {{
                         margin: 0;
                         padding: 0;
                     }}
+
                     .dataframe {{
                         width: 60%;
                         height: 80%;
