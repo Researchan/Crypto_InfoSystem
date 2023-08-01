@@ -197,7 +197,6 @@ while True:
                     .dataframe td:nth-child(8) {{
                         width: 50px;
                     }}
-                    .filter-btn {{margin: 5px;}}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
                 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
