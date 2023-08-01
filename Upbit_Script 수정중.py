@@ -139,12 +139,12 @@ while True:
 
         df = df.reindex(columns=['UpbitTicker', 'Binance_Future_listing', 'KRW_Listing', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
         df.rename(columns={
-            'Binance_Future_listing': '바낸 선물 상장',
-            'KRW_Listing': '원화 상장',
-            'CG_MarketCap': '유통 시가총액 (코인 개코)',
-            'CMC_MarketCap': '유통 시가총액 (코인 마켓캡)',
-            'CG_FDV': '총 시가총액 (코인 개코)',
-            'CMC_FDV': '총 시가총액(코인 마켓캡)'
+            'Binance_Future_listing': '바낸 선물',
+            'KRW_Listing': '원화',
+            'CG_MarketCap': '유통 시가총액 (CG)',
+            'CMC_MarketCap': '유통 시가총액 (CMC)',
+            'CG_FDV': '총 시가총액 (CG)',
+            'CMC_FDV': '총 시가총액(CMC)'
         }, inplace=True)
         
         # 행 번호를 별도의 열로 만들기
@@ -173,9 +173,31 @@ while True:
                         width: 90%;
                         margin: auto;
                     }}
-                    .dataframe td:nth-child(2), .dataframe td:nth-child(3) {{
+                    .dataframe td:nth-child(2) {{
                         text-align: center;
+                        width: 50px;
                     }}
+                    .dataframe td:nth-child(3) {{
+                        text-align: center;
+                        width: 100px;
+                    }}
+                    .dataframe td:nth-child(4) {{
+                        text-align: center;
+                        width: 50px;
+                    }}
+                        .dataframe td:nth-child(5) {{
+                        width: 50px;
+                    }}
+                    .dataframe td:nth-child(6) {{
+                        width: 100px;
+                    }}
+                    .dataframe td:nth-child(7) {{
+                        width: 50px;
+                    }}
+                    .dataframe td:nth-child(8) {{
+                        width: 50px;
+                    }}
+                    .filter-btn {margin: 5px;}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
                 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -183,7 +205,6 @@ while True:
             </head>
             <body>
             <div class="dataTables_wrapper">
-            <div id="filter"></div>
             {table}
             </div>
             <script>
@@ -215,6 +236,9 @@ while True:
             }});
             </script>
             </body>
+                <button class="filter-btn" onclick="filterTable('O')">Show 'O'</button>
+                <button class="filter-btn" onclick="filterTable('X')">Show 'X'</button>
+                <button class="filter-btn" onclick="filterTable('ALL')">Show All</button>
             </html>
             '''.format(table=html))
 

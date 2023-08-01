@@ -141,10 +141,10 @@ while True:
         df.rename(columns={
             'Binance_Future_listing': '바낸 선물',
             'KRW_Listing': '원화',
-            'CG_MarketCap': '유통 시가총액 (코인 개코)',
-            'CMC_MarketCap': '유통 시가총액 (코인 마켓캡)',
-            'CG_FDV': '총 시가총액 (코인 개코)',
-            'CMC_FDV': '총 시가총액(코인 마켓캡)'
+            'CG_MarketCap': '유통 시가총액 (CG)',
+            'CMC_MarketCap': '유통 시가총액 (CMC)',
+            'CG_FDV': '총 시가총액 (CG)',
+            'CMC_FDV': '총 시가총액(CMC)'
         }, inplace=True)
         
         # 행 번호를 별도의 열로 만들기
@@ -179,10 +179,22 @@ while True:
                     }}
                     .dataframe td:nth-child(3) {{
                         text-align: center;
-                        width: 80px;
+                        width: 100px;
                     }}
                     .dataframe td:nth-child(4) {{
                         text-align: center;
+                        width: 50px;
+                    }}
+                        .dataframe td:nth-child(5) {{
+                        width: 50px;
+                    }}
+                    .dataframe td:nth-child(6) {{
+                        width: 100px;
+                    }}
+                    .dataframe td:nth-child(7) {{
+                        width: 50px;
+                    }}
+                    .dataframe td:nth-child(8) {{
                         width: 50px;
                     }}
                 </style>
