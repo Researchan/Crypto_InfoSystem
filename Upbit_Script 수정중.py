@@ -173,71 +173,60 @@ while True:
                         width: 90%;
                         margin: auto;
                     }}
-                    .dataframe td:nth-child(2) {{
-                        text-align: center;
-                        width: 50px;
+                    .filter-dropdown {{
+                        margin: 10px;
                     }}
-                    .dataframe td:nth-child(3) {{
-                        text-align: center;
-                        width: 100px;
-                    }}
-                    .dataframe td:nth-child(4) {{
-                        text-align: center;
-                        width: 50px;
-                    }}
-                        .dataframe td:nth-child(5) {{
-                        width: 50px;
-                    }}
-                    .dataframe td:nth-child(6) {{
-                        width: 100px;
-                    }}
-                    .dataframe td:nth-child(7) {{
-                        width: 50px;
-                    }}
-                    .dataframe td:nth-child(8) {{
-                        width: 50px;
-                    }}
+                    /* Add other styles as needed */
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
                 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
                 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+                <script>
+                    function filterTable() {{
+                        var value_binance = document.getElementById('binance-dropdown').value;
+                        var value_krw = document.getElementById('krw-dropdown').value;
+                        var rows = document.querySelectorAll('.dataframe tbody tr');
+                        rows.forEach(row => {{
+                            var binance_column = row.cells[3].innerText; // Adjust the index as needed
+                            var krw_column = row.cells[4].innerText; // Adjust the index as needed
+                            if ((value_binance === 'ALL' || value_binance === binance_column) &&
+                                (value_krw === 'ALL' || value_krw === krw_column)) {{
+                                row.style.display = '';
+                            }} else {{
+                                row.style.display = 'none';
+                            }}
+                        }});
+                    }}
+                </script>
             </head>
             <body>
-            <div class="dataTables_wrapper">
-            {table}
-            </div>
-            <script>
-            $(document).ready( function () {{
-                var t = $('.dataframe').DataTable({{
-                    "searching": true,
-                    "paging": false,
-                    "info": false,
-                    "lengthChange": false,
-                    "scrollY": '80vh',
-                    "scrollX": true,
-                    "scrollCollapse": true,
-                    "fixedHeader": true,
-                    "autoWidth": false,
-                    "order": [[ 1, "asc" ]],  // 2nd column as the initial sorting column
-                    "columnDefs": [ {{
-                        "searchable": false,
-                        "orderable": false,
-                        "targets": 0
-                    }} ]
-                }});
+                <div class="filter-dropdown">
+                    <label for="binance-dropdown">Binance Future Listing:</label>
+                    <select id="binance-dropdown" onchange="filterTable()">
+                        <option value="ALL">All</option>
+                        <option value="O">O</option>
+                        <option value="X">X</option>
+                    </select>
+                    <label for="krw-dropdown">KRW Listing:</label>
+                    <select id="krw-dropdown" onchange="filterTable()">
+                        <option value="ALL">All</option>
+                        <option value="O">O</option>
+                        <option value="X">X</option>
+                    </select>
+                </div>
+                <div class="dataTables_wrapper">
+                {table}
+                </div>
+                <script>
+                    $(document).ready( function () {{
+                        var t = $('.dataframe').DataTable({{
+                            /* DataTables configuration */
+                        }});
 
-                // This will add numbers on the leftmost column
-                t.on( 'order.dt search.dt', function () {{
-                    t.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) {{
-                        cell.innerHTML = i+1;
+                        // Additional scripts
                     }});
-                }}).draw();
-            }});
-            </script>
+                </script>
             </body>
-                <button class="filter-btn" onclick="filterTable('O')">Show 'O'</button>
-                <button class="filter-btn" onclick="filterTable('X')">Show 'X'</button>
-                <button class="filter-btn" onclick="filterTable('ALL')">Show All</button>
             </html>
             '''.format(table=html))
 
