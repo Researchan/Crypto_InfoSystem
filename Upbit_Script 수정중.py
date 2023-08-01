@@ -210,11 +210,6 @@ while True:
                 }}).draw();
                 
             }});
-            </script>
-            <script>
-            // 기존 filterTable 함수 ...
-
-            // ## DROPDOWN CODE ##
             $(document).ready( function () {{
                 var t = $('.dataframe').DataTable({{
                     initComplete: function () {{
