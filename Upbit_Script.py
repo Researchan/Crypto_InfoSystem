@@ -99,7 +99,7 @@ while True:
             cmc_fdv = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('fully_diluted_market_cap', float('nan'))
 
             # 리스트에 추가 시 Binance_Future_listing과 KRW_Listing도 포함
-            coin_data_list.append([upbit_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, binance_future_listing, KRW_Listing])  # Binance Ticker 데이터 추가
+            coin_data_list.append([upbit_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, binance_future_listing, KRW_Listing])
 
         # 데이터를 DataFrame으로 변환
         columns = ['UpbitTicker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Binance_Future_listing', 'KRW_Listing']
@@ -137,7 +137,7 @@ while True:
         df['CMC_MarketCap'] = df['CMC_MarketCap'].apply(lambda x: f"${int(x):,}")
         df['CMC_FDV'] = df['CMC_FDV'].apply(lambda x: f"${int(x):,}")
 
-        df = df.reindex(columns=['UpbitTicker', 'Binance_Future_listing', 'KRW_listing', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
+        df = df.reindex(columns=['UpbitTicker', 'Binance_Future_listing', 'KRW_Listing', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
         df.rename(columns={
             'Binance_Future_listing': '바낸 선물 상장',
             'KRW_Listing': '원화 상장',
@@ -161,6 +161,9 @@ while True:
             <html>
             <head>
                 <style>
+                    .dataframe th:first-child {{
+                        display: none;
+                    }}
                     body {{
                         margin: 0;
                         padding: 0;
