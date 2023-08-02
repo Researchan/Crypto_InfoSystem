@@ -5,9 +5,9 @@ import time
 
 while True:
     
-    input_file_name = 'Upbit_input.xlsx'
-    output_xlsx_name = 'Upbit_Infos.xlsx'
-    output_html_name = 'Upbit_Infos.html'
+    input_file_name = 'Bithumb_Input.xlsx'
+    output_xlsx_name = 'Bithumb_Infos.xlsx'
+    output_html_name = 'Bithumb_Infos.html'
 
     coingecko_url = 'https://api.coingecko.com/api/v3/coins/markets'
     coinmarketcap_url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
@@ -17,8 +17,9 @@ while True:
     df = pd.read_excel(input_file_name)
 
     # 엑셀 파일에 있는 id들을 ','로 구분하여 문자열로 만듦
-    coingecko_ids = ",".join(df['CG_id'].tolist())
-
+    # coingecko_ids = ",".join(df['CG_id'].tolist())
+    coingecko_ids = ",".join(df['CG_id'].fillna('').astype(str).tolist())
+    
     # Coingecko API 호출에 사용할 파라미터
     coingecko_params = {
         'vs_currency': 'usd',
@@ -84,11 +85,11 @@ while True:
         coin_data_list = []
 
         # 코인별로 데이터를 정리하여 리스트에 추가
-        # UpbitTicker를 사용하도록 업데이트
+        # BithumbTicker를 사용하도록 업데이트
         for _, row in df.iterrows():
             cg_id = row['CG_id']
             cmc_id = row['CMC_id']
-            upbit_ticker = row['UpbitTicker']  # UpbitTicker 데이터 추가
+            bithumb_ticker = row['BithumbTicker']  # BithumbTicker 데이터 추가
             binance_future_listing = row['Binance_Future_listing']
             KRW_Listing = row['KRW_Listing']
 
@@ -99,10 +100,10 @@ while True:
             cmc_fdv = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('fully_diluted_market_cap', float('nan'))
 
             # 리스트에 추가 시 Binance_Future_listing과 KRW_Listing도 포함
-            coin_data_list.append([upbit_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, binance_future_listing, KRW_Listing])
+            coin_data_list.append([bithumb_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, binance_future_listing, KRW_Listing])
 
         # 데이터를 DataFrame으로 변환
-        columns = ['UpbitTicker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Binance_Future_listing', 'KRW_Listing']
+        columns = ['BithumbTicker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Binance_Future_listing', 'KRW_Listing']
         df_combined = pd.DataFrame(coin_data_list, columns=columns)
 
         # 새로운 엑셀 파일로 저장
@@ -137,7 +138,7 @@ while True:
         df['CMC_MarketCap'] = df['CMC_MarketCap'].apply(lambda x: f"${int(x):,}")
         df['CMC_FDV'] = df['CMC_FDV'].apply(lambda x: f"${int(x):,}")
 
-        df = df.reindex(columns=['UpbitTicker', 'Binance_Future_listing', 'KRW_Listing', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
+        df = df.reindex(columns=['BithumbTicker', 'Binance_Future_listing', 'KRW_Listing', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
         df.rename(columns={
             'Binance_Future_listing': '바낸 선물',
             'KRW_Listing': '원화',
