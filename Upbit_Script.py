@@ -189,7 +189,9 @@ while True:
                         // 3열에 드롭다운 메뉴 추가
                         this.api().columns(2).every( function () {{
                             var column = this;
-                            var select = $('<select><option value=""></option></select>')
+                            var select = $(
+                            '<select><option value="">전체</option></select>'
+                            )
                                 .appendTo( $(column.header()) )
                                 .on( 'change', function () {{
                                     var val = $.fn.dataTable.util.escapeRegex(
