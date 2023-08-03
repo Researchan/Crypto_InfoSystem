@@ -100,7 +100,7 @@ while True:
             cmc_fdv = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('fully_diluted_market_cap', float('nan'))
 
             # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
-            coin_data_list.append([binance_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv])
+            coin_data_list.append([binance_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, Upbit_KRW, Upbit_BTC, Bithumb])
 
         # 데이터를 DataFrame으로 변환
         columns = ['Binance Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb']
