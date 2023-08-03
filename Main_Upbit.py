@@ -84,7 +84,7 @@ while True:
         coin_data_list = []
 
         # 코인별로 데이터를 정리하여 리스트에 추가
-        # UpbitTicker를 사용하도록 업데이트
+        # Input Data를 열별로 받아서, 리스트에 저장.
         for _, row in df.iterrows():
             cg_id = row['CG_id']
             cmc_id = row['CMC_id']
@@ -98,7 +98,7 @@ while True:
             cmc_market_cap = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('market_cap', float('nan'))
             cmc_fdv = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('fully_diluted_market_cap', float('nan'))
 
-            # 리스트에 추가 시 Binance_Future_listing과 KRW_Listing도 포함
+            # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
             coin_data_list.append([upbit_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, binance_future_listing, KRW_Listing])
 
         # 데이터를 DataFrame으로 변환
@@ -124,7 +124,7 @@ while True:
 
         print(f"Data retrieval successful and saved to {output_xlsx_name}!")
 
-        # 엑셀 데이터 읽어오기
+        # 생성된 엑셀 데이터 읽어오기
         df = pd.read_excel(output_xlsx_name)
         df = df.drop(columns=['CG_id', 'CMC_id'])  # CG_id와 CMC_id 열을 제거
         
@@ -149,6 +149,7 @@ while True:
         
         # 행 번호를 별도의 열로 만들기
         df.reset_index(inplace=True)
+        # index열의 제목은 공란으로 만들기
         df.rename(columns={'index': ''}, inplace=True)
 
         # HTML 코드로 변환
@@ -253,7 +254,6 @@ while True:
                         cell.innerHTML = i+1;
                     }});
                 }}).draw();
-
             }});
             </script>
             </body>

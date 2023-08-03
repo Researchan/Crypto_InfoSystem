@@ -31,7 +31,7 @@ def Get_UpbitAll_Tickers():
     Allmarket_list.sort()
     return Allmarket_list
 
-Upbittickers = Get_UpbitKRW_Tickers()
+Upbittickers = Get_UpbitBTC_Tickers()
 
 # print(Upbittickers)
 for ticker in Upbittickers:

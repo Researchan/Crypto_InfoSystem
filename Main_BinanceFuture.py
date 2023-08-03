@@ -4,17 +4,17 @@ import os
 import time
 
 while True:
-    # Coingecko API 주소
+    
+    input_file_name = 'BinanceFuture_input.xlsx'
+    output_xlsx_name = 'BinanceFuture_Infos.xlsx'
+    output_html_name = 'BinanceFuture_Infos.html'
+
     coingecko_url = 'https://api.coingecko.com/api/v3/coins/markets'
-
-    # CoinMarketCap API 주소
     coinmarketcap_url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
-
-    # API 키 입력
     coinmarketcap_api_key = '339f7745-0a39-4c98-924a-39f07902c361'
 
     # 엑셀 파일에서 ids 정보를 가져옴
-    df = pd.read_excel('BinanceFuture_Input.xlsx')
+    df = pd.read_excel(input_file_name)
 
     # 엑셀 파일에 있는 id들을 ','로 구분하여 문자열로 만듦
     coingecko_ids = ",".join(df['CG_id'].tolist())
@@ -84,10 +84,14 @@ while True:
         coin_data_list = []
 
         # 코인별로 데이터를 정리하여 리스트에 추가
+        # Input Data를 열별로 받아서, 리스트에 저장.
         for _, row in df.iterrows():
             cg_id = row['CG_id']
             cmc_id = row['CMC_id']
-            binance_ticker = row['Binance Ticker']  # Binance Ticker 데이터 추가
+            binance_ticker = row['BinanceTicker']
+            Upbit_KRW = row['Upbit_KRW'] 
+            Upbit_BTC = row['Upbit_BTC']
+            Bithumb = row['Bithumb']
 
             cg_market_cap = coingecko_coins_data.get(cg_id, {}).get('market_cap', float('nan'))
             cg_fdv = coingecko_coins_data.get(cg_id, {}).get('FDV', float('nan'))
@@ -95,14 +99,15 @@ while True:
             cmc_market_cap = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('market_cap', float('nan'))
             cmc_fdv = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('fully_diluted_market_cap', float('nan'))
 
-            coin_data_list.append([binance_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv])  # Binance Ticker 데이터 추가
+            # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
+            coin_data_list.append([binance_ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv])
 
         # 데이터를 DataFrame으로 변환
-        columns = ['Binance Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV']  # Binance Ticker 데이터 추가
+        columns = ['Binance Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb']
         df_combined = pd.DataFrame(coin_data_list, columns=columns)
 
         # 새로운 엑셀 파일로 저장
-        with pd.ExcelWriter('BinanceFuturePairs_Info.xlsx', engine='xlsxwriter') as writer:
+        with pd.ExcelWriter(output_xlsx_name, engine='xlsxwriter') as writer:
             df_combined.to_excel(writer, index=False, sheet_name='Sheet1')
 
             # 엑셀 파일의 WorkSheet 객체 가져오기
@@ -118,9 +123,10 @@ while True:
             money_format = writer.book.add_format({'num_format': '$#,##0'})
             worksheet.set_column('D:G', 15, money_format)
 
-        print("Data retrieval successful and saved to BinanceFuturePairs_Info.xlsx!")
+        print(f"Data retrieval successful and saved to {output_xlsx_name}!")
 
-        df = pd.read_excel('BinanceFuturePairs_Info.xlsx')
+        # 생성된 엑셀 데이터 읽어오기
+        df = pd.read_excel(output_xlsx_name)
         df = df.drop(columns=['CG_id', 'CMC_id'])  # CG_id와 CMC_id 열을 제거
         
         # 결측값 처리
@@ -132,24 +138,28 @@ while True:
         df['CMC_MarketCap'] = df['CMC_MarketCap'].apply(lambda x: f"${int(x):,}")
         df['CMC_FDV'] = df['CMC_FDV'].apply(lambda x: f"${int(x):,}")
 
-        df = df.reindex(columns=['Binance Ticker', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
+        df = df.reindex(columns=['Binance Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'CG_MarketCap', 'CMC_MarketCap', 'CG_FDV', 'CMC_FDV'])
 
         df.rename(columns={
-            'CG_MarketCap': '유통 시가총액 (코인 개코)',
-            'CMC_MarketCap': '유통 시가총액 (코인 마켓캡)',
-            'CG_FDV': '총 시가총액 (코인 개코)',
-            'CMC_FDV': '총 시가총액(코인 마켓캡)'
+            'Upbit_KRW' : '업비트 원화',
+            'Upbit_BTC' : '업비트 BTC',
+            'Bithumb' : '빗썸',
+            'CG_MarketCap': '유통 시가총액 (CG)',
+            'CMC_MarketCap': '유통 시가총액 (CMC)',
+            'CG_FDV': '총 시가총액 (CG)',
+            'CMC_FDV': '총 시가총액(CMC)'
         }, inplace=True)
         
         # 행 번호를 별도의 열로 만들기
         df.reset_index(inplace=True)
-        df.rename(columns={'index': 'Row Number'}, inplace=True)
+        # index열의 제목은 공란으로 만들기
+        df.rename(columns={'index': ''}, inplace=True)
 
         # HTML 코드로 변환
         html = df.to_html(classes='dataframe', index=False)  # index=False 추가
 
         # HTML 파일로 저장
-        with open('BinanceFuturePairs_Info.html', 'w', encoding='utf-8') as f:
+        with open(output_html_name, 'w', encoding='utf-8') as f:
             f.write('''
             <!DOCTYPE html>
             <html>
@@ -179,6 +189,51 @@ while True:
             <script>
             $(document).ready( function () {{
                 var t = $('.dataframe').DataTable({{
+                    initComplete: function () {{
+                        // 3열에 드롭다운 메뉴 추가
+                        this.api().columns(2).every( function () {{
+                            var column = this;
+                            var select = $(
+                            '<select><option value="">전체</option></select>'
+                            )
+                                .appendTo( $(column.header()) )
+                                .on( 'change', function () {{
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }} );
+
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            }} );
+                        }} );
+
+                        // 4열에 드롭다운 메뉴 추가
+                        this.api().columns(3).every( function () {{
+                            var column = this;
+                            var select = $(
+                            '<select><option value="">전체</option></select>'
+                            )
+                                .appendTo( $(column.header()) )
+                                .on( 'change', function () {{
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }} );
+
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            }} );
+                        }} );
+                    }},
                     "searching": true,
                     "paging": false,
                     "info": false,
@@ -208,7 +263,7 @@ while True:
             </html>
             '''.format(table=html))
 
-        print("Data retrieval successful and saved to BinanceFuturePairs_Info.html!")
+        print(f"Data retrieval successful and saved to {output_html_name}!")
         
     except Exception as e:
         print("Error :", e)
