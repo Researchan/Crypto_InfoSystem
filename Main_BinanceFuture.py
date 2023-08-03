@@ -233,6 +233,29 @@ while True:
                                 select.append( '<option value="'+d+'">'+d+'</option>' )
                             }} );
                         }} );
+                        
+                        // 5열에 드롭다운 메뉴 추가
+                        this.api().columns(4).every( function () {{
+                            var column = this;
+                            var select = $(
+                            '<select><option value="">전체</option></select>'
+                            )
+                                .appendTo( $(column.header()) )
+                                .on( 'change', function () {{
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }} );
+
+                            column.data().unique().sort().each( function ( d, j ) {{
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            }} );
+                        }} );                        
+                        
                     }},
                     "searching": true,
                     "paging": false,
