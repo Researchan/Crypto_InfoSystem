@@ -1,7 +1,5 @@
 import requests
 import pandas as pd
-import os
-import time
 
 input_file_name = 'Bithumb_Input.xlsx'
 output_xlsx_name = 'Bithumb_Infos.xlsx'
