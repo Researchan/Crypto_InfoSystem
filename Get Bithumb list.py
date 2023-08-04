@@ -41,4 +41,10 @@ def Get_Bithumb_All_Tickers():
     
     return(All_Tickers)
 
-print(Get_Bithumb_All_Tickers())
+# list1 = Get_Bithumb_KRW_Tickers()
+# for ticker in list1:
+#     print(ticker)
+
+list2 = Get_Bithumb_BTC_Tickers()
+for ticker in list2:
+    print(ticker)
