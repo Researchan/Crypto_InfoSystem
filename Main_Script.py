@@ -19,3 +19,6 @@ while True:
     os.system('git commit -m "Update data"')
     os.system('git push')
     time.sleep(200)
+    
+    os.system('git pull')
+    time.sleep(10)
