@@ -1,6 +1,4 @@
 import requests
-import ccxt
-import json
 
 apikey = '339f7745-0a39-4c98-924a-39f07902c361'
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/map'
@@ -20,7 +18,7 @@ parameters = {
 # Send HTTP GET request
 response = requests.get(url, headers=headers, params=parameters)
 
-symbols = ["BOA"]
+symbols = ["YGG"]
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the response data in JSON format
