@@ -186,7 +186,7 @@ try:
             <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
         </head>
         <body>
-        <h1>Researchan's listing Infos</h1>
+        <h1>Researchan's Upbit listing Info Page</h1>
         <div class="custom-link">
             <a href="https://researchan.github.io/Crypto_InfoSystem/BinanceFuture_Infos.html">BinanceFuture_Infos</a>
             <a href="https://researchan.github.io/Crypto_InfoSystem/Bithumb_Infos.html">Bithumb_Infos</a>
