@@ -160,6 +160,7 @@ try:
         <!DOCTYPE html>
         <html>
         <head>
+            <title>BinanceFuture_listing_Info</title>
             <style>
                 body {{
                     margin: 0;

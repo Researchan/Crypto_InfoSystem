@@ -1,6 +1,5 @@
 import os
 import time
-import subprocess
 
 while True:
     os.system('python Main_Upbit.py')
