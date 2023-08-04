@@ -179,6 +179,7 @@ while True:
                     }}
                     .custom-link {{
                         text-align:center;
+                        padding-top: 8px;
                     }}
                 </style>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
