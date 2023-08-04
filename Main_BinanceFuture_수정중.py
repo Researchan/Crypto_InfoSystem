@@ -186,7 +186,7 @@ while True:
                 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
             </head>
             <body>
-            <div class="custom-links">
+            <div class="custom-link">
                 <a href="https://researchan.github.io/Crypto_InfoSystem/Upbit_Infos.html">Upbit_Infos</a>
                 <a href="https://researchan.github.io/Crypto_InfoSystem/Bithumb_Infos.html">Bithumb_Infos</a>
             </div>
