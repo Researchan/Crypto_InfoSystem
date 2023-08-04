@@ -177,12 +177,18 @@ try:
                     text-align:center;
                     padding-top: 10px;
                 }}
+                h1 {{
+                    color: blue;
+                    font-size: 24px;
+                    text-align:center;
+                }}
             </style>
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
             <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
         </head>
         <body>
+        <h1>Researchan's listing Infos</h1>
         <div class="custom-link">
             <a href="https://researchan.github.io/Crypto_InfoSystem/Upbit_Infos.html">Upbit_Infos</a>
             <a href="https://researchan.github.io/Crypto_InfoSystem/Bithumb_Infos.html">Bithumb_Infos</a>
