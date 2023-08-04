@@ -177,7 +177,7 @@ while True:
                         width: 90%;
                         margin: auto;
                     }}
-                    .custom-link {{
+                    .custom-link a {{
                         {{text-align:center;}}
                     }}
                 </style>
