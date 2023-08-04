@@ -20,7 +20,7 @@ parameters = {
 # Send HTTP GET request
 response = requests.get(url, headers=headers, params=parameters)
 
-symbols = ["LAI"]
+symbols = ["BOA"]
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the response data in JSON format
@@ -32,7 +32,7 @@ if response.status_code == 200:
     for i in range(0,len(datalist)):
         for symbol in symbols:
             if datalist[i]['symbol'] == symbol:
-                print((datalist[i]))
+                #print((datalist[i]))
                 tempstring = str(symbol) + " : " + str(datalist[i]['id']) + " rank: " + str(datalist[i]['rank'])
                 printlist.append(tempstring)
     
