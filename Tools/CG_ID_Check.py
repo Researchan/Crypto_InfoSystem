@@ -6,14 +6,14 @@ url = 'https://api.coingecko.com/api/v3/coins/markets'
 parameters = {
     'vs_currency': 'usd',
     'order': 'market_cap_desc',
-    'per_page': 500,
-    'page': 7,
+    'per_page': 200,
+    'page': 4,
 }
 
 Tickerlist = [
-    "ALT", "BIOT", "BLY", "DICE", "EGG", "ENTC", "FANC", "FLZ", "GPT", "GRACY",
-    "KSP", "LBL", "LM", "NPT", "OAS", "ORC", "PORTO", "REAP", "ROA", "STAT",
-    "TAVA", "TEMCO", "TITAN", "TRV", "VIX", "WNCG", "XPLA", "XYM"
+    "LADYS", "BONK", "AKRO", "ALPACA", "BICO", "BSW", "BUSD", "CEEK", "CORE",
+    "ETHW", "FORTH", "GFT", "GLMR", "HNT", "ILV", "KAS", "KDA", "LOOKS", "ORDI",
+    "PAXG", "SCRT", "SLP", "SWEAT", "TWT", "VGX", "XNO"
 ]
 
 Tickerlistsmall = []
