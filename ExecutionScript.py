@@ -20,7 +20,7 @@ coingecko_params = {
     'vs_currency': 'usd',
     'ids': coingecko_ids,
     'order': 'market_cap_desc',
-    'per_page': 100,
+    'per_page': 200,
     'page': 1,
     'sparkline': False
 }
@@ -29,7 +29,7 @@ coingecko_params = {
 coingecko_coins_data = {}
 
 # Coingecko API 호출 및 데이터 처리
-for _ in range(5):  # 5 페이지까지 조회
+for _ in range(3):  # 3페이지까지 조회
     try:
         response = requests.get(coingecko_url, params=coingecko_params)
         response_json = response.json()
