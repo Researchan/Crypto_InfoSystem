@@ -18,11 +18,7 @@ parameters = {
 # Send HTTP GET request
 response = requests.get(url, headers=headers, params=parameters)
 
-symbols = [
-    "LADYS", "BONK", "AKRO", "ALPACA", "BICO", "BSW", "BUSD", "CEEK", "CORE",
-    "ETHW", "FORTH", "GFT", "GLMR", "HNT", "ILV", "KAS", "KDA", "LOOKS", "ORDI",
-    "PAXG", "SCRT", "SLP", "SWEAT", "TWT", "VGX", "XNO"
-]
+symbols = ['MC', 'SEI', 'CYBER']
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the response data in JSON format
