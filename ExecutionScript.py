@@ -7,7 +7,8 @@ output_html_name = 'ListingDatas.html'
 
 coingecko_url = 'https://api.coingecko.com/api/v3/coins/markets'
 coinmarketcap_url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
-coinmarketcap_api_key = '339f7745-0a39-4c98-924a-39f07902c361'
+# coinmarketcap_api_key = '339f7745-0a39-4c98-924a-39f07902c361' #내꺼
+coinmarketcap_api_key = 'a8c9a257-d8ad-43d4-84a8-a5a75d9a6ee4' #순호님
 
 # 엑셀 파일에서 ids 정보를 가져옴
 df = pd.read_excel(input_file_name)

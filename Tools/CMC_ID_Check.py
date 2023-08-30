@@ -1,6 +1,7 @@
 import requests
 
-apikey = '339f7745-0a39-4c98-924a-39f07902c361'
+apikey = 'a8c9a257-d8ad-43d4-84a8-a5a75d9a6ee4' #순호님
+# apikey = '339f7745-0a39-4c98-924a-39f07902c361' #내꺼
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/map'
 
 headers = {
@@ -18,7 +19,7 @@ parameters = {
 # Send HTTP GET request
 response = requests.get(url, headers=headers, params=parameters)
 
-symbols = ['MC', 'SEI', 'CYBER']
+symbols = ['YFII', 'BADGER', 'ZBC', 'HIFI', 'OG']
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the response data in JSON format
