@@ -27,7 +27,7 @@ class Get_Orderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
