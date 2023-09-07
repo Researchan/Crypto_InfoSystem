@@ -27,22 +27,22 @@ class Get_Orderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair) + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
                 #1.005이상부터
                 for i in range(1,39):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
-                        jandimodule.Alert_send_message_to_jandi(str(self.pair) + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
                 if (self.intervals[39] < Spot_to_Future_ratio) :
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair) + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     
                 
-                await asyncio.sleep(3)
+                await asyncio.sleep(5)
             except Exception as e:
                 print(e)
 
@@ -72,22 +72,22 @@ class Get_1000Orderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair) + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
                 #1.005이상부터
                 for i in range(1,39):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
-                        jandimodule.Alert_send_message_to_jandi(str(self.pair) + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
                 if (self.intervals[39] < Spot_to_Future_ratio) :
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair) + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     
                 
-                await asyncio.sleep(1)
+                await asyncio.sleep(5)
             except Exception as e:
                 print(e)
 
@@ -116,22 +116,22 @@ class Get_LunaOrderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi('LUNA/USDT' + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
                 #1.005이상부터
                 for i in range(1,39):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
-                        jandimodule.Alert_send_message_to_jandi('LUNA/USDT' + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
                 if (self.intervals[39] < Spot_to_Future_ratio) :
-                    jandimodule.Alert_send_message_to_jandi('LUNA/USDT' + ': ' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     
                 
-                await asyncio.sleep(3)
+                await asyncio.sleep(5)
             except Exception as e:
                 print(e)
 
