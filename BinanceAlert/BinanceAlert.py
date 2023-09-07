@@ -15,7 +15,7 @@ class Get_Orderbooks:
 
     async def fetch_order_books(self):
         #현물과 선물의 오더북 호가를 받아오기
-        self.intervals = [round(1000*(1.005 + i * 0.005))/1000 for i in range(40)]
+        self.intervals = [1.003] + [round(1000*(1.01 + i * 0.01))/1000 for i in range(39)]
         self.isrange = [0 for _ in range(40)]
         self.isrange[0] = 1
         while True:
@@ -27,7 +27,7 @@ class Get_Orderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' 0.5% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
@@ -39,7 +39,7 @@ class Get_Orderbooks:
                         self.isrange[i] = 1
 
                 if (self.intervals[39] < Spot_to_Future_ratio) :
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' 20% 이상\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[39]-1)*1000))/10) + ' 20% 이상\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     
                 
                 await asyncio.sleep(5)
