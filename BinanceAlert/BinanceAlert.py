@@ -7,19 +7,23 @@ import jandimodule
 import Binancelist
 
 sleeptime = 10
+interval_init =[1.005] + [round(1000*(1.015 + i * 0.015))/1000 for i in range(39)]
+isrange_init = [0 for _ in range(40)]
 
 class Get_Orderbooks:
     def __init__(self, exchange1, exchange2, pair):
         #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
         global sleeptime
+        global interval_init
+        global isrange_init
         self.exchange1 = exchange1
         self.exchange2 = exchange2
         self.pair = pair
 
     async def fetch_order_books(self):
         #현물과 선물의 오더북 호가를 받아오기
-        self.intervals = [1.005] + [round(1000*(1.015 + i * 0.015))/1000 for i in range(39)]
-        self.isrange = [0 for _ in range(40)]
+        self.intervals = interval_init
+        self.isrange = isrange_init
         self.isrange[0] = 1
         while True:
             try:
@@ -60,6 +64,8 @@ class Get_1000Orderbooks:
     def __init__(self, exchange1, exchange2, usdmpair):
         #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
         global sleeptime
+        global interval_init
+        global isrange_init
         self.exchange1 = exchange1
         self.exchange2 = exchange2
         self.spotpair = usdmpair[4:]
@@ -67,8 +73,8 @@ class Get_1000Orderbooks:
         
     async def fetch_order_books(self):
         #현물과 선물의 오더북 호가를 받아오기
-        self.intervals = [round(1000*(1.005 + i * 0.005))/1000 for i in range(40)]
-        self.isrange = [0 for _ in range(40)]
+        self.intervals = interval_init
+        self.isrange = isrange_init
         self.isrange[0] = 1
         while True:
             try:
@@ -109,13 +115,15 @@ class Get_LunaOrderbooks:
     def __init__(self, exchange1, exchange2):
         #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
         global sleeptime
+        global interval_init
+        global isrange_init
         self.exchange1 = exchange1
         self.exchange2 = exchange2
 
     async def fetch_order_books(self):
         #현물과 선물의 오더북 호가를 받아오기
-        self.intervals = [round(1000*(1.005 + i * 0.005))/1000 for i in range(40)]
-        self.isrange = [0 for _ in range(40)]
+        self.intervals = interval_init
+        self.isrange = isrange_init
         self.isrange[0] = 1
         
         while True:
@@ -159,7 +167,6 @@ async def main():
     
     Tickers_main = Binancelist.Tickerlist
     Tickers_1000pair = Binancelist.future1000pairs
-    Tickers_luna = Binancelist.Lunapair
 
     instance_dict = {}
     exBN = ccxtpro.binance({})
