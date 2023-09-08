@@ -6,9 +6,12 @@ import ccxt
 import jandimodule
 import Binancelist
 
+sleeptime = 10
+
 class Get_Orderbooks:
     def __init__(self, exchange1, exchange2, pair):
         #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
+        global sleeptime
         self.exchange1 = exchange1
         self.exchange2 = exchange2
         self.pair = pair
@@ -28,22 +31,24 @@ class Get_Orderbooks:
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + str(round(10000*(Spot_to_Future_ratio))/10000)-1)
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
                 #1.005이상부터
                 for i in range(1,39):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
-                        jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[i-1]-1)*1000))/10) + '% 이상 \n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[i-1]-1)*1000))/10) + '% 이상 \n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
                 if (self.intervals[39] < Spot_to_Future_ratio) :
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[39]-1)*1000))/10) + ' % 이상\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[39]-1)*1000))/10) + ' % 이상\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     
                 
-                await asyncio.sleep(5)
+                await asyncio.sleep(sleeptime)
             except Exception as e:
                 print(e)
 
@@ -52,12 +57,13 @@ class Get_Orderbooks:
         await self.exchange2.close()
 
 class Get_1000Orderbooks:
-    def __init__(self, exchange1, exchange2, pair):
+    def __init__(self, exchange1, exchange2, usdmpair):
         #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
+        global sleeptime
         self.exchange1 = exchange1
         self.exchange2 = exchange2
-        self.spotpair = pair[4:]
-        self.usdmpair = pair
+        self.spotpair = usdmpair[4:]
+        self.usdmpair = usdmpair
         
     async def fetch_order_books(self):
         #현물과 선물의 오더북 호가를 받아오기
@@ -73,22 +79,25 @@ class Get_1000Orderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
                 #1.005이상부터
                 for i in range(1,39):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
-                        jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
                 if (self.intervals[39] < Spot_to_Future_ratio) :
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     
                 
-                await asyncio.sleep(5)
+                await asyncio.sleep(sleeptime)
             except Exception as e:
                 print(e)
 
@@ -99,6 +108,7 @@ class Get_1000Orderbooks:
 class Get_LunaOrderbooks:
     def __init__(self, exchange1, exchange2):
         #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
+        global sleeptime
         self.exchange1 = exchange1
         self.exchange2 = exchange2
 
@@ -117,22 +127,25 @@ class Get_LunaOrderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    # jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
                 #1.005이상부터
                 for i in range(1,39):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
-                        jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        # jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
                 if (self.intervals[39] < Spot_to_Future_ratio) :
-                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    # jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     
                 
-                await asyncio.sleep(5)
+                await asyncio.sleep(sleeptime)
             except Exception as e:
                 print(e)
 
