@@ -15,7 +15,7 @@ class Get_Orderbooks:
 
     async def fetch_order_books(self):
         #현물과 선물의 오더북 호가를 받아오기
-        self.intervals = [1.01] + [round(1000*(1.01 + i * 0.01))/1000 for i in range(39)]
+        self.intervals = [1.005] + [round(1000*(1.015 + i * 0.015))/1000 for i in range(39)]
         self.isrange = [0 for _ in range(40)]
         self.isrange[0] = 1
         while True:
@@ -27,7 +27,8 @@ class Get_Orderbooks:
                 
                 #1.005이하일 경우
                 if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + str(round(10000*(Spot_to_Future_ratio))/10000)-1)
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
