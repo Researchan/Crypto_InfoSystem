@@ -7,7 +7,7 @@ import jandimodule
 import Binancelist
 
 sleeptime = 10
-interval_init =[1.005] + [round(1000*(1.015 + i * 0.015))/1000 for i in range(39)]
+interval_init =[1.003] + [round(1000*(1.015 + i * 0.015))/1000 for i in range(39)]
 isrange_init = [0 for _ in range(40)]
 
 class Get_Orderbooks:
