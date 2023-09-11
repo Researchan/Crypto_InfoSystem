@@ -1,6 +1,5 @@
 import ccxt 
 
-exBN = ccxt.binance()
 exBNfuture = ccxt.binanceusdm()
 exBNfutureTickersInfo = exBNfuture.fetchTickers() # 티커 딕셔너리 가져옴
 exBNfutureTickers = exBNfutureTickersInfo.keys() # 티커 키만 받아오기 (이름만)
@@ -32,4 +31,3 @@ Tickerlist.sort()
 
 
 future1000pairs = ['1000FLOKI/USDT', '1000LUNC/USDT', '1000PEPE/USDT', '1000SHIB/USDT', '1000XEC/USDT']
-Lunapair = ['LUNA/USDT', 'LUNA2/USDT']

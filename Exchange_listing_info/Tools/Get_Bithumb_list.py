@@ -41,10 +41,18 @@ def Get_Bithumb_All_Tickers():
     
     return(All_Tickers)
 
-# list1 = Get_Bithumb_KRW_Tickers()
+list1 = Get_Bithumb_KRW_Tickers()
 # for ticker in list1:
 #     print(ticker)
 
 list2 = Get_Bithumb_BTC_Tickers()
-for ticker in list2:
-    print(ticker)
+# for ticker in list2:
+#     print(ticker)
+
+tickerlist = list1 + list2
+tickerset = set(tickerlist)
+tickerlist = list(tickerset)
+tickerlist.sort()
+tickerlist.remove('date')
+# for i in tickerlist:
+#     print(i)
