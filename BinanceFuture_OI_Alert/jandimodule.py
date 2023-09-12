@@ -5,6 +5,7 @@ Webhook_Address2 = "https://wh.jandi.com/connect-api/webhook/27226641/d751867a5c
 Webhook_Address3 = "https://wh.jandi.com/connect-api/webhook/27226641/b1199ced72dc045b8723c52d94cd7a43"
 Webhook_Address4 = "https://wh.jandi.com/connect-api/webhook/27226641/594b6fb08461fa95560bc5d13bba6014"
 Webhook_Address5 = "https://wh.jandi.com/connect-api/webhook/27226641/35e3029ea8f39016b124cfd0720e2ad6"
+Webhook_Address6 = "https://wh.jandi.com/connect-api/webhook/27226641/39612962a364af82d7db9d2a5435b276"
 
 def acc1_send_message_to_jandi(message):
     headers = {
@@ -55,6 +56,16 @@ def Alert_send_message_to_jandi(message):
         "body": message
     }
     requests.post(Webhook_Address5, headers=headers, json=payload)
+    
+def OI_Alert_send_message_to_jandi(message):
+    headers = {
+        'Accept': 'application/vnd.tosslab.jandi-v2+json',
+        'Content-Type': 'application/json'
+    }
+    payload = {
+        "body" : message,
+    }
+    requests.post(Webhook_Address6, headers=headers, json=payload)
     
 #두나무 환율
 def get_usd_krw():
