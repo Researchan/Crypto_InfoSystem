@@ -1,7 +1,6 @@
 import ccxt 
 import time
 from jandimodule import *
-import unicodedata
 
 exBNfuture = ccxt.binanceusdm()
 exBNfutureTickersInfo = exBNfuture.fetchTickers() # 티커 딕셔너리 가져옴
@@ -55,7 +54,7 @@ while True:
         formatted_message = formatted_message.rstrip()
         OI_Alert_send_message_to_jandi('***OI Volume Top20 List***\n\n' + formatted_message)
         
-        time.sleep(30)
+        time.sleep(60)
         
         # OI 하위 20개 메세지 전송
         Ascend_OI_Message = ''
@@ -75,7 +74,7 @@ while True:
         formatted_message = formatted_message.rstrip()
         OI_Alert_send_message_to_jandi('***OI Volume Bottom20 List***\n\n' + formatted_message)
         
-        time.sleep(30)
+        time.sleep(60)
 ################################################ OI 24H ########################################################
 
         # OI 정보 수신
@@ -110,7 +109,8 @@ while True:
             message += f"24H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
             Descend_24h_Message += message
         OI_Alert_send_message_to_jandi("**24H OI Increase TOP5**\n\n" + Descend_24h_Message)
-            
+        time.sleep(60)
+        
         # 24시간 OI 변화율 하위 5개 전송
         Ascend_24h_Message = ''
         for i in range (5):
@@ -125,8 +125,8 @@ while True:
             message += f"24H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
             Ascend_24h_Message += message
         OI_Alert_send_message_to_jandi("**24H OI Decrease TOP5**\n\n" + Ascend_24h_Message)
-
         time.sleep(60)
+        
 ################################################ OI 04H ########################################################
 
         # OI 정보 수신
@@ -161,6 +161,7 @@ while True:
             message += f"04H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
             Descend_04h_Message += message
         OI_Alert_send_message_to_jandi("**04H OI Increase TOP5**\n\n" + Descend_04h_Message)
+        time.sleep(60)
         
         # 변화율 하위 5개 메세지 전송
         Ascend_04h_Message = ''
@@ -176,7 +177,6 @@ while True:
             message += f"04H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
             Ascend_04h_Message += message
         OI_Alert_send_message_to_jandi("**04H OI Decrease TOP5**\n\n" + Ascend_04h_Message)
-
         time.sleep(60)
 ################################################ OI 01H ########################################################
 
@@ -211,6 +211,7 @@ while True:
             message += f"01H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
             Descend_01h_Message += message
         OI_Alert_send_message_to_jandi("**01H OI Increase TOP5**\n\n" + Descend_01h_Message)
+        time.sleep(60)
         
         # 변화율 하위 5개 메세지 전송
         Ascend_01h_Message = ''
@@ -226,8 +227,8 @@ while True:
             message += f"01H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
             Ascend_01h_Message += message
         OI_Alert_send_message_to_jandi("**01H OI Decrease TOP5**\n\n" + Ascend_01h_Message)
-        
         time.sleep(60)
+        
     except Exception as e:
             print(i, ':', str(e))
     
