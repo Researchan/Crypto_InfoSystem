@@ -1,58 +1,24 @@
-import requests
-from requests.exceptions import HTTPError
-import json
-from urllib import request, parse
-import ssl
-import certifi
+import ccxt
 
+exBithumb = ccxt.bithumb({})
+exBithumbTickersInfo = exBithumb.fetchTickers() # 티커 딕셔너리 가져옴
+exBithumbTickers = exBithumbTickersInfo.keys() # 티커 키만 받아오기 (이름만)
 
+BTClist = []
+KRWlist = []
+Alllist = []
+for i in exBithumbTickers:
+    if i[-3:] == 'BTC':
+        BTClist.append(i[0:-4])
+    elif i[-3:] == 'KRW':
+        KRWlist.append(i[0:-4])
+        
+Alllist = BTClist + KRWlist
+Alllist = set(Alllist)
+Alllist = list(Alllist)
+Alllist.sort()
 
-# 모든 BTC 코인 조회하기 
-def Get_Bithumb_BTC_Tickers():
-    req = request.Request('https://api.bithumb.com/public/ticker/ALL_BTC')
-    res = request.urlopen(req)
-    # print(str(res.status) + " | " + res.read().decode('utf-8'))
+# BTClist.remove()
+# KRWlist.remove()
 
-    resultString = res.read().decode('utf-8')
-    result = json.loads(resultString)
-    data = result["data"]
-    keys_list = list(data)
-
-    return(keys_list)
-    
-# 모든 KRW 코인 불러오기
-def Get_Bithumb_KRW_Tickers():
-    req = request.Request('https://api.bithumb.com/public/ticker/ALL_KRW')
-    res = request.urlopen(req)
-    # print(str(res.status) + " | " + res.read().decode('utf-8'))
-
-    resultString = res.read().decode('utf-8')
-    result = json.loads(resultString)
-    data = result["data"]
-    keys_list = list(data)
-
-    return(keys_list)
-
-def Get_Bithumb_All_Tickers():
-    All_Tickers = Get_Bithumb_BTC_Tickers() + Get_Bithumb_KRW_Tickers()
-    Temp = set(All_Tickers)
-    All_Tickers = list(Temp)
-    All_Tickers.sort()
-    
-    return(All_Tickers)
-
-list1 = Get_Bithumb_KRW_Tickers()
-# for ticker in list1:
-#     print(ticker)
-
-list2 = Get_Bithumb_BTC_Tickers()
-# for ticker in list2:
-#     print(ticker)
-
-tickerlist = list1 + list2
-tickerset = set(tickerlist)
-tickerlist = list(tickerset)
-tickerlist.sort()
-tickerlist.remove('date')
-# for i in tickerlist:
-#     print(i)
+print(Alllist)

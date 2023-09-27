@@ -1,38 +1,24 @@
-import pyupbit
+import ccxt
 
-#업비트 KRW 마켓 티커들 반환
-def Get_UpbitKRW_Tickers():
-    KRWmarket_list = []
-    KRWtickers = pyupbit.get_tickers(fiat="KRW")
+exUpbit = ccxt.upbit({})
+exUpbitTickersInfo = exUpbit.fetchTickers() # 티커 딕셔너리 가져옴
+exUpbitTickers = exUpbitTickersInfo.keys() # 티커 키만 받아오기 (이름만)
 
-    for i in KRWtickers:
-        KRWmarket_list.append(i[4:])
-    
-    KRWmarket_list.sort()    
-    return KRWmarket_list
+BTClist = []
+KRWlist = []
+Alllist = []
+for i in exUpbitTickers:
+    if i[-3:] == 'BTC':
+        BTClist.append(i[0:-4])
+    elif i[-3:] == 'KRW':
+        KRWlist.append(i[0:-4])
+        
+Alllist = BTClist + KRWlist
+# Alllist = set(Alllist)
+# Alllist = list(Alllist)
+# Alllist.sort()
 
-#업비트 BTC 마켓 티커들 반환
-def Get_UpbitBTC_Tickers():
-    BTCmarket_list = []
-    BTCtickers = pyupbit.get_tickers(fiat="BTC")
+# BTClist.remove()
+# KRWlist.remove()
 
-    for i in BTCtickers:
-        BTCmarket_list.append(i[4:])
-
-    BTCmarket_list.sort()
-    return BTCmarket_list
-
-#업비트 모든 상장코인 티커 반환
-def Get_UpbitAll_Tickers():
-    Allmarket_list = Get_UpbitKRW_Tickers() + Get_UpbitBTC_Tickers()
-    temp = set(Allmarket_list)
-    Allmarket_list = list(temp)
-
-    Allmarket_list.sort()
-    return Allmarket_list
-
-Upbittickers = Get_UpbitAll_Tickers()
-
-# print(Upbittickers)
-# for ticker in Upbittickers:
-#     print(ticker)
+print(Alllist)
