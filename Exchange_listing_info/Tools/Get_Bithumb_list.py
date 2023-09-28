@@ -6,19 +6,22 @@ exBithumbTickers = exBithumbTickersInfo.keys() # 티커 키만 받아오기 (이
 
 BTClist = []
 KRWlist = []
-Alllist = []
+Tickerlist = []
 for i in exBithumbTickers:
     if i[-3:] == 'BTC':
         BTClist.append(i[0:-4])
     elif i[-3:] == 'KRW':
         KRWlist.append(i[0:-4])
         
-Alllist = BTClist + KRWlist
-Alllist = set(Alllist)
-Alllist = list(Alllist)
-Alllist.sort()
+Tickerlist = BTClist + KRWlist
 
-# BTClist.remove()
-# KRWlist.remove()
+Tickerlist.remove('ArchLoot')
+Tickerlist.append('ALT')
+Tickerlist = set(Tickerlist)
+Tickerlist = list(Tickerlist)
+Tickerlist.sort()
 
-print(Alllist)
+
+# print(Tickerlist)
+for i in Tickerlist:
+    print(i)

@@ -11,7 +11,9 @@ exBybitTickers = exBybitTickersInfo.keys() # 티커 키만 받아오기 (이름�
 
 Tickerlist = []
 for i in exBybitTickers:
-    Tickerlist.append(i[0:-10])
+    if 'USDC' not in i: # USDC페어는 제외.
+        Tickerlist.append(i[0:-10])
+        # Tickerlist.append(i)
 
 Tickerlist.remove('10000LADYS')
 Tickerlist.remove('10000NFT')
@@ -21,6 +23,7 @@ Tickerlist.remove('1000FLOKI')
 Tickerlist.remove('1000LUNC')
 Tickerlist.remove('1000PEPE')
 Tickerlist.remove('1000XEC')
+Tickerlist.remove('SHIB1000')
 
 Tickerlist.append('LADYS')
 Tickerlist.append('NFT')
@@ -36,4 +39,6 @@ Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
 Tickerlist.sort()
 
-print(Tickerlist)
+# print(Tickerlist)
+for i in Tickerlist:
+    print(i)
