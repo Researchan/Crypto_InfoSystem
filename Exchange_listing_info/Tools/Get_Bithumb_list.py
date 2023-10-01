@@ -15,13 +15,17 @@ for i in exBithumbTickers:
         
 Tickerlist = BTClist + KRWlist
 
+#아치루트 제거후 ALT로 변경
 Tickerlist.remove('ArchLoot')
 Tickerlist.append('ALT')
+
+#GRACY는 제거. 코마캡 코개코도 상장안된 잡페어
+Tickerlist.remove('GRACY')
+
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 Tickerlist.sort()
 
 
-# print(Tickerlist)
-for i in Tickerlist:
-    print(i)
+# for i in Tickerlist:
+#     print(i)

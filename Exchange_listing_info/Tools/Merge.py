@@ -4,31 +4,51 @@ import Get_BybitFuture_list
 import Get_Upbit_BTC_list
 import Get_Upbit_KRW_list
 
-Upbit_BTC = Get_Upbit_BTC_list.Tickerlist
-Upbit_KRW = Get_Upbit_KRW_list.Tickerlist
-Binance = Get_BinanceFuture_list.Tickerlist
-Bybit = Get_BybitFuture_list.Tickerlist
-Bithumb = Get_Bithumb_list.Tickerlist
+Upbit_BTC_list = Get_Upbit_BTC_list.Tickerlist
+Upbit_KRW_list = Get_Upbit_KRW_list.Tickerlist
+Binance_Future_list = Get_BinanceFuture_list.Tickerlist
+Bybit_Future_list = Get_BybitFuture_list.Tickerlist
+Bithumb_list = Get_Bithumb_list.Tickerlist
 
-Coin_list = Upbit_BTC + Upbit_KRW + Binance + Bybit + Bithumb
+# 각 거래소 상장리스트 합산하여 전체 리스트 생성 및 정렬
+Coin_list = Upbit_KRW_list + Upbit_BTC_list + Binance_Future_list + Bybit_Future_list + Bithumb_list
 Coin_list = set(Coin_list)
 Coin_list = list(Coin_list)
 Coin_list.sort()
 
-for i in Coin_list:
-    print(i)
-
+# 전체 정보를 담을 딕셔너리 생성
 Coin_Infos = {}
 
-# Coin_Infos['1inch'] = {
-#     'upbit':None,
-#     'bithumb':None,
-#     'binance':None,
-#     'bybit':None
-# }
-# testdict['1inch']['upbit'] = 'O'
-# testdict['1inch']['bithumb'] = 'O'
-# testdict['1inch']['binance'] = 'O'
-# testdict['1inch']['bybit'] = 'X'
-
-# print(testdict)
+for i in Coin_list:
+    Coin_Infos[i] = {
+        'Upbit_KRW':None,
+        'Upbit_BTC':None,
+        'Bithumb':None,
+        'Binance_Future':None,
+        'Bybit_Future':None
+    }
+    
+    if i in Upbit_KRW_list:
+        Coin_Infos[i]['Upbit_KRW'] = 'O'
+    elif i not in Upbit_KRW_list:
+        Coin_Infos[i]['Upbit_KRW'] = 'X'
+        
+    if i in Upbit_BTC_list:
+        Coin_Infos[i]['Upbit_BTC'] = 'O'
+    elif i not in Upbit_BTC_list:
+        Coin_Infos[i]['Upbit_BTC'] = 'X'
+        
+    if i in Binance_Future_list:
+        Coin_Infos[i]['Binance_Future'] = 'O'
+    elif i not in Binance_Future_list:
+        Coin_Infos[i]['Binance_Future'] = 'X'
+        
+    if i in Bybit_Future_list:
+        Coin_Infos[i]['Bybit_Future'] = 'O'
+    elif i not in Bybit_Future_list:
+        Coin_Infos[i]['Bybit_Future'] = 'X'
+        
+    if i in Bithumb_list:
+        Coin_Infos[i]['Bithumb'] = 'O'    
+    elif i not in Bithumb_list:
+        Coin_Infos[i]['Bithumb'] = 'X'
