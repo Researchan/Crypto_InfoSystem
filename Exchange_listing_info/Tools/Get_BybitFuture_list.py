@@ -1,5 +1,4 @@
 import ccxt
-from pprint import pprint
 
 exBybit = ccxt.bybit({
     'options': {
