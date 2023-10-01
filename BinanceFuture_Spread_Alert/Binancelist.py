@@ -21,13 +21,8 @@ Tickerlist.remove('COCOS/USDT')
 Tickerlist.remove('FOOTBALL/USDT')
 Tickerlist.remove('DEFI/USDT')
 Tickerlist.remove('LUNA2/USDT')
-# Tickerlist.remove('1000FLOKI/USDT')
-# Tickerlist.remove('1000LUNC/USDT')
-# Tickerlist.remove('1000PEPE/USDT')
-# Tickerlist.remove('1000SHIB/USDT')
-# Tickerlist.remove('1000XEC/USDT')
 Tickerlist.sort()
 
-
+print(Tickerlist)
 
 future1000pairs = ['1000FLOKI/USDT', '1000LUNC/USDT', '1000PEPE/USDT', '1000SHIB/USDT', '1000XEC/USDT']

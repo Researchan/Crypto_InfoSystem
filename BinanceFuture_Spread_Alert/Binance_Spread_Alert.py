@@ -111,56 +111,6 @@ class Get_1000Orderbooks:
         await self.exchange1.close()
         await self.exchange2.close()
 
-class Get_LunaOrderbooks:
-    def __init__(self, exchange1, exchange2):
-        #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
-        global sleeptime
-        global interval_init
-        global isrange_init
-        self.exchange1 = exchange1
-        self.exchange2 = exchange2
-
-    async def fetch_order_books(self):
-        #현물과 선물의 오더북 호가를 받아오기
-        self.intervals = interval_init
-        self.isrange = isrange_init
-        self.isrange[0] = 1
-        
-        while True:
-            try:
-                spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker('LUNA/USDT', params={'name': 'bookTicker'}),
-                                                                self.exchange2.watch_ticker('LUNA2/USDT', params={'name': 'bookTicker'}))
-                
-                Spot_to_Future_ratio = spotticker['bid']/futureticker['ask'] #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
-                
-                #1.005이하일 경우
-                if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    # jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
-                    self.isrange = [0] * 40
-                    self.isrange[0] = 1
-                
-                #1.005이상부터
-                for i in range(1,39):
-                    if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
-                        # jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                        jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
-                        self.isrange = [0] * 40
-                        self.isrange[i] = 1
-
-                if (self.intervals[39] < Spot_to_Future_ratio) :
-                    # jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                    jandimodule.Alert_send_message_to_jandi('LUNA' + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
-                    
-                
-                await asyncio.sleep(sleeptime)
-            except Exception as e:
-                print(e)
-
-    async def close_connections(self):
-        await self.exchange1.close()
-        await self.exchange2.close()
-
 async def main():
     exBN = ccxt.binance({})
     exBNfuture = ccxt.binanceusdm({})
@@ -183,8 +133,6 @@ async def main():
         for Ticker in Tickers_1000pair:
             instance_dict[str(Ticker)] = Get_1000Orderbooks(exBN, exBNfuture, Ticker)
             print(Ticker, '인스턴스 생성완료')
-        
-        instance_dict[str(Ticker)] = Get_LunaOrderbooks(exBN, exBNfuture)
             
         tasks = [instance.fetch_order_books() for instance in instance_dict.values()]
         await asyncio.gather(*tasks)

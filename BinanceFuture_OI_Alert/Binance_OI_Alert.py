@@ -77,107 +77,107 @@ while True:
         time.sleep(60)
 ################################################ OI 24H ########################################################
 
-        # OI 정보 수신
-        for i in Tickers:
-            res = exBNfuture.fetch_open_interest_history(i, timeframe='5m', params={
-                'limit':'289',
-            })
-            OI_Dict[str(i)] = round(res[288]['openInterestValue']) # OI 정보 수신
+        # # OI 정보 수신
+        # for i in Tickers:
+        #     res = exBNfuture.fetch_open_interest_history(i, timeframe='5m', params={
+        #         'limit':'289',
+        #     })
+        #     OI_Dict[str(i)] = round(res[288]['openInterestValue']) # OI 정보 수신
         
-        # OI 정보 가공 (24시간 증감율)
-            Change_24h[str(i)] = {'Change_Pct' : round((((res[288]['openInterestValue'] - res[0]['openInterestValue']) / res[0]['openInterestValue']) * 100)*100)/100,
-                                'OpenInterestValue_t00' : round(res[288]['openInterestValue']),
-                                'OpenInterestValue_t24' : round(res[0]['openInterestValue']),
-                                'Change_Amt' : round(res[288]['openInterestValue'])-round(res[0]['openInterestValue'])
-                                }  
+        # # OI 정보 가공 (24시간 증감율)
+        #     Change_24h[str(i)] = {'Change_Pct' : round((((res[288]['openInterestValue'] - res[0]['openInterestValue']) / res[0]['openInterestValue']) * 100)*100)/100,
+        #                         'OpenInterestValue_t00' : round(res[288]['openInterestValue']),
+        #                         'OpenInterestValue_t24' : round(res[0]['openInterestValue']),
+        #                         'Change_Amt' : round(res[288]['openInterestValue'])-round(res[0]['openInterestValue'])
+        #                         }  
             
-        # 24시간 변화율 내림차순, 오름차순 정렬
-        Descend_24h = sorted(Change_24h.items(), key=lambda x: x[1]['Change_Pct'], reverse=True) 
-        Ascend_24h = sorted(Change_24h.items(), key=lambda x: x[1]['Change_Pct'], reverse=False)
+        # # 24시간 변화율 내림차순, 오름차순 정렬
+        # Descend_24h = sorted(Change_24h.items(), key=lambda x: x[1]['Change_Pct'], reverse=True) 
+        # Ascend_24h = sorted(Change_24h.items(), key=lambda x: x[1]['Change_Pct'], reverse=False)
         
-        # 24시간 OI 변화율 상위 5개 전송
-        Descend_24h_Message = ''
-        for i in range (5):
-            pair, data = Descend_24h[i]
-            message = f"**{pair}**\n"
-            message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
-            message += f"OI_Volume_24H : ${data['OpenInterestValue_t24']:,}\n"
-            if data['Change_Amt'] < 0:
-                message += f"24H_Change($) : -${-data['Change_Amt']:,}\n"
-            else:
-                message += f"24H_Change($) : ${data['Change_Amt']:,}\n"
-            message += f"24H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
-            Descend_24h_Message += message
-        OI_Alert_send_message_to_jandi("**24H OI Increase TOP5**\n\n" + Descend_24h_Message)
-        time.sleep(60)
+        # # 24시간 OI 변화율 상위 5개 전송
+        # Descend_24h_Message = ''
+        # for i in range (5):
+        #     pair, data = Descend_24h[i]
+        #     message = f"**{pair}**\n"
+        #     message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
+        #     message += f"OI_Volume_24H : ${data['OpenInterestValue_t24']:,}\n"
+        #     if data['Change_Amt'] < 0:
+        #         message += f"24H_Change($) : -${-data['Change_Amt']:,}\n"
+        #     else:
+        #         message += f"24H_Change($) : ${data['Change_Amt']:,}\n"
+        #     message += f"24H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
+        #     Descend_24h_Message += message
+        # OI_Alert_send_message_to_jandi("**24H OI Increase TOP5**\n\n" + Descend_24h_Message)
+        # time.sleep(60)
         
-        # 24시간 OI 변화율 하위 5개 전송
-        Ascend_24h_Message = ''
-        for i in range (5):
-            pair, data = Ascend_24h[i]
-            message = f"**{pair}**\n"
-            message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
-            message += f"OI_Volume_24H : ${data['OpenInterestValue_t24']:,}\n"
-            if data['Change_Amt'] < 0:
-                message += f"24H_Change($) : -${-data['Change_Amt']:,}\n"
-            else:
-                message += f"24H_Change($) : ${data['Change_Amt']:,}\n"
-            message += f"24H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
-            Ascend_24h_Message += message
-        OI_Alert_send_message_to_jandi("**24H OI Decrease TOP5**\n\n" + Ascend_24h_Message)
-        time.sleep(60)
+        # # 24시간 OI 변화율 하위 5개 전송
+        # Ascend_24h_Message = ''
+        # for i in range (5):
+        #     pair, data = Ascend_24h[i]
+        #     message = f"**{pair}**\n"
+        #     message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
+        #     message += f"OI_Volume_24H : ${data['OpenInterestValue_t24']:,}\n"
+        #     if data['Change_Amt'] < 0:
+        #         message += f"24H_Change($) : -${-data['Change_Amt']:,}\n"
+        #     else:
+        #         message += f"24H_Change($) : ${data['Change_Amt']:,}\n"
+        #     message += f"24H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
+        #     Ascend_24h_Message += message
+        # OI_Alert_send_message_to_jandi("**24H OI Decrease TOP5**\n\n" + Ascend_24h_Message)
+        # time.sleep(60)
         
 ################################################ OI 04H ########################################################
 
-        # OI 정보 수신
-        for i in Tickers:
-            res = exBNfuture.fetch_open_interest_history(i, timeframe='5m', params={
-                'limit':'289',
-            })
-            OI_Dict[str(i)] = round(res[288]['openInterestValue'])
+        # # OI 정보 수신
+        # for i in Tickers:
+        #     res = exBNfuture.fetch_open_interest_history(i, timeframe='5m', params={
+        #         'limit':'289',
+        #     })
+        #     OI_Dict[str(i)] = round(res[288]['openInterestValue'])
         
-        #OI 정보 가공(4시간 증감률)
-            Change_4h[str(i)] = {'Change_Pct' : round((((res[288]['openInterestValue'] - res[240]['openInterestValue']) / res[240]['openInterestValue']) * 100)*100)/100,
-                                'OpenInterestValue_t00' : round(res[288]['openInterestValue']),
-                                'OpenInterestValue_t04' : round(res[240]['openInterestValue']),
-                                'Change_Amt' : round(res[288]['openInterestValue'])-round(res[240]['openInterestValue'])
-                                }
+        # #OI 정보 가공(4시간 증감률)
+        #     Change_4h[str(i)] = {'Change_Pct' : round((((res[288]['openInterestValue'] - res[240]['openInterestValue']) / res[240]['openInterestValue']) * 100)*100)/100,
+        #                         'OpenInterestValue_t00' : round(res[288]['openInterestValue']),
+        #                         'OpenInterestValue_t04' : round(res[240]['openInterestValue']),
+        #                         'Change_Amt' : round(res[288]['openInterestValue'])-round(res[240]['openInterestValue'])
+        #                         }
             
-        # 4시간 변화율 내림차순, 오름차순 정렬
-        Descend_04h = sorted(Change_4h.items(), key=lambda x: x[1]['Change_Pct'], reverse=True) 
-        Ascend_04h = sorted(Change_4h.items(), key=lambda x: x[1]['Change_Pct'], reverse=False)
+        # # 4시간 변화율 내림차순, 오름차순 정렬
+        # Descend_04h = sorted(Change_4h.items(), key=lambda x: x[1]['Change_Pct'], reverse=True) 
+        # Ascend_04h = sorted(Change_4h.items(), key=lambda x: x[1]['Change_Pct'], reverse=False)
         
-        # 변화율 상위 5개 메세지 전송
-        Descend_04h_Message = ''
-        for i in range (5):
-            pair, data = Descend_04h[i]
-            message = f"**{pair}**\n"
-            message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
-            message += f"OI_Volume_04H : ${data['OpenInterestValue_t04']:,}\n"
-            if data['Change_Amt'] < 0:
-                message += f"04H_Change($) : -${-data['Change_Amt']:,}\n"
-            else:
-                message += f"04H_Change($) : ${data['Change_Amt']:,}\n"
-            message += f"04H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
-            Descend_04h_Message += message
-        OI_Alert_send_message_to_jandi("**04H OI Increase TOP5**\n\n" + Descend_04h_Message)
-        time.sleep(60)
+        # # 변화율 상위 5개 메세지 전송
+        # Descend_04h_Message = ''
+        # for i in range (5):
+        #     pair, data = Descend_04h[i]
+        #     message = f"**{pair}**\n"
+        #     message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
+        #     message += f"OI_Volume_04H : ${data['OpenInterestValue_t04']:,}\n"
+        #     if data['Change_Amt'] < 0:
+        #         message += f"04H_Change($) : -${-data['Change_Amt']:,}\n"
+        #     else:
+        #         message += f"04H_Change($) : ${data['Change_Amt']:,}\n"
+        #     message += f"04H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
+        #     Descend_04h_Message += message
+        # OI_Alert_send_message_to_jandi("**04H OI Increase TOP5**\n\n" + Descend_04h_Message)
+        # time.sleep(60)
         
-        # 변화율 하위 5개 메세지 전송
-        Ascend_04h_Message = ''
-        for i in range (5):
-            pair, data = Ascend_04h[i]
-            message = f"**{pair}**\n"
-            message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
-            message += f"OI_Volume_04H : ${data['OpenInterestValue_t04']:,}\n"
-            if data['Change_Amt'] < 0:
-                message += f"04H_Change($) : -${-data['Change_Amt']:,}\n"
-            else:
-                message += f"04H_Change($) : ${data['Change_Amt']:,}\n"
-            message += f"04H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
-            Ascend_04h_Message += message
-        OI_Alert_send_message_to_jandi("**04H OI Decrease TOP5**\n\n" + Ascend_04h_Message)
-        time.sleep(60)
+        # # 변화율 하위 5개 메세지 전송
+        # Ascend_04h_Message = ''
+        # for i in range (5):
+        #     pair, data = Ascend_04h[i]
+        #     message = f"**{pair}**\n"
+        #     message += f"OI_Volume_00H : ${data['OpenInterestValue_t00']:,}\n"
+        #     message += f"OI_Volume_04H : ${data['OpenInterestValue_t04']:,}\n"
+        #     if data['Change_Amt'] < 0:
+        #         message += f"04H_Change($) : -${-data['Change_Amt']:,}\n"
+        #     else:
+        #         message += f"04H_Change($) : ${data['Change_Amt']:,}\n"
+        #     message += f"04H_Change(%) : {data['Change_Pct']:.2f}%\n\n"
+        #     Ascend_04h_Message += message
+        # OI_Alert_send_message_to_jandi("**04H OI Decrease TOP5**\n\n" + Ascend_04h_Message)
+        # time.sleep(60)
 ################################################ OI 01H ########################################################
 
         #OI 정보 수신
