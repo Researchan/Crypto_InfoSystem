@@ -9,5 +9,13 @@ for i in exUpbitTickers:
     if i[-3:] == 'BTC':
         Tickerlist.append(i[0:-4])
 
+# Tokamak이 TON이랑 겹침. 또한 오름차순 정렬시 소문자 O를 엑셀이 구분하기때문에 전부 대문자로 변경
+Tickerlist.remove('Tokamak Network')
+Tickerlist.append('TON(Tokamak)')
+
+Tickerlist = set(Tickerlist)
+Tickerlist = list(Tickerlist)
+Tickerlist.sort()
+
 # for i in Tickerlist:
 #     print(i)
