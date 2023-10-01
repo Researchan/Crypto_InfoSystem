@@ -3,9 +3,10 @@ import time
 import subprocess
 
 while True:
-    # os.system('ExecutionScript.py')
-    subprocess.run(['python', 'ExecutionScript.py'])
-    time.sleep(20)
+    subprocess.run(['python', 'Update_InputExcel.py'])
+    time.sleep(2)
+    subprocess.run(['python', 'Update_OutputExcel_and_HTML.py'])
+    time.sleep(2)
     os.system('git add .')
     os.system('git commit -m "Update data"')
     os.system('git push')

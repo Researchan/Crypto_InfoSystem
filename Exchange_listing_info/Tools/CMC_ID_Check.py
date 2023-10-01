@@ -19,7 +19,7 @@ parameters = {
 # Send HTTP GET request
 response = requests.get(url, headers=headers, params=parameters)
 
-symbols = ['MULTI']
+symbols = ['FOR']
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the response data in JSON format
