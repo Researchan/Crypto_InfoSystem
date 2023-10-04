@@ -1,6 +1,6 @@
 import requests
 
-Webhook_Address1 = "https://wh.jandi.com/connect-api/webhook/27226641/e7b1034711f262a4b424c22b8cbd703c"
+Webhook_Address1 = "https://wh.jandi.com/connect-api/webhook/27226641/b3a9191223a24ff3a895182714991b5a"
 
 def send_message_to_jandi(message):
     headers = {
