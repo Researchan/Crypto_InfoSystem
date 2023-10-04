@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import jandimodule
 
 input_file_name = 'ListingDatas.xlsx'
 output_xlsx_name = 'Dataoutput.xlsx'
@@ -54,25 +55,21 @@ for _ in range(3):  # 3페이지까지 조회
         print("Error: Failed to retrieve Coingecko data", e)
         break
 
-# CoinMarketCap API 호출에 사용할 파라미터
-coinmarketcap_params = {
-    'id': ",".join(df['CMC_id'].astype(int).astype(str)),  # 여기서 정수형으로 변환한 후 다시 문자열로 변환
-}
-
-# CoinMarketCap API 호출에 필요한 헤더
-coinmarketcap_headers = {
-    'X-CMC_PRO_API_KEY': coinmarketcap_api_key,
-}
-
-# CoinMarketCap API 호출 및 데이터 처리
 try:
+    # CoinMarketCap API 호출에 사용할 파라미터
+    coinmarketcap_params = {
+        'id': ",".join(df['CMC_id'].astype(int).astype(str)),  # 여기서 정수형으로 변환한 후 다시 문자열로 변환
+    }
+
+    # CoinMarketCap API 호출에 필요한 헤더
+    coinmarketcap_headers = {
+        'X-CMC_PRO_API_KEY': coinmarketcap_api_key,
+    }
+
+    # CoinMarketCap API 호출 및 데이터 처리
+
     response = requests.get(coinmarketcap_url, params=coinmarketcap_params, headers=coinmarketcap_headers)
     response_json = response.json()
-
-    # API 호출 결과에 문제가 있는 경우 종료
-    if 'data' not in response_json:
-        print("Error: No CoinMarketCap data found.")
-        exit()
 
     # 모든 코인의 정보를 딕셔너리에 추가
     coinmarketcap_coins_data = response_json['data']
@@ -340,4 +337,4 @@ try:
     print(f"Data retrieval successful and saved to {output_html_name}!")
     
 except Exception as e:
-    print("Error :", e)
+    jandimodule.send_message_to_jandi(str(e))
