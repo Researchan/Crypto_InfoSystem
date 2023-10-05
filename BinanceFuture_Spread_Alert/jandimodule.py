@@ -55,9 +55,3 @@ def Alert_send_message_to_jandi(message):
         "body": message
     }
     requests.post(Webhook_Address5, headers=headers, json=payload)
-    
-#두나무 환율
-def get_usd_krw():
-    url = 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD'
-    exchange =requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}).json()
-    return exchange[0]['basePrice']
