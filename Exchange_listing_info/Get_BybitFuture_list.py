@@ -10,7 +10,7 @@ exBybitTickers = exBybitTickersInfo.keys() # 티커 키만 받아오기 (이름�
 
 Tickerlist = []
 for i in exBybitTickers:
-    if 'USDC' not in i: # USDC페어는 제외. DefaultType == Swap이라 자동으로 Delivery 제거되는듯함.
+    if 'USD:USDC' not in i:
         Tickerlist.append(i[0:-10])
 
 # 단위 작은 티커 제거
@@ -34,9 +34,6 @@ Tickerlist.append('LUNC')
 Tickerlist.append('PEPE')
 Tickerlist.append('SHIB')
 Tickerlist.append('XEC')
-
-# USDC제거하면서 제거된 USDC 선물 추가
-Tickerlist.append('USDC')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)

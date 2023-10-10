@@ -88,6 +88,8 @@ try:
         Bithumb = row['Bithumb']        
         Binance_Future = row['Binance_Future']
         Bybit_Future = row['Bybit_Future']
+        Binance_OI = row['Binance_OI']
+        Bybit_OI = row['Bybit_OI']
 
         cg_market_cap = coingecko_coins_data.get(cg_id, {}).get('market_cap', float('nan'))
         cg_fdv = coingecko_coins_data.get(cg_id, {}).get('FDV', float('nan'))
@@ -96,15 +98,23 @@ try:
         cmc_fdv = coinmarketcap_coins_data.get(str(cmc_id), {}).get('quote', {}).get('USD', {}).get('fully_diluted_market_cap', float('nan'))
 
         # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
-        coin_data_list.append([Ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, Upbit_KRW, Upbit_BTC, Bithumb, Binance_Future, Bybit_Future])
+        coin_data_list.append([Ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, 
+                               Binance_OI, Bybit_OI,
+                               Upbit_KRW, Upbit_BTC, Bithumb, Binance_Future, Bybit_Future, 
+                               ])
 
-    # 데이터를 DataFrame으로 변환
-    columns = ['Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Future', 'Bybit_Future']
+    # 데이터를 DataFrame으로 변환. 이는 각 열 이름
+    columns = ['Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV',
+               'Binance_OI', 'Bybit_OI',
+               'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Future', 'Bybit_Future',
+               ]
+    
+    #위에 coin_data_list와 columns에서 지정한 열 합쳐서 총 자료 생성. 순서 일치해야함
     df_combined = pd.DataFrame(coin_data_list, columns=columns)
 
     # 새로운 엑셀 파일로 저장
     with pd.ExcelWriter(output_xlsx_name, engine='xlsxwriter') as writer:
-        df_combined.to_excel(writer, index=False, sheet_name='Sheet1')
+        df_combined.to_excel(writer, index=False, sheet_name='Sheet1') #위에서 생성한 df_combined를 그대로 엑셀에 넣음 (순서 일치)
 
         # 엑셀 파일의 WorkSheet 객체 가져오기
         worksheet = writer.sheets['Sheet1']
@@ -115,12 +125,20 @@ try:
         # B열과 C열의 넓이를 최대한 줄여주기
         worksheet.set_column('B:C', None, None, {'hidden': True})
 
-        # D, E, F, G열의 넓이를 15로 설정하고 통화 형식도 적용
+        # D, E, F, G, H, I열의 넓이를 15로 설정하고 통화 형식도 적용
         money_format = writer.book.add_format({'num_format': '$#,##0'})
-        worksheet.set_column('D:G', 15, money_format)
+        worksheet.set_column('D:I', 15, money_format)
 
     print(f"Data retrieval successful and saved to {output_xlsx_name}!")
 
+
+
+
+    ######## HTML 생성중 #########
+    
+    
+    
+    
     # 생성된 엑셀 데이터 읽어오기
     df = pd.read_excel(output_xlsx_name)
     df = df.drop(columns=['CG_id', 'CMC_id'])  # CG_id와 CMC_id 열을 제거
@@ -133,19 +151,23 @@ try:
     df['CG_FDV'] = df['CG_FDV'].apply(lambda x: f"${int(x):,}")
     df['CMC_MarketCap'] = df['CMC_MarketCap'].apply(lambda x: f"${int(x):,}")
     df['CMC_FDV'] = df['CMC_FDV'].apply(lambda x: f"${int(x):,}")
+    df['Binance_OI'] = df['Binance_OI'].apply(lambda x: f"${int(x):,}")
+    df['Bybit_OI'] = df['Bybit_OI'].apply(lambda x: f"${int(x):,}")
 
-    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Future', 'Bybit_Future', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV'])
+    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Future', 'Bybit_Future', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Binance_OI', 'Bybit_OI'])
 
     df.rename(columns={
-        'Upbit_KRW' : '업비트 원화',
-        'Upbit_BTC' : '업비트 BTC',
+        'Upbit_KRW' : '업빗 KRW',
+        'Upbit_BTC' : '업빗 BTC',
         'Bithumb' : '빗썸',
-        'Binance_Future' : 'Binance선물',
-        'Bybit_Future' : 'Bybit선물',
-        'CG_MarketCap': '유통 시가총액 (CG)',
-        'CMC_MarketCap': '유통 시가총액 (CMC)',
-        'CG_FDV': '총 시가총액 (CG)',
-        'CMC_FDV': '총 시가총액(CMC)'
+        'Binance_Future' : '바이낸스 선물',
+        'Bybit_Future' : '바이비트 선물',
+        'CG_MarketCap': '유통 시총 (CG)',
+        'CMC_MarketCap': '유통 시총 (CMC)',
+        'CG_FDV': '총 시총 (CG)',
+        'CMC_FDV': '총 시총 (CMC)',
+        'Binance_OI' : 'Binance_OI',
+        'Bybit_OI' : 'Bybit_OI'
     }, inplace=True)
     
     # 행 번호를 별도의 열로 만들기
@@ -169,7 +191,7 @@ try:
                     padding: 0;
                 }}
                 .dataframe {{
-                    width: 60%;
+                    width: 80%;
                     height: 80%;
                 }}
                 .dataTables_wrapper {{
