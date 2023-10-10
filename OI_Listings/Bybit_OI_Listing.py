@@ -22,13 +22,14 @@ lastprices = exBybitFuture.fetch_tickers(Tickerlist)
 #OI 딕셔너리 생성
 Bybit_OI_Dict ={}
 
-#원하는 티커에 대해서 OI정보 받아오기, 마지막 가격 딕셔너리에넣기, 계산하기
 for i in Tickerlist:
-    res = exBybitFuture.fetch_open_interest_history(i, timeframe='5m', params={
+    #원하는 티커에 대해서 OI정보 받아오기
+    res = exBybitFuture.fetch_open_interest_history(i, timeframe='5m', params={ 
             'limit':'1',
         })
     
-    Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue'])
+    #가격정보 받아서 OIvolume과 곱해서 USD value 계산 후 Dict에 집어넣기
+    Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue']) 
 
 Bybit_New_OI_Dict = {}
 

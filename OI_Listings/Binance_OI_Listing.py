@@ -14,7 +14,6 @@ Tickerlist = []
 for i in exBNfutureTickers:
     if '-' not in i and ':USDT' in i:
         Tickerlist.append(i)
-        print(i)
 
 Tickerlist.remove('COCOS/USDT:USDT')
 Tickerlist.remove('DEFI/USDT:USDT')
@@ -22,7 +21,6 @@ Tickerlist.remove('BLUEBIRD/USDT:USDT')
 Tickerlist.remove('FOOTBALL/USDT:USDT')
 Tickerlist.remove('BTCDOM/USDT:USDT')
 Tickerlist.sort()
-
 
 #OI Dict 생성 및 저장
 OI_Dict ={}
@@ -37,7 +35,7 @@ New_OI_Dict = {}
 
 #페어 이름정보 변경 (자동)
 for key, value in OI_Dict.items():
-    new_key = key[0:-5]
+    new_key = key[0:-10]
     New_OI_Dict[new_key] = value
     
 # #페어 이름정보 변경 (수동)
@@ -51,28 +49,25 @@ New_OI_Dict['XEC'] = New_OI_Dict.pop('1000XEC')
 #OI 내림차순
 sorted_OI_Dict = dict(sorted(New_OI_Dict.items(), key=lambda x: x[1], reverse=True) )
 
-for i in sorted_OI_Dict:
-    print(i)
+# # OI 순위 메세지 전송
+# count = 1
+# formatted_message = ''
+# for key,value in list(sorted_OI_Dict.items())[0:200]:
+#     coin = key
+#     OIvolume = '${:,.0f}'.format(value)
+#     formatted_line = f'{coin}\n{OIvolume}\n\n'
+#     formatted_message += (str(count)+ '. ' + formatted_line)
+#     count += 1
+# formatted_message = '***Binance_OI***\n\n' + formatted_message
+# formatted_message = formatted_message.rstrip()
+# Binance_OI_Alert_send_message_to_jandi(formatted_message)
 
-# OI 순위 메세지 전송
-count = 1
-formatted_message = ''
-for key,value in list(sorted_OI_Dict.items())[0:200]:
-    coin = key
-    OIvolume = '${:,.0f}'.format(value)
-    formatted_line = f'{coin}\n{OIvolume}\n\n'
-    formatted_message += (str(count)+ '. ' + formatted_line)
-    count += 1
-formatted_message = '***Binance_OI***\n\n' + formatted_message
-formatted_message = formatted_message.rstrip()
-Binance_OI_Alert_send_message_to_jandi(formatted_message)
-
-formatted_message = ''
-for key,value in list(sorted_OI_Dict.items())[200:]:
-    coin = key
-    OIvolume = '${:,.0f}'.format(value)
-    formatted_line = f'{coin}\n{OIvolume}\n\n'
-    formatted_message += (str(count)+ '. ' + formatted_line)
-    count += 1
-formatted_message = formatted_message.rstrip()
-Binance_OI_Alert_send_message_to_jandi(formatted_message)
+# formatted_message = ''
+# for key,value in list(sorted_OI_Dict.items())[200:]:
+#     coin = key
+#     OIvolume = '${:,.0f}'.format(value)
+#     formatted_line = f'{coin}\n{OIvolume}\n\n'
+#     formatted_message += (str(count)+ '. ' + formatted_line)
+#     count += 1
+# formatted_message = formatted_message.rstrip()
+# Binance_OI_Alert_send_message_to_jandi(formatted_message)
