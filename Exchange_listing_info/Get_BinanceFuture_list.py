@@ -11,15 +11,13 @@ exBNTickers = exBNTickersInfo.keys() # 티커 키만 받아오기 (이름만)
 
 Tickerlist = []
 for i in exBNTickers:
-    if '-' not in i and '/BTC' not in i: #BTC선물페어와, Delivery선물페어 정리
+    if '-' not in i and ':USDT' in i: #BTC선물페어와, Delivery선물페어 정리
         Tickerlist.append(i[0:-10])
-        # Tickerlist.append(i)
 
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 
 #ETF 삭제, 잘못된 페어이름 삭제
-Tickerlist.remove('DODOX')
 Tickerlist.remove('BLUEBIRD')
 Tickerlist.remove('BTCDOM')
 Tickerlist.remove('COCOS')
@@ -37,6 +35,10 @@ Tickerlist.remove('1000SHIB')
 Tickerlist.append('SHIB')
 Tickerlist.remove('1000XEC')
 Tickerlist.append('XEC')
+
+#DODO티커 정리
+Tickerlist.remove('DODOX')
+Tickerlist.append('DODO')
 
 Tickerlist.sort()
 

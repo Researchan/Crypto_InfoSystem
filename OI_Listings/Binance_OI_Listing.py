@@ -12,13 +12,15 @@ exBNfutureTickers = exBNfutureTickersInfo.keys() # 티커 키만 받아오기 (�
 
 Tickerlist = []
 for i in exBNfutureTickers:
-    if '-' not in i and 'USDT' in i:
-        Tickerlist.append(i[0:-5])
+    if '-' not in i and ':USDT' in i:
+        Tickerlist.append(i)
+        print(i)
 
-Tickerlist.remove('COCOS/USDT')
-Tickerlist.remove('DEFI/USDT')
-Tickerlist.remove('BLUEBIRD/USDT')
-Tickerlist.remove('FOOTBALL/USDT')
+Tickerlist.remove('COCOS/USDT:USDT')
+Tickerlist.remove('DEFI/USDT:USDT')
+Tickerlist.remove('BLUEBIRD/USDT:USDT')
+Tickerlist.remove('FOOTBALL/USDT:USDT')
+Tickerlist.remove('BTCDOM/USDT:USDT')
 Tickerlist.sort()
 
 
@@ -48,6 +50,9 @@ New_OI_Dict['XEC'] = New_OI_Dict.pop('1000XEC')
 
 #OI 내림차순
 sorted_OI_Dict = dict(sorted(New_OI_Dict.items(), key=lambda x: x[1], reverse=True) )
+
+for i in sorted_OI_Dict:
+    print(i)
 
 # OI 순위 메세지 전송
 count = 1
