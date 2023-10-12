@@ -25,4 +25,5 @@ Tickerlist.sort()
 
 print(Tickerlist)
 
-future1000pairs = ['1000FLOKI/USDT', '1000LUNC/USDT', '1000PEPE/USDT', '1000SHIB/USDT', '1000XEC/USDT']
+future1000_Tickerlist = ['1000FLOKI/USDT', '1000LUNC/USDT', '1000PEPE/USDT', '1000SHIB/USDT', '1000XEC/USDT']
+Luna_Tickerlist = ['LUNA2/USDT', 'LUNA/USDT:USDT']

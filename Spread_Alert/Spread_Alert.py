@@ -1,10 +1,8 @@
 import ccxt.async_support as ccxtasync
 import ccxt.pro as ccxtpro
 import asyncio
-import time
-import ccxt
 import jandimodule
-import Binancelist
+import Get_Tickerlists
 
 sleeptime = 20
 interval_init =[1.003] + [round(1000*(1.015 + i * 0.015))/1000 for i in range(39)]
@@ -60,7 +58,7 @@ class Get_Orderbooks:
         await self.exchange1.close()
         await self.exchange2.close()
 
-class Get_1000Orderbooks:
+class Get_1000_Orderbooks:
     def __init__(self, exchange1, exchange2, usdmpair):
         #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
         global sleeptime
@@ -111,18 +109,117 @@ class Get_1000Orderbooks:
         await self.exchange1.close()
         await self.exchange2.close()
 
+class Get_Luna_Orderbooks:
+    def __init__(self, exchange1, exchange2, Spotpair, Futurepair):
+        #Binance 현물과 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
+        global sleeptime
+        global interval_init
+        global isrange_init
+        self.exchange1 = exchange1
+        self.exchange2 = exchange2
+        self.Spotpair = Spotpair
+        self.Futurepair = Futurepair
+
+    async def fetch_order_books(self):
+        #현물과 선물의 오더북 호가를 받아오기
+        self.intervals = interval_init
+        self.isrange = isrange_init
+        self.isrange[0] = 1
+        while True:
+            try:
+                spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.Spotpair, params={'name': 'bookTicker'}),
+                                                                self.exchange2.watch_ticker(self.Futurepair, params={'name': 'bookTicker'}))
+                
+                Spot_to_Future_ratio = spotticker['bid']/futureticker['ask'] #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
+                
+                #1.005이하일 경우
+                if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
+                    jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    self.isrange = [0] * 40
+                    self.isrange[0] = 1
+                
+                #1.005이상부터
+                for i in range(1,39):
+                    if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
+                        jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                        self.isrange = [0] * 40
+                        self.isrange[i] = 1
+
+                if (self.intervals[39] < Spot_to_Future_ratio) :
+                    jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    
+                
+                await asyncio.sleep(sleeptime)
+            except Exception as e:
+                print(e)
+
+    async def close_connections(self):
+        await self.exchange1.close()
+        await self.exchange2.close()
+
+class Get_Bybit_Orderbooks:
+    def __init__(self, exchange1, exchange2, pair):
+        #바이낸스 현물과 바이비트 선물의 인스턴스 생성 (페어는 인스턴스 생성시 파라미터로 받음)
+        global sleeptime
+        global interval_init
+        global isrange_init
+        self.exchange1 = exchange1
+        self.exchange2 = exchange2
+        self.pair = pair
+
+    async def fetch_order_books(self):
+        #현물과 선물의 오더북 호가를 받아오기
+        self.intervals = interval_init
+        self.isrange = isrange_init
+        self.isrange[0] = 1
+        while True:
+            try:
+                spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.pair, params={'name': 'bookTicker'}),
+                                                                self.exchange2.watch_ticker(self.pair, params={'name': 'bookTicker'}))
+                
+                Spot_to_Future_ratio = spotticker['bid']/futureticker['ask'] #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
+                
+                #1.005이하일 경우
+                if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    self.isrange = [0] * 40
+                    self.isrange[0] = 1
+                
+                #1.005이상부터
+                for i in range(1,39):
+                    if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
+                        # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[i-1]-1)*1000))/10) + '% 이상 \n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                        jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                        self.isrange = [0] * 40
+                        self.isrange[i] = 1
+
+                if (self.intervals[39] < Spot_to_Future_ratio) :
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[39]-1)*1000))/10) + ' % 이상\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    
+                
+                await asyncio.sleep(sleeptime)
+            except Exception as e:
+                print(e)
+
+    async def close_connections(self):
+        await self.exchange1.close()
+        await self.exchange2.close()
+
+
 async def main():
-    exBN = ccxt.binance({})
-    exBNfuture = ccxt.binanceusdm({})
     
-    Tickers_main = Binancelist.Tickerlist
-    Tickers_1000pair = Binancelist.future1000pairs
+    Tickers_main = Get_Tickerlists.Tickerlist
+    Tickers_1000pair = Get_Tickerlists.future1000_Tickerlist
+    Tickers_Luna = Get_Tickerlists.Luna_Tickerlist
 
     instance_dict = {}
     exBN = ccxtpro.binance({})
     exBNfuture = ccxtpro.binanceusdm({})
     
     try:
+        #처음 소켓 연결시키기
         await exBN.watch_ticker('BTC/USDT')
         await exBNfuture.watch_ticker('BTC/USDT')
         
@@ -131,8 +228,10 @@ async def main():
             print(Ticker, '인스턴스 생성완료')
             
         for Ticker in Tickers_1000pair:
-            instance_dict[str(Ticker)] = Get_1000Orderbooks(exBN, exBNfuture, Ticker)
+            instance_dict[str(Ticker)] = Get_1000_Orderbooks(exBN, exBNfuture, Ticker)
             print(Ticker, '인스턴스 생성완료')
+            
+            
             
         tasks = [instance.fetch_order_books() for instance in instance_dict.values()]
         await asyncio.gather(*tasks)
