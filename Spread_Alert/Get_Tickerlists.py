@@ -1,4 +1,5 @@
-import ccxt 
+import ccxt
+import Get_BinanceBybitTicker
 
 exBNfuture = ccxt.binanceusdm()
 exBNfutureTickersInfo = exBNfuture.fetchTickers() # 티커 딕셔너리 가져옴
@@ -23,6 +24,7 @@ Tickerlist.remove('DEFI/USDT')
 Tickerlist.remove('LUNA2/USDT')
 Tickerlist.sort()
 
-print(Tickerlist)
 
-future1000pairs = ['1000FLOKI/USDT', '1000LUNC/USDT', '1000PEPE/USDT', '1000SHIB/USDT', '1000XEC/USDT']
+future1000_Tickerlist = ['1000FLOKI/USDT', '1000LUNC/USDT', '1000PEPE/USDT', '1000SHIB/USDT', '1000XEC/USDT']
+Luna_Tickerlist = ['LUNA/USDT', 'LUNA2/USDT']
+Binance_Bybit_diff_Tickers = Get_BinanceBybitTicker.Tickerlist
