@@ -11,7 +11,7 @@ for i in exUpbitTickers:
 
 # Tokamak이 TON이랑 겹침. 또한 오름차순 정렬시 소문자 O를 엑셀이 구분하기때문에 전부 대문자로 변경
 Tickerlist.remove('Tokamak Network')
-Tickerlist.append('TON(Tokamak)')
+Tickerlist.append('TOKAMAK')
 
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)

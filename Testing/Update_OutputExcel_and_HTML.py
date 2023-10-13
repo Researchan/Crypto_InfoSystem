@@ -24,15 +24,15 @@ df['Bybit_OI'] = df['Bybit_OI'].apply(lambda x: f"${int(x):,}")
 df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Future', 'Bybit_Future', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Binance_OI', 'Bybit_OI'])
 
 df.rename(columns={
-    'Upbit_KRW' : '업빗 KRW',
-    'Upbit_BTC' : '업빗 BTC',
-    'Bithumb' : '빗썸',
-    'Binance_Future' : '바이낸스 선물',
-    'Bybit_Future' : '바이비트 선물',
-    'CG_MarketCap': '유통 시총 (CG)',
-    'CMC_MarketCap': '유통 시총 (CMC)',
-    'CG_FDV': '총 시총 (CG)',
-    'CMC_FDV': '총 시총 (CMC)',
+    'Upbit_KRW' : 'Ub_KRW',
+    'Upbit_BTC' : 'Ub_BTC',
+    'Bithumb' : 'Bithumb',
+    'Binance_Future' : 'Bn_Usdm',
+    'Bybit_Future' : 'Bb_Usdm',
+    'CG_MarketCap': 'CG_MC',
+    'CMC_MarketCap': 'CMC_MC',
+    'CG_FDV': 'CG_FDV',
+    'CMC_FDV': 'CMC_FDV',
     'Binance_OI' : 'Binance_OI',
     'Bybit_OI' : 'Bybit_OI'
 }, inplace=True)
@@ -81,6 +81,13 @@ with open(output_html_name, 'w', encoding='utf-8') as f:
             th select{{
             display: block;
             margin: 0 auto;
+            }}
+            
+            tbody tr td:nth-child(3),tbody tr td:nth-child(4),
+            tbody tr td:nth-child(5),tbody tr td:nth-child(6),
+            tbody tr td:nth-child(7) 
+            {{
+                text-align: center;
             }}
         </style>
         
