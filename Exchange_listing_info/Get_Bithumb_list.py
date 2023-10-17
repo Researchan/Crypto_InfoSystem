@@ -22,6 +22,9 @@ Tickerlist.append('ALT')
 #GRACY는 제거. 코마캡 코개코도 상장안된 잡페어
 Tickerlist.remove('GRACY')
 
+#상장초기라 코인마캣캡 상장이 안되어있네. 코개코만있다.
+Tickerlist.remove('ZTX')
+
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 Tickerlist.sort()
