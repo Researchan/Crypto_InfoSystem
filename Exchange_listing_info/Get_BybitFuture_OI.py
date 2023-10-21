@@ -35,7 +35,8 @@ Bybit_New_OI_Dict = {}
 for key, value in Bybit_OI_Dict.items():
     new_key = key[0:-10]
     Bybit_New_OI_Dict[new_key] = value
-    
+
+
 #페어 이름정보 변경 (수동)
 Bybit_New_OI_Dict['LADYS'] = Bybit_New_OI_Dict.pop('10000LADYS')
 Bybit_New_OI_Dict['NFT'] = Bybit_New_OI_Dict.pop('10000NFT')
@@ -46,6 +47,7 @@ Bybit_New_OI_Dict['LUNC'] = Bybit_New_OI_Dict.pop('1000LUNC')
 Bybit_New_OI_Dict['PEPE'] = Bybit_New_OI_Dict.pop('1000PEPE')
 Bybit_New_OI_Dict['SHIB'] = Bybit_New_OI_Dict.pop('SHIB1000')
 Bybit_New_OI_Dict['XEC'] = Bybit_New_OI_Dict.pop('1000XEC')
+Bybit_New_OI_Dict['STARL'] = Bybit_New_OI_Dict.pop('10000STARL')
 
 #OI 내림차순
 sorted_OI_Dict = dict(sorted(Bybit_New_OI_Dict.items(), key=lambda item: item[1], reverse=True))
