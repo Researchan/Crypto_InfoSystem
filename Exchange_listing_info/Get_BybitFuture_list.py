@@ -24,6 +24,7 @@ Tickerlist.remove('1000PEPE')
 Tickerlist.remove('1000XEC')
 Tickerlist.remove('SHIB1000')
 Tickerlist.remove('10000STARL')
+Tickerlist.remove('GASDAO')
 
 # 제거한 티커 표준맞춰서 다시 추가
 Tickerlist.append('LADYS')
@@ -36,6 +37,7 @@ Tickerlist.append('PEPE')
 Tickerlist.append('SHIB')
 Tickerlist.append('XEC')
 Tickerlist.append('STARL')
+Tickerlist.append('GAS')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
