@@ -32,4 +32,5 @@ Tickerlist = list(Tickerlist)
 
 
 Tickerlist.remove('BTT/USDT:USDT') #BTT는 1000Pairs라 또 제거
+Tickerlist.remove('GAS/USDT:USDT') #GAS는 Bybit에서는 GASDAO라고 표현되어서 제거 후 수동등록
 Tickerlist.sort()

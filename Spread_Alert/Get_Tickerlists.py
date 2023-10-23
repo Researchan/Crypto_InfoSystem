@@ -21,7 +21,7 @@ Tickerlist.remove('BTCDOM/USDT')
 Tickerlist.remove('COCOS/USDT')
 Tickerlist.remove('FOOTBALL/USDT')
 Tickerlist.remove('DEFI/USDT')
-Tickerlist.remove('LUNA2/USDT')
+Tickerlist.remove('LUNA2/USDT') #루나는 따로참조
 Tickerlist.sort()
 
 
