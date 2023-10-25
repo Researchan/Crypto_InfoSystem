@@ -26,5 +26,4 @@ Tickerlist.sort()
 
 
 future1000_Tickerlist = ['1000FLOKI/USDT', '1000LUNC/USDT', '1000PEPE/USDT', '1000SHIB/USDT', '1000XEC/USDT']
-Luna_Tickerlist = ['LUNA/USDT', 'LUNA2/USDT']
 Binance_Bybit_diff_Tickers = Get_BinanceBybitTicker.Tickerlist
