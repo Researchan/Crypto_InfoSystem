@@ -43,5 +43,5 @@ Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
 Tickerlist.sort()
 
-for i in Tickerlist:
-    print(i)
+# for i in Tickerlist:
+#     print(i)
