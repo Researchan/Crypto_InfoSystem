@@ -6,7 +6,7 @@ import Get_Tickerlists
 import Get_BinanceBybitTicker
 
 sleeptime = 20
-interval_init =[1.005] + [round(1000*(1.015 + i * 0.015))/1000 for i in range(39)]
+interval_init =[0.997] + [1.005] + [round(1000*(1.005 + i * 0.01))/1000 for i in range(38)]
 isrange_init = [0 for _ in range(40)]
 
 class Get_Orderbooks:
@@ -23,30 +23,38 @@ class Get_Orderbooks:
         #현물과 선물의 오더북 호가를 받아오기
         self.intervals = interval_init
         self.isrange = isrange_init
-        self.isrange[0] = 1
+        self.isrange[1] = 1
         while True:
             try:
                 spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.pair, params={'name': 'bookTicker'}),
                                                                 self.exchange2.watch_ticker(self.pair, params={'name': 'bookTicker'}))
                 
                 Spot_to_Future_ratio = spotticker['bid']/futureticker['ask'] #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
+                Spot_to_Future_ratio_reverse = spotticker['ask']/futureticker['bid'] #Spot을 Ask로, Future을 bid로 받기.
                 
-                #1.005이하일 경우
-                if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
+                #역갭 설정한 가격 이하
+                if (Spot_to_Future_ratio_reverse < self.intervals[0]) and (self.isrange[0] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio_reverse-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
+                #1이상 1.005이하일 경우
+                if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    self.isrange = [0] * 40
+                    self.isrange[1] = 1
+                
                 #1.005이상부터
-                for i in range(1,39):
+                for i in range(2,38):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
                         # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[i-1]-1)*1000))/10) + '% 이상 \n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                         jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
-                if (self.intervals[39] < Spot_to_Future_ratio) :
+                if (self.intervals[38] < Spot_to_Future_ratio) :
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[39]-1)*1000))/10) + ' % 이상\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     
@@ -74,30 +82,38 @@ class Get_1000_Orderbooks:
         #현물과 선물의 오더북 호가를 받아오기
         self.intervals = interval_init
         self.isrange = isrange_init
-        self.isrange[0] = 1
+        self.isrange[1] = 1
         while True:
             try:
                 spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.spotpair, params={'name': 'bookTicker'}),
                                                                 self.exchange2.watch_ticker(self.usdmpair, params={'name': 'bookTicker'}))
                 
-                Spot_to_Future_ratio = spotticker['bid']/futureticker['ask'] #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
+                Spot_to_Future_ratio = spotticker['bid']/futureticker['ask']*1000 #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
+                Spot_to_Future_ratio_reverse = spotticker['ask']/futureticker['bid']*1000 #Spot을 Ask로, Future을 bid로 받기.
                 
-                #1.005이하일 경우
-                if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
+                #역갭 설정한 가격 이하
+                if (Spot_to_Future_ratio_reverse < self.intervals[0]) and (self.isrange[0] != 1):
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio_reverse-1))/100) + '%')
+                    self.isrange = [0] * 40
+                    self.isrange[0] = 1
+                    
+                #1이상 1.005이하일 경우
+                if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
-                    self.isrange[0] = 1
+                    self.isrange[1] = 1
                 
                 #1.005이상부터
-                for i in range(1,39):
+                for i in range(2,38):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
                         # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                         jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
-                if (self.intervals[39] < Spot_to_Future_ratio) :
+                if (self.intervals[38] < Spot_to_Future_ratio) :
                     # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     
@@ -125,30 +141,38 @@ class Get_BinanceBybit_Orderbooks:
         #현물과 선물의 오더북 호가를 받아오기
         self.intervals = interval_init
         self.isrange = isrange_init
-        self.isrange[0] = 1
+        self.isrange[1] = 1
         while True:
             try:
                 spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.BinanceSpot_pair, params={'name': 'bookTicker'}),
                                                                 self.exchange2.watch_ticker(self.BybitFuture_pair, params={'name': 'bookTicker'}))
                 
                 Spot_to_Future_ratio = spotticker['bid']/futureticker['ask'] #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
+                Spot_to_Future_ratio_reverse = spotticker['ask']/futureticker['bid'] #Spot을 Ask로, Future을 bid로 받기.
                 
-                #1.005이하일 경우
-                if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
+                #역갭 설정한 가격 이하
+                if (Spot_to_Future_ratio_reverse < self.intervals[0]) and (self.isrange[0] != 1):
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi('BYBIT\n' + str(self.BinanceSpot_pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio_reverse-1))/100) + '%')
+                    self.isrange = [0] * 40
+                    self.isrange[0] = 1
+                    
+                #1이상 1.005이하일 경우
+                if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     jandimodule.Alert_send_message_to_jandi('BYBIT\n' + str(self.BinanceSpot_pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
-                    self.isrange[0] = 1
+                    self.isrange[1] = 1
                 
                 #1.005이상부터
-                for i in range(1,39):
+                for i in range(2,39):
                     if (self.intervals[i-1] < Spot_to_Future_ratio < self.intervals[i]) and (self.isrange[i] != 1):
                         # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[i-1]-1)*1000))/10) + '% 이상 \n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                         jandimodule.Alert_send_message_to_jandi('BYBIT\n' + str(self.BinanceSpot_pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                         self.isrange = [0] * 40
                         self.isrange[i] = 1
 
-                if (self.intervals[39] < Spot_to_Future_ratio) :
+                if (self.intervals[38] < Spot_to_Future_ratio) :
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[39]-1)*1000))/10) + ' % 이상\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     jandimodule.Alert_send_message_to_jandi('BYBIT\n' + str(self.BinanceSpot_pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     
@@ -176,19 +200,27 @@ class Get_Other_Orderbooks:
         #현물과 선물의 오더북 호가를 받아오기
         self.intervals = interval_init
         self.isrange = isrange_init
-        self.isrange[0] = 1
+        self.isrange[1] = 1
         while True:
             try:
                 spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.Spotpair, params={'name': 'bookTicker'}),
                                                                 self.exchange2.watch_ticker(self.Futurepair, params={'name': 'bookTicker'}))
                 
                 Spot_to_Future_ratio = spotticker['bid']/futureticker['ask'] #SPot에서 bid로 받는 이유는, 누군가 Spot잘못긁어서 Spot매도호가가 비어버릴 경우, 알람이 오작동하는 것을 방지하기위해서.
+                Spot_to_Future_ratio_reverse = spotticker['ask']/futureticker['bid'] #Spot을 Ask로, Future을 bid로 받기.
                 
-                #1.005이하일 경우
-                if (Spot_to_Future_ratio < self.intervals[0]) and (self.isrange[0] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                #역갭 설정한 가격 이하
+                if (Spot_to_Future_ratio_reverse < self.intervals[0]) and (self.isrange[0] != 1):
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
+                    jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio_reverse-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
+                    
+                #1이상 1.005이하일 경우
+                if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
+                    jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    self.isrange = [0] * 40
+                    self.isrange[1] = 1
                 
                 #1.005이상부터
                 for i in range(1,39):
@@ -245,9 +277,9 @@ async def main():
         instance_dict['LUNA/USDT'] = Get_Other_Orderbooks(exBN, exBNfuture, 'LUNA/USDT', 'LUNA2/USDT')
         print('LUNA/USDT', '인스턴스 생성완료')
         
-        # #바이낸스-바이빗 GAS 티커 등록
-        # instance_dict['GAS/USDT'] = Get_Other_Orderbooks(exBN, exBybit, 'GAS/USDT', 'GASDAO/USDT:USDT')
-        # print('GAS/USDT', '인스턴스 생성완료')
+        #바이낸스-바이빗 GAS 티커 등록
+        instance_dict['GAS/USDT'] = Get_Other_Orderbooks(exBN, exBybit, 'GAS/USDT', 'GASDAO/USDT:USDT')
+        print('GAS/USDT', '인스턴스 생성완료')
     
         
             
