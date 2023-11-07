@@ -1,0 +1,51 @@
+import ccxt
+
+exBN = ccxt.binance({
+    'options': {
+        'defaultType': 'spot',
+    },
+})
+exBNTickersInfo = exBN.fetchTickers() # 티커 딕셔너리 가져옴
+exBNTickers = exBNTickersInfo.keys() # 티커 키만 받아오기 (이름만)
+
+#API에서 USDT페어의 티커만 받아오기
+API_Tickerlist = []
+for i in exBNTickers:
+    if '/USDT' in i:
+        coinname = i.split('/')[0]
+        API_Tickerlist.append(coinname)
+
+#기존에 상장폐지된 리스트 수동으로 제거 (바이낸스가 API에서 여전히 제공해서 수동으로 제거해야함)
+delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP', 
+               'AION', 'ANC', 'ANY', 'AUD', 'AUTO', 'BCC', 'BCHABC', 'BCHDOWN', 'BCHUP', 
+               'BEAM', 'BEAR', 'BETH', 'BKRW', 'BNBBEAR', 'BNBBULL', 'BNBDOWN', 'BNBUP', 
+               'BSV', 'BTCDOWN', 'BTCST', 'BTCUP', 'BTG', 'BTT', 'BULL', 'BZRX', 'COCOS', 
+               'DAI', 'DNT', 'DOTDOWN', 'DOTUP', 'EOSBEAR', 'EOSBULL', 'EOSDOWN', 'EOSUP', 
+               'EPS', 'ERD', 'ETHBEAR', 'ETHBULL', 'ETHDOWN', 'ETHUP', 'FILDOWN', 'FILUP', 
+               'GTO', 'GXS', 'HC', 'HNT', 'KEEP', 'LEND', 'LINKDOWN', 'LINKUP', 'LTCDOWN', 'LTCUP', 
+               'MCO', 'MFT', 'MIR', 'MITH', 'NANO', 'NBS', 'NEBL', 'NPXS', 'NU', 'PAX', 'POLY', 
+               'RAMP', 'REP', 'RGT', 'SRM', 'STORM', 'STRAT', 'SUSD', 'SUSHIDOWN', 'SUSHIUP', 
+               'SXPDOWN', 'SXPUP', 'TCT', 'TORN', 'TRIBE', 'TRXDOWN', 'TRXUP', 'UNIDOWN', 'UNIUP', 
+               'USDS', 'USDSB', 'UST', 'VEN', 'XLMDOWN', 'XLMUP', 'XRPBEAR', 'XRPBULL', 
+               'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP']
+
+
+
+#바낸 상장되어있는 Spot USDT페어 목록
+Tickerlist = set(API_Tickerlist) - set(delete_list)
+Tickerlist = list(Tickerlist)
+
+#WBETH, WBTC제거
+Tickerlist.remove('WBETH')
+Tickerlist.remove('WBTC')
+
+#LUNA는 LUNA2로 티커이름 통일하겠음.
+Tickerlist.remove('LUNA')
+Tickerlist.append('LUNA2')
+
+#정렬
+Tickerlist.sort()
+
+
+# for i in Tickerlist:
+#     print(i)
