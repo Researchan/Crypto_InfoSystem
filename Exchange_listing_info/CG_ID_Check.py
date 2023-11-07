@@ -7,13 +7,14 @@ parameters = {
     'vs_currency': 'usd',
     'order': 'market_cap_desc',
     'per_page': 200,
-    'page': 4,
+    'page': 15,
 }
 
 Tickerlist = [
-    "LADYS", "BONK", "AKRO", "ALPACA", "BICO", "BSW", "BUSD", "CEEK", "CORE",
-    "ETHW", "FORTH", "GFT", "GLMR", "HNT", "ILV", "KAS", "KDA", "LOOKS", "ORDI",
-    "PAXG", "SCRT", "SLP", "SWEAT", "TWT", "VGX", "XNO"
+    "ABT", "AIOZ", "ALEPH", "AMPL", "AURORA", "AVT", "AXL", "BTRST", "CFG", "COVAL", "CTX", "DESO", "DEXT", "DIMO", "DYP", "ELA",
+    "EUROC", "FORT", "FOX", "GFI", "GODS", "GYEN", "HOPR", "INDEX", "INV", "KRL", "LCX", "MATH", "MCO2", "MEDIA", "METIS", "MNDE",
+    "MONA", "MPL", "MUSE", "ORCA", "PAX", "PLU", "PNG", "POLY", "PRIME", "PRO", "PRQ", "RARI", "RBN", "SHPING", "SPA", "SUKU",
+    "SWFTC", "SYLO", "TIME", "TRAC", "VARA", "XYO"
 ]
 
 Tickerlistsmall = []

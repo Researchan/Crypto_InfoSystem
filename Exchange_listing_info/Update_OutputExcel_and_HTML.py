@@ -85,9 +85,12 @@ try:
         Ticker = row['Ticker']
         Upbit_KRW = row['Upbit_KRW'] 
         Upbit_BTC = row['Upbit_BTC']
-        Bithumb = row['Bithumb']        
+        Bithumb = row['Bithumb']
+        Coinbase_Spot = row['Coinbase_Spot']
+        Binance_Spot = row['Binance_Spot']
         Binance_Future = row['Binance_Future']
         Bybit_Future = row['Bybit_Future']
+        Okx_Future = row['Okx_Future']
         Binance_OI = row['Binance_OI']
         Bybit_OI = row['Bybit_OI']
 
@@ -100,13 +103,15 @@ try:
         # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
         coin_data_list.append([Ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, 
                                Binance_OI, Bybit_OI,
-                               Upbit_KRW, Upbit_BTC, Bithumb, Binance_Future, Bybit_Future, 
+                               Upbit_KRW, Upbit_BTC, Bithumb, Coinbase_Spot, Binance_Spot,
+                               Binance_Future, Bybit_Future, Okx_Future
                                ])
 
     # 데이터를 DataFrame으로 변환. 이는 각 열 이름
     columns = ['Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV',
                'Binance_OI', 'Bybit_OI',
-               'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Future', 'Bybit_Future',
+               'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot', 'Binance_Spot',
+               'Binance_Future', 'Bybit_Future', 'Okx_Future'
                ]
     
     #위에 coin_data_list와 columns에서 지정한 열 합쳐서 총 자료 생성. 순서 일치해야함
@@ -154,21 +159,27 @@ try:
     df['Binance_OI'] = df['Binance_OI'].apply(lambda x: f"${int(x):,}")
     df['Bybit_OI'] = df['Bybit_OI'].apply(lambda x: f"${int(x):,}")
 
-    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Future', 'Bybit_Future', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 'Binance_OI', 'Bybit_OI'])
+    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot', 'Binance_Spot', 
+                             'Binance_Future', 'Bybit_Future', 'Okx_Future',
+                             'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 
+                             'Binance_OI', 'Bybit_OI'])
 
     df.rename(columns={
         'Upbit_KRW' : 'Ub_KRW',
         'Upbit_BTC' : 'Ub_BTC',
         'Bithumb' : 'Bithumb',
+        'Coinbase_Spot' : 'CB_Spot',
+        'Binance_Spot' : 'BN_Spot',
         'Binance_Future' : 'BN_USDM',
         'Bybit_Future' : 'BB_USDM',
+        'Okx_Future' : 'OKX_Perp',
         'CG_MarketCap': 'CG_MC',
         'CMC_MarketCap': 'CMC_MC',
         'CG_FDV': 'CG_FDV',
         'CMC_FDV': 'CMC_FDV',
         'Binance_OI' : 'Binance_OI',
-        'Bybit_OI' : 'Bybit_OI'
-    }, inplace=True)
+        'Bybit_OI' : 'Bybit_OI',
+        }, inplace=True)
 
     # 행 번호를 별도의 열로 만들기
     df.reset_index(inplace=True)
@@ -218,7 +229,8 @@ try:
                 
                 tbody tr td:nth-child(3),tbody tr td:nth-child(4),
                 tbody tr td:nth-child(5),tbody tr td:nth-child(6),
-                tbody tr td:nth-child(7) 
+                tbody tr td:nth-child(7),tbody tr td:nth-child(8), 
+                tbody tr td:nth-child(9),tbody tr td:nth-child(10),
                 {{
                     text-align: center;
                 }}
@@ -242,28 +254,37 @@ try:
                     <input type="checkbox" id="toggleColumn4" checked> 빗썸
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn5" checked> 바이낸스 선물
+                    <input type="checkbox" id="toggleColumn5" checked> 코베 현물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn6" checked> 바이비트 선물
+                    <input type="checkbox" id="toggleColumn6" checked> 바이낸스 현물
+                </label>                
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn7" checked> 바이낸스 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn7" checked> CG_MC
+                    <input type="checkbox" id="toggleColumn8" checked> 바이비트 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn8" checked> CG_FDV
+                    <input type="checkbox" id="toggleColumn9" checked> OKX 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn9" checked> CMC_MC
+                    <input type="checkbox" id="toggleColumn10" checked> CG_MC
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn10" checked> CMC_FDV
+                    <input type="checkbox" id="toggleColumn11" checked> CG_FDV
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn11" checked> OI_Binance
+                    <input type="checkbox" id="toggleColumn12" checked> CMC_MC
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn12" checked> OI_Bybit
+                    <input type="checkbox" id="toggleColumn13" checked> CMC_FDV
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn14" checked> OI_Binance
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn15" checked> OI_Bybit
                 </label>
                 {table}
             </div>
@@ -315,6 +336,19 @@ try:
                     {{
                         table.column(12).visible(this.checked);
                     }});
+                    $('#toggleColumn13').on('change', function () 
+                    {{
+                        table.column(13).visible(this.checked);
+                    }});
+                    $('#toggleColumn14').on('change', function () 
+                    {{
+                        table.column(14).visible(this.checked);
+                    }});
+                    $('#toggleColumn15').on('change', function () 
+                    {{
+                        table.column(15).visible(this.checked);
+                    }});
+                    
                     
                     var table = $('.dataframe').DataTable(
                     {{    
@@ -443,7 +477,79 @@ try:
                                 {{
                                     select.append( '<option value="'+d+'">'+d+'</option>' )
                                 }} );
-                            }} );     
+                            }} );
+                            // 8열에 드롭다운 메뉴 추가          
+                            this.api().columns(7).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );   
+                            // 9열에 드롭다운 메뉴 추가          
+                            this.api().columns(8).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );   
+                            // 10열에 드롭다운 메뉴 추가          
+                            this.api().columns(9).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );        
                         }},
                         
                         "searching": true,
@@ -465,6 +571,9 @@ try:
                         "columns": 
                         [
                             {{ "width": "10px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
                             {{ "width": "50px" }},
                             {{ "width": "50px" }},
                             {{ "width": "50px" }},
