@@ -6,7 +6,7 @@ import Get_Tickerlists
 import Get_BinanceBybitTicker
 
 sleeptime = 20
-interval_init =[0.997] + [1.005] + [round(1000*(1.005 + i * 0.01))/1000 for i in range(38)]
+interval_init =[0.996] + [1.005] + [round(1000*(1.005 + i * 0.01))/1000 for i in range(38)]
 isrange_init = [0 for _ in range(40)]
 
 class Get_Orderbooks:
