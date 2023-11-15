@@ -49,6 +49,9 @@ Tickerlist.append('LUNA2')
 Tickerlist.remove('BTTC')
 Tickerlist.append('BTT')
 
+#BEAMX는 BEAM로 티커이름 통일하겠음.
+Tickerlist.remove('BEAMX')
+Tickerlist.append('BEAM')
 
 #정렬
 Tickerlist.sort()

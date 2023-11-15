@@ -13,13 +13,13 @@ parameters = {
     'listing_status' : 'active',
     'start' : 1,
     'limit' : 5000,
-    'sort' : 'cmc_rank',
+    # 'sort' : 'cmc_rank',
 }
 
 # Send HTTP GET request
 response = requests.get(url, headers=headers, params=parameters)
 
-symbols = ['XLM']
+symbols = ['BEAM']
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the response data in JSON format
