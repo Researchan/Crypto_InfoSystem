@@ -27,7 +27,7 @@ Binance_OI = Get_BinanceFuture_OI.sorted_OI_Dict
 Bybit_OI = Get_BybitFuture_OI.sorted_OI_Dict
 
 # 각 거래소 상장리스트 합산하여 전체 리스트 생성 및 정렬
-Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + Coinbase_Spot_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list
+Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + Coinbase_Spot_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list
 Coin_list = set(Coin_list)
 Coin_list = list(Coin_list)
 Coin_list.sort()

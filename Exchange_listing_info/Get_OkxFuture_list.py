@@ -22,7 +22,13 @@ Tickerlist.remove('DASH')
 Tickerlist.remove('ZEN')
 Tickerlist.remove('ZEC')
 Tickerlist.remove('XMR')
+
+# 루나 이름 통일
+Tickerlist.remove('LUNA')
+Tickerlist.append('LUNA2')
+
 Tickerlist.sort()
+
 
 # for i in Tickerlist:
 #     print(i)

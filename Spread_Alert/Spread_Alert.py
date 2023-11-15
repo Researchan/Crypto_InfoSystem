@@ -277,9 +277,9 @@ async def main():
         instance_dict['LUNA/USDT'] = Get_Other_Orderbooks(exBN, exBNfuture, 'LUNA/USDT', 'LUNA2/USDT')
         print('LUNA/USDT', '인스턴스 생성완료')
         
-        #바이낸스-바이빗 GAS 티커 등록
-        instance_dict['GAS/USDT'] = Get_Other_Orderbooks(exBN, exBybit, 'GAS/USDT', 'GASDAO/USDT:USDT')
-        print('GAS/USDT', '인스턴스 생성완료')
+        # #바이낸스-바이빗 GAS 티커 등록
+        # instance_dict['GAS/USDT'] = Get_Other_Orderbooks(exBN, exBybit, 'GAS/USDT', 'GASDAO/USDT:USDT')
+        # print('GAS/USDT', '인스턴스 생성완료')
     
         
             
