@@ -27,7 +27,8 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'RAMP', 'REP', 'RGT', 'SRM', 'STORM', 'STRAT', 'SUSD', 'SUSHIDOWN', 'SUSHIUP', 
                'SXPDOWN', 'SXPUP', 'TCT', 'TORN', 'TRIBE', 'TRXDOWN', 'TRXUP', 'UNIDOWN', 'UNIUP', 
                'USDS', 'USDSB', 'UST', 'VEN', 'XLMDOWN', 'XLMUP', 'XRPBEAR', 'XRPBULL', 
-               'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP']
+               'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP',
+               'MC']
 
 
 

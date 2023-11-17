@@ -93,13 +93,9 @@ for i in Coin_list:
         
     if i in Binance_OI:
         Coin_Infos[i]['Binance_OI'] = Binance_OI[i]
-    # elif i not in Binance_OI:
-    #     Coin_Infos[i]['Binance_OI'] = 
         
     if i in Bybit_OI:
         Coin_Infos[i]['Bybit_OI'] = Bybit_OI[i]
-    # elif i not in Bybit_OI:
-    #     Coin_Infos[i]['Bybit_OI'] = 
 
 # 기존 엑셀 파일 불러오기 + Read로 열기
 Input_excel_file = 'ListingDatas.xlsx'
