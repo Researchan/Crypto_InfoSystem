@@ -33,5 +33,5 @@ Tickerlist = list(Tickerlist)
 Tickerlist.remove('BTT') #BTT는 1000Pairs라 또 제거
 Tickerlist.sort()
 
-for i in Tickerlist:
-    print(i)
+# for i in Tickerlist:
+#     print(i)
