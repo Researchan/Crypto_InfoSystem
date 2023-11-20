@@ -15,15 +15,14 @@ Only_Bybit_Future_list = list(Only_Bybit_Future_list)
 
 Only_Bybit_Future_list.sort()
 
-# print(Only_Bybit_Future_list)
+print(Only_Bybit_Future_list)
 # print(BinanceSpot_list)
 
 Tickerlist = []
 
 for i in BinanceSpot_list:
-    for j in Only_Bybit_Future_list:
-        if (str(j)+'/') in i:
-            Tickerlist.append(j+'/USDT:USDT')
+    if i in Only_Bybit_Future_list:
+        Tickerlist.append(i)
             
 
 
@@ -31,8 +30,8 @@ Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 
 
-Tickerlist.remove('BTT/USDT:USDT') #BTT는 1000Pairs라 또 제거
+Tickerlist.remove('BTT') #BTT는 1000Pairs라 또 제거
 Tickerlist.sort()
 
-# for i in Tickerlist:
-#     print(i)
+for i in Tickerlist:
+    print(i)

@@ -161,4 +161,5 @@ try:
     print(f"Data has been updated and saved to {Input_excel_file}.")
 
 except Exception as e:
+    print(e)
     jandimodule.send_message_to_jandi(str(e))

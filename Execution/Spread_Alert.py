@@ -1,4 +1,3 @@
-import ccxt.async_support as ccxtasync
 import ccxt.pro as ccxtpro
 import asyncio
 import jandimodule
@@ -134,8 +133,8 @@ class Get_BinanceBybit_Orderbooks:
         global isrange_init
         self.exchange1 = exchange1
         self.exchange2 = exchange2
-        self.BinanceSpot_pair = pair[0:-5]
-        self.BybitFuture_pair = pair
+        self.BinanceSpot_pair = pair + '/USDT'
+        self.BybitFuture_pair = pair + '/USDT:USDT'
 
     async def fetch_order_books(self):
         #현물과 선물의 오더북 호가를 받아오기
@@ -276,25 +275,17 @@ async def main():
         #바이낸스 루나 티커 등록
         instance_dict['LUNA/USDT'] = Get_Other_Orderbooks(exBN, exBNfuture, 'LUNA/USDT', 'LUNA2/USDT')
         print('LUNA/USDT', '인스턴스 생성완료')
-        
-        # #바이낸스-바이빗 GAS 티커 등록
-        # instance_dict['GAS/USDT'] = Get_Other_Orderbooks(exBN, exBybit, 'GAS/USDT', 'GASDAO/USDT:USDT')
-        # print('GAS/USDT', '인스턴스 생성완료')
     
-        
-            
-            
-            
         tasks = [instance.fetch_order_books() for instance in instance_dict.values()]
         await asyncio.gather(*tasks)
         
     except Exception as e:
         jandimodule.acc2_send_message_to_jandi('바이낸스 현선갭 알람 에러 : ' + str(e))
 
-    finally:
-        await exBN.close()
-        await exBNfuture.close()
-        await exBybit.close()
+    # finally:
+        # await exBN.close()
+        # await exBNfuture.close()
+        # await exBybit.close()
     
     
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())

@@ -39,6 +39,10 @@ Tickerlist.append('XEC')
 Tickerlist.remove('DODOX')
 Tickerlist.append('DODO')
 
+# BEAM티커 정리
+Tickerlist.remove('BEAMX')
+Tickerlist.append('BEAM')
+
 Tickerlist.sort()
 
 # for i in Tickerlist:
