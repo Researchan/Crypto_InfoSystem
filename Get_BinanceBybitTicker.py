@@ -15,9 +15,6 @@ Only_Bybit_Future_list = list(Only_Bybit_Future_list)
 
 Only_Bybit_Future_list.sort()
 
-print(Only_Bybit_Future_list)
-# print(BinanceSpot_list)
-
 Tickerlist = []
 
 for i in BinanceSpot_list:
