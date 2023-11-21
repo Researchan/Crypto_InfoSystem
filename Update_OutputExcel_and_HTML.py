@@ -604,4 +604,4 @@ try:
     print(f"Data retrieval successful and saved to {output_html_name}!")
         
 except Exception as e:
-    jandimodule.send_message_to_jandi(str(e))
+    jandimodule.Exchange_Listing_send_message_to_jandi(str(e))

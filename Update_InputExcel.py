@@ -162,4 +162,4 @@ try:
 
 except Exception as e:
     print(e)
-    jandimodule.send_message_to_jandi(str(e))
+    jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
