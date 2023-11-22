@@ -34,6 +34,8 @@ Tickerlist.remove('1000SHIB')
 Tickerlist.append('SHIB')
 Tickerlist.remove('1000XEC')
 Tickerlist.append('XEC')
+Tickerlist.remove('1000BONK')
+Tickerlist.append('BONK')
 
 #DODO티커 정리
 Tickerlist.remove('DODOX')
