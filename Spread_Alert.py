@@ -60,6 +60,7 @@ class Get_Orderbooks:
                 
                 await asyncio.sleep(sleeptime)
             except Exception as e:
+                print(self.pair)
                 print(e)
 
     async def close_connections(self):
@@ -280,7 +281,7 @@ async def main():
         await asyncio.gather(*tasks)
         
     except Exception as e:
-        jandimodule.acc2_send_message_to_jandi('바이낸스 현선갭 알람 에러 : ' + str(e))
+        jandimodule.Alert_send_message_to_jandi('바이낸스 현선갭 알람 에러 : ' + str(e))
 
     # finally:
         # await exBN.close()
