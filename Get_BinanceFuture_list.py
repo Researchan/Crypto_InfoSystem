@@ -45,6 +45,10 @@ Tickerlist.append('DODO')
 Tickerlist.remove('BEAMX')
 Tickerlist.append('BEAM')
 
+# TOMO 리브랜딩
+Tickerlist.remove('TOMO')
+Tickerlist.append('VIC')
+
 Tickerlist.sort()
 
 # for i in Tickerlist:

@@ -54,6 +54,10 @@ Tickerlist.append('BTT')
 Tickerlist.remove('BEAMX')
 Tickerlist.append('BEAM')
 
+#TOMO 리브랜딩
+Tickerlist.remove('TOMO')
+Tickerlist.append('VIC')
+
 #정렬
 Tickerlist.sort()
 

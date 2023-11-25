@@ -44,6 +44,7 @@ New_OI_Dict['PEPE'] = New_OI_Dict.pop('1000PEPE')
 New_OI_Dict['SHIB'] = New_OI_Dict.pop('1000SHIB')
 New_OI_Dict['XEC'] = New_OI_Dict.pop('1000XEC')
 New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX')
+New_OI_Dict['VIC'] = New_OI_Dict.pop('TOMO') #토모 리브랜딩
 
 #OI 내림차순
 sorted_OI_Dict = dict(sorted(New_OI_Dict.items(), key=lambda x: x[1], reverse=True) )
