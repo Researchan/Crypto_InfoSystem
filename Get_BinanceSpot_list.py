@@ -36,11 +36,12 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
 Tickerlist = set(API_Tickerlist) - set(delete_list)
 Tickerlist = list(Tickerlist)
 
-#WBETH, WBTC, EUR, GBP 제거
+#WBETH, WBTC, EUR, GBP, AEUR 제거
 Tickerlist.remove('WBETH')
 Tickerlist.remove('WBTC')
 Tickerlist.remove('EUR')
 Tickerlist.remove('GBP')
+Tickerlist.remove('AEUR')
 
 #LUNA는 LUNA2로 티커이름 통일하겠음.
 Tickerlist.remove('LUNA')
