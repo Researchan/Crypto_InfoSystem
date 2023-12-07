@@ -38,9 +38,12 @@ Tickerlist.remove('WAXL') # AXL 랩핑한 거 삭제. (AXL은 기본적으로 �
 Tickerlist.remove('WCFG')
 Tickerlist.append('CFG')
 
-# 센트리퓨지는 랩핑토큰제거하고 원래토큰으로 저장.
+# AMPL은 랩핑토큰제거하고 원래토큰으로 저장.
 Tickerlist.remove('WAMPL')
 Tickerlist.append('AMPL')
+
+# 아직 거래안되니깐 잠깐 제거
+Tickerlist.remove('JTO')
     
 #정렬
 Tickerlist.sort()
