@@ -47,6 +47,10 @@ Tickerlist.remove('AEUR')
 Tickerlist.remove('LUNA')
 Tickerlist.append('LUNA2')
 
+#SATS정리
+Tickerlist.remove('1000SATS')
+Tickerlist.append('SATS')
+
 #BTTC는 BTT로 티커이름 통일하겠음.
 Tickerlist.remove('BTTC')
 Tickerlist.append('BTT')
