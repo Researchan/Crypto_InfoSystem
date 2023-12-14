@@ -65,7 +65,7 @@ Tickerlist.append('VIC')
 
 #TVK 리브랜딩
 Tickerlist.remove('TVK')
-Tickerlist.remove('VANRY') #얘는 코게코에 없길래 임시삭제.
+Tickerlist.append('VANRY')
 
 #정렬
 Tickerlist.sort()
