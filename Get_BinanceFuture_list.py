@@ -38,6 +38,8 @@ Tickerlist.remove('1000BONK')
 Tickerlist.append('BONK')
 Tickerlist.remove('1000SATS')
 Tickerlist.append('SATS')
+Tickerlist.remove('1000RATS')
+Tickerlist.append('RATS')
 
 #DODO티커 정리
 
