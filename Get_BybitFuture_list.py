@@ -8,9 +8,10 @@ exBybit = ccxt.bybit({
 exBybitTickersInfo = exBybit.fetchTickers() # 티커 딕셔너리 가져옴
 exBybitTickers = exBybitTickersInfo.keys() # 티커 키만 받아오기 (이름만)
 
+#Bybit 티커 조정
 Tickerlist = []
 for i in exBybitTickers:
-    if 'USD:USDC' not in i:
+    if 'USDT:USDT' in i:
         Tickerlist.append(i[0:-10])
 
 # 단위 작은 티커 제거

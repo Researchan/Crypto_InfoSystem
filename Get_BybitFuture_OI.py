@@ -1,28 +1,30 @@
 import ccxt
 
-exBybitFuture = ccxt.bybit({
+exBybit = ccxt.bybit({
     'options': {
         'defaultType': 'swap',
     },
 })
-exBybitTickersInfo = exBybitFuture.fetchTickers() # 티커 딕셔너리 가져옴
+exBybitTickersInfo = exBybit.fetchTickers() # 티커 딕셔너리 가져옴
 exBybitTickers = exBybitTickersInfo.keys() # 티커 키만 받아오기 (이름만)
 
 #Bybit 티커 조정
 Tickerlist = []
 for i in exBybitTickers:
-    if 'USD:USDC' not in i:
+    if 'USDT:USDT' in i:
         Tickerlist.append(i)
 
+# print(Tickerlist)
+
 #마지막 가격정보 불러오기
-lastprices = exBybitFuture.fetch_tickers(Tickerlist)
+lastprices = exBybit.fetch_tickers(Tickerlist)
 
 #OI 딕셔너리 생성
 Bybit_OI_Dict ={}
 
 for i in Tickerlist:
     #원하는 티커에 대해서 OI정보 받아오기
-    res = exBybitFuture.fetch_open_interest_history(i, timeframe='5m', params={ 
+    res = exBybit.fetch_open_interest_history(i, timeframe='5m', params={ 
             'limit':'1',
         })
     

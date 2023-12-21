@@ -18,10 +18,11 @@ Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
 
 # 상폐됐는데 API에서 여전히 주고있는 코인이름 삭제 - 다 익명성 관련이네
-Tickerlist.remove('DASH')
-Tickerlist.remove('ZEN')
-Tickerlist.remove('ZEC')
-Tickerlist.remove('XMR')
+# 231221 이제 제대로 삭제됐네
+# Tickerlist.remove('DASH') 
+# Tickerlist.remove('ZEN')
+# Tickerlist.remove('ZEC')
+# Tickerlist.remove('XMR')
 
 # 루나 이름 통일
 Tickerlist.remove('LUNA')
