@@ -1,4 +1,5 @@
 import ccxt
+import time
 
 exBNfuture = ccxt.binanceusdm({
     'options': {
@@ -18,7 +19,9 @@ Tickerlist.remove('DEFI/USDT:USDT')
 Tickerlist.remove('BLUEBIRD/USDT:USDT')
 Tickerlist.remove('FOOTBALL/USDT:USDT')
 Tickerlist.remove('BTCDOM/USDT:USDT')
+Tickerlist.remove('TOMO/USDT:USDT')
 Tickerlist.sort()
+
 
 #OI Dict 생성 및 저장
 OI_Dict ={}
@@ -35,6 +38,7 @@ for i in Tickerlist:
     except Exception as e:
         print(res)
         break
+
 New_OI_Dict = {}
 
 #페어 이름정보 변경 (자동)
