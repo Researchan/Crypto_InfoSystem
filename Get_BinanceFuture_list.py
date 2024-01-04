@@ -50,9 +50,9 @@ Tickerlist.append('DODO')
 Tickerlist.remove('BEAMX')
 Tickerlist.append('BEAM')
 
-# TOMO 리브랜딩
+# TOMO 리브랜딩 후 VIC 미상장
 Tickerlist.remove('TOMO')
-Tickerlist.append('VIC')
+# Tickerlist.append('VIC')
 
 Tickerlist.sort()
 

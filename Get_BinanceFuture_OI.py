@@ -55,6 +55,7 @@ New_OI_Dict['SHIB'] = New_OI_Dict.pop('1000SHIB')
 New_OI_Dict['XEC'] = New_OI_Dict.pop('1000XEC')
 New_OI_Dict['SATS'] = New_OI_Dict.pop('1000SATS')
 New_OI_Dict['RATS'] = New_OI_Dict.pop('1000RATS')
+New_OI_Dict['BONK'] = New_OI_Dict.pop('1000BONK')
 New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX') #C98 리브랜딩
 # New_OI_Dict['VIC'] = New_OI_Dict.pop('TOMO') #토모 리브랜딩
 
