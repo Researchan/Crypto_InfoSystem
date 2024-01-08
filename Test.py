@@ -10,6 +10,6 @@ def get_open_interest(symbol):
         return response.status_code, response.text
 
 # 예시 사용
-symbol = "TOMOUSDT"  # 비트코인 대 USDT
+symbol = "TOMOUSDT" 
 open_interest_data = get_open_interest(symbol)
 print(open_interest_data)
