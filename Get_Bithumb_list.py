@@ -19,6 +19,10 @@ Tickerlist = BTClist + KRWlist
 Tickerlist.remove('ArchLoot')
 Tickerlist.append('ALT')
 
+#AXL 티커 조정
+Tickerlist.remove('WAXL')
+Tickerlist.append('AXL')
+
 #GRACY는 제거. 코마캡 코개코도 상장안된 잡페어
 Tickerlist.remove('GRACY')
 Tickerlist.remove('USDT')
