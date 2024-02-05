@@ -41,7 +41,7 @@ class Get_Orderbooks:
                 #1이상 1.005이하일 경우
                 if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                    jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[1] = 1
                 
@@ -101,7 +101,7 @@ class Get_1000_Orderbooks:
                 #1이상 1.005이하일 경우
                 if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                    jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    # jandimodule.Alert_send_message_to_jandi(str(self.spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[1] = 1
                 
@@ -160,7 +160,7 @@ class Get_BinanceBybit_Orderbooks:
                 #1이상 1.005이하일 경우
                 if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
-                    jandimodule.Alert_send_message_to_jandi('BYBIT\n' + str(self.BinanceSpot_pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    # jandimodule.Alert_send_message_to_jandi('BYBIT\n' + str(self.BinanceSpot_pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[1] = 1
                 
@@ -218,7 +218,7 @@ class Get_Other_Orderbooks:
                     
                 #1이상 1.005이하일 경우
                 if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
-                    jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
+                    # jandimodule.Alert_send_message_to_jandi(str(self.Spotpair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[1] = 1
                 
