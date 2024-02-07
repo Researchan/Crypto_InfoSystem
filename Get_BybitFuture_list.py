@@ -27,7 +27,7 @@ Tickerlist.remove('SHIB1000')
 Tickerlist.remove('10000STARL')
 Tickerlist.remove('10000SATS')
 Tickerlist.remove('1000RATS')
-Tickerlist.remove('1000000VINU')
+# Tickerlist.remove('1000000VINU')
 Tickerlist.remove('10000WEN')
 
 # 제거한 티커 표준맞춰서 다시 추가
@@ -43,7 +43,7 @@ Tickerlist.append('XEC')
 Tickerlist.append('STARL')
 Tickerlist.append('SATS')
 Tickerlist.append('RATS')
-Tickerlist.append('VINU')
+# Tickerlist.append('VINU')
 Tickerlist.append('WEN')
 
 Tickerset = set(Tickerlist)

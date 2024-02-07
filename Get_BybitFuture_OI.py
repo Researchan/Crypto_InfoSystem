@@ -52,7 +52,6 @@ Bybit_New_OI_Dict['XEC'] = Bybit_New_OI_Dict.pop('1000XEC')
 Bybit_New_OI_Dict['STARL'] = Bybit_New_OI_Dict.pop('10000STARL')
 Bybit_New_OI_Dict['SATS'] = Bybit_New_OI_Dict.pop('10000SATS')
 Bybit_New_OI_Dict['RATS'] = Bybit_New_OI_Dict.pop('1000RATS')
-Bybit_New_OI_Dict['VINU'] = Bybit_New_OI_Dict.pop('1000000VINU')
 Bybit_New_OI_Dict['WEN'] = Bybit_New_OI_Dict.pop('10000WEN')
 
 #OI 내림차순
