@@ -5,7 +5,7 @@ import Get_Tickerlists
 import Get_BinanceBybitTicker
 
 sleeptime = 20
-interval_init =[0.996] + [1.002] + [round(1000*(1.00 + i * 0.005))/1000 for i in range(78)]
+interval_init =[0.996] + [1.0025] + [1.005] + [round(1000*(1.005 + i * 0.005))/1000 for i in range(78)]
 isrange_init = [0 for _ in range(40)]
 
 class Get_Orderbooks:
@@ -157,14 +157,14 @@ class Get_BinanceBybit_Orderbooks:
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                     
-                #1이상 1.005이하일 경우
+                #1이상 1.002이하일 경우
                 if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     # jandimodule.Alert_send_message_to_jandi('BYBIT\n' + str(self.BinanceSpot_pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
                     self.isrange = [0] * 40
                     self.isrange[1] = 1
                 
-                #1.005이상부터
+                #범위[3]부터. (실질4)
                 for i in range(2,39):
                     if (self.intervals[2*i-1] < Spot_to_Future_ratio < self.intervals[2*i]) and (self.isrange[i] != 1):
                         # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[i-1]-1)*1000))/10) + '% 이상 \n' + str(round(10000*(Spot_to_Future_ratio))/10000))
