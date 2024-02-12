@@ -5,7 +5,7 @@ import Get_Tickerlists
 import Get_BinanceBybitTicker
 
 sleeptime = 20
-interval_init =[0.996] + [1.005] + [round(1000*(1.005 + i * 0.01))/1000 for i in range(38)]
+interval_init =[0.996] + [1.002] + [round(1000*(1.00 + i * 0.01))/1000 for i in range(38)]
 isrange_init = [0 for _ in range(40)]
 
 class Get_Orderbooks:
@@ -38,7 +38,7 @@ class Get_Orderbooks:
                     self.isrange = [0] * 40
                     self.isrange[0] = 1
                 
-                #1이상 1.005이하일 경우
+                #1이상 1.002이하일 경우 (1.005초과했다가 다시 돌아오면, 초기화.)
                 if (1 < Spot_to_Future_ratio < self.intervals[1]) and (self.isrange[1] != 1):
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + ' ' + str((round((self.intervals[0]-1)*1000))/10) + '% 이하\n' + str(round(10000*(Spot_to_Future_ratio))/10000))
                     # jandimodule.Alert_send_message_to_jandi(str(self.pair)[0:-5] + '\n' + str(round(10000*(Spot_to_Future_ratio-1))/100) + '%')
