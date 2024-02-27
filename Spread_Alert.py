@@ -3,6 +3,7 @@ import asyncio
 import jandimodule
 import Get_Tickerlists
 import Get_BinanceBybitTicker
+import time
 
 sleeptime = 20
 interval_init =[0.994] + [1.0025] + [1.005] + [round(1000*(1.005 + i * 0.005))/1000 for i in range(78)]
@@ -24,6 +25,7 @@ class Get_Orderbooks:
         self.isrange = isrange_init
         self.isrange[1] = 1
         while True:
+            time.sleep(0.1)
             try:
                 spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.pair, params={'name': 'bookTicker'}),
                                                                 self.exchange2.watch_ticker(self.pair, params={'name': 'bookTicker'}))
@@ -84,7 +86,7 @@ class Get_1000_Orderbooks:
         self.isrange = isrange_init
         self.isrange[1] = 1
         while True:
-            try:
+            # try:
                 spotticker, futureticker = await asyncio.gather(self.exchange1.watch_ticker(self.spotpair, params={'name': 'bookTicker'}),
                                                                 self.exchange2.watch_ticker(self.usdmpair, params={'name': 'bookTicker'}))
                 
@@ -119,8 +121,8 @@ class Get_1000_Orderbooks:
                     
                 
                 await asyncio.sleep(sleeptime)
-            except Exception as e:
-                print(e)
+            # except Exception as e:
+            #     print(e)
 
     async def close_connections(self):
         await self.exchange1.close()
@@ -260,16 +262,19 @@ async def main():
         
         #바이낸스 현선티커 등록
         for Ticker in Tickers_main:
+            time.sleep(0.1)
             instance_dict[str(Ticker)] = Get_Orderbooks(exBN, exBNfuture, Ticker)
             print(Ticker, '인스턴스 생성완료')
         
         #바이낸스 1000Perps 현선티커 등록
         for Ticker in Tickers_1000pair:
+            time.sleep(0.1)
             instance_dict[str(Ticker)] = Get_1000_Orderbooks(exBN, exBNfuture, Ticker)
             print(Ticker, '인스턴스 생성완료')
         
         #바이낸스현물, 바이빗선물(바이낸스 선물에 없는)
         for Ticker in Tickers_Binance_Bybit:
+            time.sleep(0.1)
             instance_dict[str(Ticker)] = Get_BinanceBybit_Orderbooks(exBN, exBybit, Ticker)
             print('바이빗 : ', Ticker, '인스턴스 생성완료')
             
