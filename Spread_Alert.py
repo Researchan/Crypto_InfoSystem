@@ -262,19 +262,16 @@ async def main():
         
         #바이낸스 현선티커 등록
         for Ticker in Tickers_main:
-            time.sleep(0.1)
             instance_dict[str(Ticker)] = Get_Orderbooks(exBN, exBNfuture, Ticker)
             print(Ticker, '인스턴스 생성완료')
         
         #바이낸스 1000Perps 현선티커 등록
         for Ticker in Tickers_1000pair:
-            time.sleep(0.1)
             instance_dict[str(Ticker)] = Get_1000_Orderbooks(exBN, exBNfuture, Ticker)
             print(Ticker, '인스턴스 생성완료')
         
         #바이낸스현물, 바이빗선물(바이낸스 선물에 없는)
         for Ticker in Tickers_Binance_Bybit:
-            time.sleep(0.1)
             instance_dict[str(Ticker)] = Get_BinanceBybit_Orderbooks(exBN, exBybit, Ticker)
             print('바이빗 : ', Ticker, '인스턴스 생성완료')
             
