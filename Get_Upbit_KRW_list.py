@@ -13,6 +13,7 @@ for i in exUpbitTickers:
 Tickerlist.remove('Tokamak Network')
 Tickerlist.append('TOKAMAK')
 
+Tickerlist.remove('PDA')
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 Tickerlist.sort()
