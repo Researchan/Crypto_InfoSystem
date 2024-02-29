@@ -27,6 +27,9 @@ Tickerlist.append('AXL')
 Tickerlist.remove('GRACY')
 Tickerlist.remove('USDT')
 
+#PLA 해킹 마이그레이션 PDA 잠시 지우기.
+Tickerlist.remove('PDA')
+
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 Tickerlist.sort()
