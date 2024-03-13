@@ -55,5 +55,6 @@ Bybit_New_OI_Dict['RATS'] = Bybit_New_OI_Dict.pop('1000RATS')
 Bybit_New_OI_Dict['WEN'] = Bybit_New_OI_Dict.pop('10000WEN')
 Bybit_New_OI_Dict['TURBO'] = Bybit_New_OI_Dict.pop('1000TURBO')
 Bybit_New_OI_Dict['AIDOGE'] = Bybit_New_OI_Dict.pop('10000000AIDOGE')
+Bybit_New_OI_Dict['COQ'] = Bybit_New_OI_Dict.pop('10000COQ')
 #OI 내림차순
 sorted_OI_Dict = dict(sorted(Bybit_New_OI_Dict.items(), key=lambda item: item[1], reverse=True))

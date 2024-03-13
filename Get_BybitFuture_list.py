@@ -30,6 +30,7 @@ Tickerlist.remove('1000RATS')
 Tickerlist.remove('10000WEN')
 Tickerlist.remove('1000TURBO')
 Tickerlist.remove('10000000AIDOGE')
+Tickerlist.remove('10000COQ')
 
 # 제거한 티커 표준맞춰서 다시 추가
 Tickerlist.append('LADYS')
@@ -47,6 +48,7 @@ Tickerlist.append('RATS')
 Tickerlist.append('WEN')
 Tickerlist.append('TURBO')
 Tickerlist.append('AIDOGE')
+Tickerlist.append('COQ')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
