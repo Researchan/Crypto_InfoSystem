@@ -32,6 +32,9 @@ Tickerlist.remove('1000TURBO')
 Tickerlist.remove('10000000AIDOGE')
 Tickerlist.remove('10000COQ')
 
+#SCA 코개코없네.
+Tickerlist.remove('SCA')
+
 # 제거한 티커 표준맞춰서 다시 추가
 Tickerlist.append('LADYS')
 Tickerlist.append('NFT')
