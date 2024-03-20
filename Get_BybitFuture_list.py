@@ -31,6 +31,7 @@ Tickerlist.remove('10000WEN')
 Tickerlist.remove('1000TURBO')
 Tickerlist.remove('10000000AIDOGE')
 Tickerlist.remove('10000COQ')
+Tickerlist.remove('1000IQ50')
 
 #SCA 코개코없네.
 Tickerlist.remove('SCA')
@@ -52,6 +53,7 @@ Tickerlist.append('WEN')
 Tickerlist.append('TURBO')
 Tickerlist.append('AIDOGE')
 Tickerlist.append('COQ')
+Tickerlist.append('IQ50')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
