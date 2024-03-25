@@ -53,7 +53,7 @@ Tickerlist.append('WEN')
 Tickerlist.append('TURBO')
 Tickerlist.append('AIDOGE')
 Tickerlist.append('COQ')
-# Tickerlist.append('IQ50')
+Tickerlist.append('IQ50')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
