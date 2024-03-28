@@ -33,6 +33,9 @@ Tickerlist.remove('10000000AIDOGE')
 Tickerlist.remove('10000COQ')
 Tickerlist.remove('1000IQ50')
 
+#이거 코개코에 없어서 삭제
+Tickerlist.remove('PUNDU')
+
 #SCA 코개코없네.
 Tickerlist.remove('SCA')
 
