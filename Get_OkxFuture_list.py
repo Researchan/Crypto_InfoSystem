@@ -24,6 +24,9 @@ Tickerlist = list(Tickerset)
 # Tickerlist.remove('ZEC')
 # Tickerlist.remove('XMR')
 
+#이거 코개코에서 등록될떄까지 냅둔다.
+Tickerlist.remove('BLOCK')
+
 # 루나 이름 통일
 Tickerlist.remove('LUNA')
 Tickerlist.append('LUNA2')
