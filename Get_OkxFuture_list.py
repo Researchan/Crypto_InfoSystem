@@ -25,7 +25,7 @@ Tickerlist = list(Tickerset)
 # Tickerlist.remove('XMR')
 
 #이거 코개코에서 등록될떄까지 냅둔다.
-Tickerlist.remove('BLOCK')
+# Tickerlist.remove('BLOCK') #코개코가 등록해줬으니 차단해제.
 
 # 루나 이름 통일
 Tickerlist.remove('LUNA')

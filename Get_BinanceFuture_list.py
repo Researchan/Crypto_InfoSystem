@@ -42,7 +42,6 @@ Tickerlist.remove('1000RATS')
 Tickerlist.append('RATS')
 
 #DODO티커 정리
-
 Tickerlist.remove('DODOX')
 Tickerlist.append('DODO')
 

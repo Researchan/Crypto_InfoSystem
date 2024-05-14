@@ -14,6 +14,10 @@ for i in exBybitTickers:
     if 'USDT:USDT' in i:
         Tickerlist.append(i[0:-10])
 
+#이거 코개코에 없어서 삭제
+# Tickerlist.remove('PUNDU') 생겨서 차단해제.
+# Tickerlist.remove('SCA') 생겨서 차단해제.
+
 # 단위 작은 티커 제거
 Tickerlist.remove('10000LADYS')
 Tickerlist.remove('10000NFT')
@@ -32,12 +36,6 @@ Tickerlist.remove('1000TURBO')
 Tickerlist.remove('10000000AIDOGE')
 Tickerlist.remove('10000COQ')
 Tickerlist.remove('1000IQ50')
-
-#이거 코개코에 없어서 삭제
-Tickerlist.remove('PUNDU')
-
-#SCA 코개코없네.
-Tickerlist.remove('SCA')
 
 # 제거한 티커 표준맞춰서 다시 추가
 Tickerlist.append('LADYS')
