@@ -28,6 +28,9 @@ try:
     Tickerlist.remove('DGB/USDT:USDT')
     Tickerlist.remove('STPT/USDT:USDT')
     Tickerlist.remove('STRAX/USDT:USDT')
+    Tickerlist.remove('CVX/USDT:USDT')
+    Tickerlist.remove('MBL/USDT:USDT')
+    
     Tickerlist.sort()
 
 
@@ -40,7 +43,7 @@ try:
         })
         OI_Dict[str(i)] = round(res[0]['openInterestValue'])
         
-        # 문제있는 페어 찾기용도.
+        # OI정보 보내주지 않는 페어는 오류나게 됨.
         # print(i, ' : ', OI_Dict[str(i)])
 
     New_OI_Dict = {}
@@ -59,9 +62,9 @@ try:
     New_OI_Dict['SATS'] = New_OI_Dict.pop('1000SATS')
     New_OI_Dict['RATS'] = New_OI_Dict.pop('1000RATS')
     New_OI_Dict['BONK'] = New_OI_Dict.pop('1000BONK')
-    # New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX') #C98 리브랜딩
-    # New_OI_Dict['VIC'] = New_OI_Dict.pop('TOMO') #토모 리브랜딩
-    # New_OI_Dict['DODO'] = New_OI_Dict.pop('DODOX')
+    New_OI_Dict['DODO'] = New_OI_Dict.pop('DODOX') #DODO 바낸 페어 이름.
+    New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX') #C98 리브랜딩
+    # New_OI_Dict['VIC'] = New_OI_Dict.pop('TOMO') #토모 리브랜딩했는데 선물상장 안해줌.
 
     #OI 내림차순
     sorted_OI_Dict = dict(sorted(New_OI_Dict.items(), key=lambda x: x[1], reverse=True) )
