@@ -17,18 +17,18 @@ Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 
 #ETF 삭제, 잘못된 페어이름 삭제
-Tickerlist.remove('COCOS/USDT:USDT')
-Tickerlist.remove('DEFI/USDT:USDT')
-Tickerlist.remove('BLUEBIRD/USDT:USDT')
-Tickerlist.remove('FOOTBALL/USDT:USDT')
-Tickerlist.remove('BTCDOM/USDT:USDT')
-Tickerlist.remove('TOMO/USDT:USDT')
-Tickerlist.remove('RAD/USDT:USDT')
-Tickerlist.remove('ANT/USDT:USDT')
-Tickerlist.remove('CTK/USDT:USDT')
-Tickerlist.remove('DGB/USDT:USDT')
-Tickerlist.remove('STPT/USDT:USDT')
-Tickerlist.remove('STRAX/USDT:USDT')
+Tickerlist.remove('BLUEBIRD')
+Tickerlist.remove('BTCDOM')
+Tickerlist.remove('COCOS')
+Tickerlist.remove('FOOTBALL')
+Tickerlist.remove('DEFI')
+Tickerlist.remove('TOMO') #VIC으로 바뀜. 근데 선물 미상장
+Tickerlist.remove('RAD')
+Tickerlist.remove('ANT')
+Tickerlist.remove('CTK')
+Tickerlist.remove('DGB')
+Tickerlist.remove('STPT')
+Tickerlist.remove('STRAX')
 
 #단위작은 페어 삭제후 재 등록.
 Tickerlist.remove('1000FLOKI')
@@ -55,11 +55,6 @@ Tickerlist.append('DODO')
 # BEAM티커 정리
 Tickerlist.remove('BEAMX')
 Tickerlist.append('BEAM')
-
-# TOMO 리브랜딩 후 VIC 미상장
-Tickerlist.remove('TOMO')
-# Tickerlist.append('VIC')
-
 Tickerlist.sort()
 
 # for i in Tickerlist:
