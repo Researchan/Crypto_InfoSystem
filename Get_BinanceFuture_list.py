@@ -17,11 +17,18 @@ Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 
 #ETF 삭제, 잘못된 페어이름 삭제
-Tickerlist.remove('BLUEBIRD')
-Tickerlist.remove('BTCDOM')
-Tickerlist.remove('COCOS')
-Tickerlist.remove('FOOTBALL')
-Tickerlist.remove('DEFI')
+Tickerlist.remove('COCOS/USDT:USDT')
+Tickerlist.remove('DEFI/USDT:USDT')
+Tickerlist.remove('BLUEBIRD/USDT:USDT')
+Tickerlist.remove('FOOTBALL/USDT:USDT')
+Tickerlist.remove('BTCDOM/USDT:USDT')
+Tickerlist.remove('TOMO/USDT:USDT')
+Tickerlist.remove('RAD/USDT:USDT')
+Tickerlist.remove('ANT/USDT:USDT')
+Tickerlist.remove('CTK/USDT:USDT')
+Tickerlist.remove('DGB/USDT:USDT')
+Tickerlist.remove('STPT/USDT:USDT')
+Tickerlist.remove('STRAX/USDT:USDT')
 
 #단위작은 페어 삭제후 재 등록.
 Tickerlist.remove('1000FLOKI')
