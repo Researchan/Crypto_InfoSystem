@@ -22,7 +22,7 @@ Tickerlist.remove('BTCDOM')
 Tickerlist.remove('COCOS')
 Tickerlist.remove('FOOTBALL')
 Tickerlist.remove('DEFI')
-Tickerlist.remove('TOMO') #VIC으로 바뀜. 근데 선물 미상장
+Tickerlist.remove('TOMO') #TOMO가 VIC으로 바뀜. C98이 인수. 근데 합병은 안했네. 그리고 선물 미상장
 Tickerlist.remove('RAD')
 Tickerlist.remove('ANT')
 Tickerlist.remove('CTK')
