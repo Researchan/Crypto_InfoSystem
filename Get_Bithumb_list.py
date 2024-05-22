@@ -23,12 +23,10 @@ Tickerlist = BTClist + KRWlist
 Tickerlist.remove('WAXL')
 Tickerlist.append('AXL')
 
-#GRACY는 제거. 코마캡 코개코도 상장안된 잡페어
+#코마캡 코개코도 상장안된 잡페어
+Tickerlist.remove('LWA')
 Tickerlist.remove('GRACY')
 Tickerlist.remove('USDT')
-
-#PLA 해킹 마이그레이션 PDA 잠시 지우기.
-# Tickerlist.remove('PDA')
 
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
