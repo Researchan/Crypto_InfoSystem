@@ -30,7 +30,10 @@ try:
     Tickerlist.remove('STRAX/USDT:USDT')
     Tickerlist.remove('CVX/USDT:USDT')
     Tickerlist.remove('MBL/USDT:USDT')
-    
+    Tickerlist.remove('MDT/USDT:USDT')
+    Tickerlist.remove('AUDIO/USDT:USDT')
+    Tickerlist.remove('SLP/USDT:USDT')
+    Tickerlist.remove('IDEX/USDT:USDT')
     Tickerlist.sort()
 
 
@@ -63,7 +66,7 @@ try:
     New_OI_Dict['RATS'] = New_OI_Dict.pop('1000RATS')
     New_OI_Dict['BONK'] = New_OI_Dict.pop('1000BONK')
     New_OI_Dict['DODO'] = New_OI_Dict.pop('DODOX') #DODO 바낸 페어 이름.
-    New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX') #C98 리브랜딩
+    New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX') #MeritCircle 리브랜딩
     # New_OI_Dict['VIC'] = New_OI_Dict.pop('TOMO') #토모 리브랜딩했는데 선물상장 안해줌.
 
     #OI 내림차순

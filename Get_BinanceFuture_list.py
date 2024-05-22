@@ -31,6 +31,10 @@ Tickerlist.remove('STPT')
 Tickerlist.remove('STRAX')
 Tickerlist.remove('CVX')
 Tickerlist.remove('MBL')
+Tickerlist.remove('MDT')
+Tickerlist.remove('AUDIO')
+Tickerlist.remove('SLP')
+Tickerlist.remove('IDEX')
 
 #단위작은 페어 삭제후 재 등록.
 Tickerlist.remove('1000FLOKI')
