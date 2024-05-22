@@ -34,6 +34,8 @@ try:
     Tickerlist.remove('AUDIO/USDT:USDT')
     Tickerlist.remove('SLP/USDT:USDT')
     Tickerlist.remove('IDEX/USDT:USDT')
+    Tickerlist.remove('SNT/USDT:USDT')
+    Tickerlist.remove('GLMR/USDT:USDT')
     Tickerlist.sort()
 
 
