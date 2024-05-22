@@ -15,8 +15,7 @@ try:
     Tickerlist.remove('Tokamak Network')
     Tickerlist.append('TOKAMAK')
 
-    # Tickerlist.remove('GAME2')
-    # Tickerlist.remove('PDA')
+    Tickerlist.remove('LWA') #코인개코에 정보없음.
     Tickerlist = set(Tickerlist)
     Tickerlist = list(Tickerlist)
     Tickerlist.sort()

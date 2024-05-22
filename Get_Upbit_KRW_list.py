@@ -13,8 +13,7 @@ for i in exUpbitTickers:
 Tickerlist.remove('Tokamak Network')
 Tickerlist.append('TOKAMAK')
 
-Tickerlist.remove('GAME2')
-# Tickerlist.remove('PDA')
+Tickerlist.remove('GAME2') #CoinGecko에 정보없음.
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 Tickerlist.sort()
