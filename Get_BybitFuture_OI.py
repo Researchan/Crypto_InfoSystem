@@ -38,6 +38,7 @@ for key, value in Bybit_OI_Dict.items():
     new_key = key[0:-10]
     Bybit_New_OI_Dict[new_key] = value
 
+# Tickerlist.remove('SPEC') # 코마캡에 없어서 제거.
 
 #페어 이름정보 변경 (수동)
 Bybit_New_OI_Dict['LADYS'] = Bybit_New_OI_Dict.pop('10000LADYS')
