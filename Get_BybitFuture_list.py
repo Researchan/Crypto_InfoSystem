@@ -14,9 +14,8 @@ for i in exBybitTickers:
     if 'USDT:USDT' in i:
         Tickerlist.append(i[0:-10])
 
-#이거 코개코에 없어서 삭제
-# Tickerlist.remove('PUNDU') 생겨서 차단해제.
-# Tickerlist.remove('SCA') 생겨서 차단해제.
+
+Tickerlist.remove('SPEC') # 코마캡에없음
 
 # 단위 작은 티커 제거
 Tickerlist.remove('10000LADYS')
