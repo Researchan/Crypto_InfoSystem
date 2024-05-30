@@ -17,7 +17,7 @@ Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
 
 #ETF 삭제, 잘못된 페어이름 삭제
-Tickerlist.remove('BLUEBIRD')
+# Tickerlist.remove('BLUEBIRD')
 Tickerlist.remove('BTCDOM')
 Tickerlist.remove('COCOS')
 Tickerlist.remove('FOOTBALL')
