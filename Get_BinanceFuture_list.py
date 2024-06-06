@@ -63,6 +63,10 @@ Tickerlist.append('DODO')
 # BEAM티커 정리
 Tickerlist.remove('BEAMX')
 Tickerlist.append('BEAM')
+
+# RON티커 정리
+Tickerlist.remove('RONIN')
+Tickerlist.append('RON')
 Tickerlist.sort()
 
 # for i in Tickerlist:

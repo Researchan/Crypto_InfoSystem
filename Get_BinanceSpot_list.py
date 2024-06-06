@@ -67,6 +67,10 @@ Tickerlist.append('VIC')
 Tickerlist.remove('TVK')
 Tickerlist.append('VANRY')
 
+#RON 티커 정리/
+Tickerlist.remove('RONIN')
+Tickerlist.append('RON')
+
 #정렬
 Tickerlist.sort()
 
