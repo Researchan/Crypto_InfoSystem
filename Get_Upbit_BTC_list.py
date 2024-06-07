@@ -16,6 +16,8 @@ try:
     Tickerlist.append('TOKAMAK')
 
     Tickerlist.remove('LWA') #코인개코에 정보없음.
+    Tickerlist.remove('USDT') #테더삭제
+    
     Tickerlist = set(Tickerlist)
     Tickerlist = list(Tickerlist)
     Tickerlist.sort()
