@@ -37,6 +37,7 @@ Tickerlist.remove('SLP')
 Tickerlist.remove('IDEX')
 Tickerlist.remove('SNT')
 Tickerlist.remove('GLMR')
+Tickerlist.remove('WAVES')
 
 #단위작은 페어 삭제후 재 등록.
 Tickerlist.remove('1000FLOKI')
