@@ -36,6 +36,7 @@ Tickerlist.remove('SLP/USDT:USDT')
 Tickerlist.remove('IDEX/USDT:USDT')
 Tickerlist.remove('SNT/USDT:USDT')
 Tickerlist.remove('GLMR/USDT:USDT')
+Tickerlist.remove('WAVES/USDT:USDT')
 Tickerlist.sort()
 
 
