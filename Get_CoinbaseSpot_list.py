@@ -31,7 +31,7 @@ Tickerlist.remove('GUSD')
 Tickerlist.remove('CBETH')
 Tickerlist.remove('BIT')
 # Tickerlist.remove('EUROC') #유로
-# Tickerlist.remove('EURC') #유로
+Tickerlist.remove('EURC') #유로
 Tickerlist.remove('PAX') # 너무 잡코라 그냥 삭제
 Tickerlist.remove('WAXL') # AXL 랩핑한 거 삭제. (AXL은 기본적으로 있기 때문에 추가안해도 됨)
 Tickerlist.remove('RENDER') # RNDR랑 같은 토큰인데 ERC말고 솔라나는 이름을 다르게해서 상장해버렸네. 제거함.
