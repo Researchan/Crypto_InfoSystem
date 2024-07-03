@@ -28,8 +28,7 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'SXPDOWN', 'SXPUP', 'TCT', 'TORN', 'TRIBE', 'TRXDOWN', 'TRXUP', 'UNIDOWN', 'UNIUP', 
                'USDS', 'USDSB', 'UST', 'VEN', 'XLMDOWN', 'XLMUP', 'XRPBEAR', 'XRPBULL', 
                'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP',
-               'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD', 'PNT', 'MULTI', 'PLA', 'OMG',
-               'WNXM', 'WAVES', 'XEM']
+               'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD']
 
 
 
@@ -43,6 +42,13 @@ Tickerlist.remove('WBTC')
 Tickerlist.remove('EUR')
 Tickerlist.remove('GBP')
 Tickerlist.remove('AEUR')
+Tickerlist.remove('PNT')
+Tickerlist.remove('MULTI')
+Tickerlist.remove('PLA')
+Tickerlist.remove('OMG')
+Tickerlist.remove('WNXM')
+Tickerlist.remove('WAVES')
+Tickerlist.remove('XEM')
 
 #LUNA는 LUNA2로 티커이름 통일하겠음.
 Tickerlist.remove('LUNA')
