@@ -49,6 +49,8 @@ Tickerlist.remove('OMG')
 Tickerlist.remove('WNXM')
 Tickerlist.remove('WAVES')
 Tickerlist.remove('XEM')
+Tickerlist.remove('AGIX') # FET합병
+Tickerlist.remove('OCEAN') # FET 합병
 
 #LUNA는 LUNA2로 티커이름 통일하겠음.
 Tickerlist.remove('LUNA')
