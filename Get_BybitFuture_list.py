@@ -40,6 +40,7 @@ Tickerlist.remove('1000000MOG')
 Tickerlist.remove('1000BEER')
 Tickerlist.remove('1000000BABYDOGE')
 Tickerlist.remove('1000APU')
+Tickerlist.remove('1000000PEIPEI')
 
 
 
@@ -65,6 +66,7 @@ Tickerlist.append('MOG')
 Tickerlist.append('BEER')
 Tickerlist.append('BABYDOGE')
 Tickerlist.append('APU')
+Tickerlist.append('PEIPEI')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
