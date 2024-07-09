@@ -35,7 +35,7 @@ Tickerlist.remove('10000WEN')
 Tickerlist.remove('1000TURBO')
 Tickerlist.remove('10000000AIDOGE')
 Tickerlist.remove('10000COQ')
-Tickerlist.remove('1000IQ50')
+# Tickerlist.remove('1000IQ50') 상폐.
 Tickerlist.remove('1000000MOG')
 Tickerlist.remove('1000BEER')
 Tickerlist.remove('1000000BABYDOGE')
