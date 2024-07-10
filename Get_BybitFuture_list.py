@@ -17,6 +17,7 @@ for i in exBybitTickers:
 
 Tickerlist.remove('SPEC') # 코마캡에없음
 Tickerlist.remove('ETHBTC') # 인덱스
+Tickerlist.remove('DOP1') # 코개코에 없음
 
 # 단위 작은 티커 제거
 Tickerlist.remove('10000LADYS')
