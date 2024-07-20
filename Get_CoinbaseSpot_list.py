@@ -42,7 +42,7 @@ Tickerlist.remove('WCFG')
 Tickerlist.append('CFG')
 
 # AMPL은 랩핑토큰제거하고 원래토큰으로 저장.
-Tickerlist.remove('WAMPL')
+# Tickerlist.remove('WAMPL')
 Tickerlist.append('AMPL')
 
 # RONIN티커 정리
