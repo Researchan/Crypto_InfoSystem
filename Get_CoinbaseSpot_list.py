@@ -35,6 +35,7 @@ Tickerlist.remove('EURC') #유로
 Tickerlist.remove('PAX') # 너무 잡코라 그냥 삭제
 Tickerlist.remove('WAXL') # AXL 랩핑한 거 삭제. (AXL은 기본적으로 있기 때문에 추가안해도 됨)
 # Tickerlist.remove('RENDER') # RNDR랑 같은 토큰인데 ERC말고 솔라나는 이름을 다르게해서 상장해버렸네. 제거함... 은 다른애들도 마이그레이션.
+Tickerlist.remove('RNDR')
 Tickerlist.remove('KARRAT') #뭐야 이 잡코는..
 
 # 센트리퓨지는 랩핑토큰제거하고 원래토큰으로 저장.
