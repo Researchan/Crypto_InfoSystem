@@ -14,6 +14,9 @@ try:
     # Tokamak이 TON이랑 겹침. 또한 오름차순 정렬시 소문자 O를 엑셀이 구분하기때문에 전부 대문자로 변경
     Tickerlist.remove('Tokamak Network')
     Tickerlist.append('TOKAMAK')
+    #RNDR 티커 정리/
+    Tickerlist.remove('RNDR')
+    Tickerlist.append('RENDER')
 
     Tickerlist.remove('LWA') #코인개코에 정보없음.
     Tickerlist.remove('GAME2') #CoinGecko에 정보없음.

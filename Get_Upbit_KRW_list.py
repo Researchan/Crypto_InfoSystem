@@ -13,6 +13,10 @@ for i in exUpbitTickers:
 Tickerlist.remove('Tokamak Network')
 Tickerlist.append('TOKAMAK')
 
+#RNDR 티커 정리/
+Tickerlist.remove('RNDR')
+Tickerlist.append('RENDER')
+
 Tickerlist.remove('GAME2') #CoinGecko에 정보없음.
 Tickerlist.remove('USDT') #테더삭제
 

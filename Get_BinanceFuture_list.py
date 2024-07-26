@@ -68,6 +68,12 @@ Tickerlist.append('BEAM')
 # RON티커 정리
 Tickerlist.remove('RONIN')
 Tickerlist.append('RON')
+
+#RNDR 티커 정리/
+Tickerlist.remove('RNDR')
+Tickerlist.append('RENDER')
+
+
 Tickerlist.sort()
 
 # for i in Tickerlist:
