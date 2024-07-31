@@ -71,7 +71,7 @@ New_OI_Dict['BONK'] = New_OI_Dict.pop('1000BONK')
 New_OI_Dict['DODO'] = New_OI_Dict.pop('DODOX') #DODO 바낸 페어 이름.
 New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX') #MeritCircle 리브랜딩
 New_OI_Dict['RON'] = New_OI_Dict.pop('RONIN') #MeritCircle 리브랜딩
-New_OI_Dict['RENDER'] = New_OI_Dict.pop('RNDR') #MeritCircle 리브랜딩
+# New_OI_Dict['RENDER'] = New_OI_Dict.pop('RNDR') #RNDR 리브랜딩
 # New_OI_Dict['VIC'] = New_OI_Dict.pop('TOMO') #토모 리브랜딩했는데 선물상장 안해줌.
 
 #OI 내림차순
