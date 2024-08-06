@@ -86,7 +86,7 @@ try:
         Upbit_KRW = row['Upbit_KRW'] 
         Upbit_BTC = row['Upbit_BTC']
         Bithumb = row['Bithumb']
-        Coinbase_Spot = row['Coinbase_Spot']
+        # Coinbase_Spot = row['Coinbase_Spot']
         Binance_Spot = row['Binance_Spot']
         Binance_Future = row['Binance_Future']
         Bybit_Future = row['Bybit_Future']
@@ -102,16 +102,19 @@ try:
 
         # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
         coin_data_list.append([Ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, 
-                               Binance_OI, Bybit_OI,
-                               Upbit_KRW, Upbit_BTC, Bithumb, Coinbase_Spot, Binance_Spot,
-                               Binance_Future, Bybit_Future, Okx_Future
+                                Binance_OI, Bybit_OI,
+                                Upbit_KRW, Upbit_BTC, Bithumb,
+                                # Coinbase_Spot, 
+                                Binance_Spot,
+                                Binance_Future, Bybit_Future, Okx_Future
                                ])
 
     # 데이터를 DataFrame으로 변환. 이는 각 열 이름
     columns = ['Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV',
-               'Binance_OI', 'Bybit_OI',
-               'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot', 'Binance_Spot',
-               'Binance_Future', 'Bybit_Future', 'Okx_Future'
+                'Binance_OI', 'Bybit_OI', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 
+                #'Coinbase_Spot', 
+                'Binance_Spot',
+                'Binance_Future', 'Bybit_Future', 'Okx_Future'
                ]
     
     #위에 coin_data_list와 columns에서 지정한 열 합쳐서 총 자료 생성. 순서 일치해야함
@@ -159,7 +162,9 @@ try:
     df['Binance_OI'] = df['Binance_OI'].apply(lambda x: f"${int(x):,}")
     df['Bybit_OI'] = df['Bybit_OI'].apply(lambda x: f"${int(x):,}")
 
-    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot', 'Binance_Spot', 
+    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 
+                             #'Coinbase_Spot', 
+                             'Binance_Spot', 
                              'Binance_Future', 'Bybit_Future', 'Okx_Future',
                              'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 
                              'Binance_OI', 'Bybit_OI'])
@@ -168,7 +173,7 @@ try:
         'Upbit_KRW' : 'Ub_KRW',
         'Upbit_BTC' : 'Ub_BTC',
         'Bithumb' : 'Bithumb',
-        'Coinbase_Spot' : 'CB_Spot',
+        # 'Coinbase_Spot' : 'CB_Spot',
         'Binance_Spot' : 'BN_Spot',
         'Binance_Future' : 'BN_USDM',
         'Bybit_Future' : 'BB_USDM',
@@ -254,37 +259,34 @@ try:
                     <input type="checkbox" id="toggleColumn4" checked> 빗썸
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn5" checked> 코베 현물
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn6" checked> 바이낸스 현물
+                    <input type="checkbox" id="toggleColumn5" checked> 바이낸스 현물
                 </label>                
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn7" checked> 바이낸스 선물
+                    <input type="checkbox" id="toggleColumn6" checked> 바이낸스 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn8" checked> 바이비트 선물
+                    <input type="checkbox" id="toggleColumn7" checked> 바이비트 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn9" checked> OKX 선물
+                    <input type="checkbox" id="toggleColumn8" checked> OKX 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn10" checked> CG_MC
+                    <input type="checkbox" id="toggleColumn9" checked> CG_MC
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn11" checked> CG_FDV
+                    <input type="checkbox" id="toggleColumn10" checked> CG_FDV
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn12" checked> CMC_MC
+                    <input type="checkbox" id="toggleColumn11" checked> CMC_MC
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn13" checked> CMC_FDV
+                    <input type="checkbox" id="toggleColumn12" checked> CMC_FDV
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn14" checked> OI_Binance
+                    <input type="checkbox" id="toggleColumn13" checked> OI_Binance
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn15" checked> OI_Bybit
+                    <input type="checkbox" id="toggleColumn14" checked> OI_Bybit
                 </label>
                 {table}
             </div>
@@ -343,10 +345,6 @@ try:
                     $('#toggleColumn14').on('change', function () 
                     {{
                         table.column(14).visible(this.checked);
-                    }});
-                    $('#toggleColumn15').on('change', function () 
-                    {{
-                        table.column(15).visible(this.checked);
                     }});
                     
                     
