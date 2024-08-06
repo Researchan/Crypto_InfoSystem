@@ -86,7 +86,6 @@ try:
         Upbit_KRW = row['Upbit_KRW'] 
         Upbit_BTC = row['Upbit_BTC']
         Bithumb = row['Bithumb']
-        # Coinbase_Spot = row['Coinbase_Spot']
         Binance_Spot = row['Binance_Spot']
         Binance_Future = row['Binance_Future']
         Bybit_Future = row['Bybit_Future']
@@ -103,17 +102,13 @@ try:
         # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
         coin_data_list.append([Ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, 
                                 Binance_OI, Bybit_OI,
-                                Upbit_KRW, Upbit_BTC, Bithumb,
-                                # Coinbase_Spot, 
-                                Binance_Spot,
+                                Upbit_KRW, Upbit_BTC, Bithumb, Binance_Spot,
                                 Binance_Future, Bybit_Future, Okx_Future
                                ])
 
     # 데이터를 DataFrame으로 변환. 이는 각 열 이름
     columns = ['Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV',
-                'Binance_OI', 'Bybit_OI', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 
-                #'Coinbase_Spot', 
-                'Binance_Spot',
+                'Binance_OI', 'Bybit_OI', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Spot',
                 'Binance_Future', 'Bybit_Future', 'Okx_Future'
                ]
     
@@ -162,9 +157,7 @@ try:
     df['Binance_OI'] = df['Binance_OI'].apply(lambda x: f"${int(x):,}")
     df['Bybit_OI'] = df['Bybit_OI'].apply(lambda x: f"${int(x):,}")
 
-    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 
-                             #'Coinbase_Spot', 
-                             'Binance_Spot', 
+    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Spot', 
                              'Binance_Future', 'Bybit_Future', 'Okx_Future',
                              'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 
                              'Binance_OI', 'Bybit_OI'])
@@ -173,7 +166,6 @@ try:
         'Upbit_KRW' : 'Ub_KRW',
         'Upbit_BTC' : 'Ub_BTC',
         'Bithumb' : 'Bithumb',
-        # 'Coinbase_Spot' : 'CB_Spot',
         'Binance_Spot' : 'BN_Spot',
         'Binance_Future' : 'BN_USDM',
         'Bybit_Future' : 'BB_USDM',
@@ -476,6 +468,7 @@ try:
                                     select.append( '<option value="'+d+'">'+d+'</option>' )
                                 }} );
                             }} );
+                
                             // 8열에 드롭다운 메뉴 추가          
                             this.api().columns(7).every( function () 
                             {{
@@ -500,6 +493,7 @@ try:
                                     select.append( '<option value="'+d+'">'+d+'</option>' )
                                 }} );
                             }} );   
+                
                             // 9열에 드롭다운 메뉴 추가          
                             this.api().columns(8).every( function () 
                             {{
@@ -524,30 +518,7 @@ try:
                                     select.append( '<option value="'+d+'">'+d+'</option>' )
                                 }} );
                             }} );   
-                            // 10열에 드롭다운 메뉴 추가          
-                            this.api().columns(9).every( function () 
-                            {{
-                                var column = this;
-                                var select = $(
-                                '<select><option value="">전체</option></select>'
-                                )
-                                    .appendTo( $(column.header()) )
-                                    .on( 'change', function () 
-                                    {{
-                                        var val = $.fn.dataTable.util.escapeRegex(
-                                            $(this).val()
-                                        );
-
-                                        column
-                                            .search( val ? '^'+val+'$' : '', true, false )
-                                            .draw();
-                                    }} );
-
-                                column.data().unique().sort().each( function ( d, j ) 
-                                {{
-                                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                                }} );
-                            }} );        
+                
                         }},
                         
                         "searching": true,
@@ -569,7 +540,6 @@ try:
                         "columns": 
                         [
                             {{ "width": "10px" }},
-                            {{ "width": "50px" }},
                             {{ "width": "50px" }},
                             {{ "width": "50px" }},
                             {{ "width": "50px" }},

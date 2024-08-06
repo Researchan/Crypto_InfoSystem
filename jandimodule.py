@@ -13,23 +13,3 @@ def Exchange_Listing_send_message_to_jandi(message):
         "body": message
     }
     requests.post(Webhook_Address1, headers=headers, json=payload)
-    
-# def Alert_send_message_to_jandi(message): #사무실 잔디 토픽
-#     headers = {
-#         'Accept': 'application/vnd.tosslab.jandi-v2+json',
-#         'Content-Type': 'application/json'
-#     }
-#     payload = {
-#         "body": message
-#     }
-#     requests.post(Webhook_Address2, headers=headers, json=payload)
-    
-def Alert_send_message_to_jandi(message): #혜민 지은 잔디 토픽
-    headers = {
-        'Accept': 'application/vnd.tosslab.jandi-v2+json',
-        'Content-Type': 'application/json'
-    }
-    payload = {
-        "body": message
-    }
-    requests.post(Webhook_Address3, headers=headers, json=payload)
