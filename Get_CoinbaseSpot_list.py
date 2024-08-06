@@ -1,8 +1,9 @@
 import ccxt
+#코베가 API키 방식이 달라져서 그냥  포기했음. 원래도 귀찮았는데 대응 안하는 쪽으로 선회.
 
 exCB = ccxt.coinbase({
-    'apiKey':'Eg0muGsS6RHoh7fV',
-    'secret':'Ruqp7i61bWeZ783FYTmOFa1dUfDsjasT',
+    'apiKey':'a04f8779-d954-4dff-8bf5-a2bdbd7d2a15',
+    'secret':'MHcCAQEEIGzMb0JHOdgbly25JWS2bdJ320QPc3BIdzYNqoi2IIZuoAoGCCqGSM49\nAwEHoUQDQgAE7Mgf4E2BglxD5PX13DPb7Bt77wgKBH6ix6JSfDN0eEH0CXjtiTzu\nV34nsJn3+s/eKEegZQmZKa0hR8wJTxx2jg==',
     'options': {
         'defaultType': 'spot',
     },

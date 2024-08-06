@@ -20,7 +20,7 @@ try:
     Upbit_KRW_list = Get_Upbit_KRW_list.Tickerlist
     Upbit_BTC_list = Get_Upbit_BTC_list.Tickerlist
     Bithumb_list = Get_Bithumb_list.Tickerlist
-    Coinbase_Spot_list = Get_CoinbaseSpot_list.Tickerlist
+    # Coinbase_Spot_list = Get_CoinbaseSpot_list.Tickerlist
     Binance_Spot_list = Get_BinanceSpot_list.Tickerlist
     Binance_Future_list = Get_BinanceFuture_list.Tickerlist
     Bybit_Future_list = Get_BybitFuture_list.Tickerlist
@@ -30,7 +30,7 @@ try:
     Bybit_OI = Get_BybitFuture_OI.sorted_OI_Dict
 
     # 각 거래소 상장리스트 합산하여 전체 리스트 생성 및 정렬
-    Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + Coinbase_Spot_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list
+    Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + '''Coinbase_Spot_list''' + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list
     Coin_list = set(Coin_list)
     Coin_list = list(Coin_list)
     Coin_list.sort()
@@ -43,7 +43,7 @@ try:
             'Upbit_KRW':None,
             'Upbit_BTC':None,
             'Bithumb':None,
-            'Coinbase_Spot':None,
+            # 'Coinbase_Spot':None,
             'Binance_Spot':None,
             'Binance_Future':None,
             'Bybit_Future':None,
@@ -69,10 +69,10 @@ try:
         elif i not in Bithumb_list:
             Coin_Infos[i]['Bithumb'] = 'X'
 
-        if i in Coinbase_Spot_list:
-            Coin_Infos[i]['Coinbase_Spot'] = 'O'
-        elif i not in Coinbase_Spot_list:
-            Coin_Infos[i]['Coinbase_Spot'] = 'X'
+        # if i in Coinbase_Spot_list:
+        #     Coin_Infos[i]['Coinbase_Spot'] = 'O'
+        # elif i not in Coinbase_Spot_list:
+        #     Coin_Infos[i]['Coinbase_Spot'] = 'X'
             
         if i in Binance_Spot_list:
             Coin_Infos[i]['Binance_Spot'] = 'O'
