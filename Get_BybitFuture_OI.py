@@ -30,6 +30,7 @@ for i in Tickerlist:
     
     #가격정보 받아서 OIvolume과 곱해서 USD value 계산 후 Dict에 집어넣기
     Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue']) 
+    print
 
 Bybit_New_OI_Dict = {}
 

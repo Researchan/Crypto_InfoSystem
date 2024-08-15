@@ -38,6 +38,8 @@ Tickerlist.remove('IDEX')
 Tickerlist.remove('SNT')
 Tickerlist.remove('GLMR')
 Tickerlist.remove('WAVES')
+Tickerlist.remove('AGIX') #AGIX 상폐
+Tickerlist.remove('OCEAN') #OCEAN 상폐
 
 #단위작은 페어 삭제후 재 등록.
 Tickerlist.remove('1000FLOKI')
@@ -71,7 +73,7 @@ Tickerlist.append('RON')
 
 #RNDR 티커 정리/
 # Tickerlist.remove('RNDR')
-Tickerlist.append('RENDER')
+# Tickerlist.append('RENDER')
 
 
 Tickerlist.sort()
