@@ -21,6 +21,7 @@ try:
     Tickerlist.remove('LWA') #코인개코에 정보없음.
     Tickerlist.remove('GAME2') #CoinGecko에 정보없음.
     Tickerlist.remove('USDT') #테더삭제
+    Tickerlist.remove('OCEAN') #삭제
     
     Tickerlist = set(Tickerlist)
     Tickerlist = list(Tickerlist)
