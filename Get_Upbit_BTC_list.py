@@ -15,8 +15,8 @@ try:
     Tickerlist.remove('Tokamak Network')
     Tickerlist.append('TOKAMAK')
     #RNDR 티커 정리/
-    Tickerlist.remove('RNDR')
-    Tickerlist.append('RENDER')
+    # Tickerlist.remove('RNDR') #삭제됨
+    # Tickerlist.append('RENDER') #이제 알아서 올라오겠지
 
     Tickerlist.remove('LWA') #코인개코에 정보없음.
     Tickerlist.remove('GAME2') #CoinGecko에 정보없음.
@@ -31,4 +31,4 @@ try:
     #     print(i)
     
 except Exception as e:
-    jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
+    jandimodule.Exchange_Listing_send_message_to_jandi("upbit BTC오류 : " + str(e))
