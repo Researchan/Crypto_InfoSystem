@@ -24,8 +24,8 @@ Tickerlist.remove('WAXL')
 Tickerlist.append('AXL')
 
 #RNDR 티커 정리/
-Tickerlist.remove('RNDR')
-Tickerlist.append('RENDER')
+# Tickerlist.remove('RNDR')
+# Tickerlist.append('RENDER')
 
 #코마캡 코개코도 상장안된 잡페어
 Tickerlist.remove('LWA')
