@@ -28,7 +28,8 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'SXPDOWN', 'SXPUP', 'TCT', 'TORN', 'TRIBE', 'TRXDOWN', 'TRXUP', 'UNIDOWN', 'UNIUP', 
                'USDS', 'USDSB', 'UST', 'VEN', 'XLMDOWN', 'XLMUP', 'XRPBEAR', 'XRPBULL', 
                'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP',
-               'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD']
+               'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD', 'ANT', 'DOCK', 'GAL', 'MDX', 'POLS',
+               'EPX']
 
 
 
