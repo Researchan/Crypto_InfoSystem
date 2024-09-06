@@ -19,7 +19,7 @@ Tickerlist.remove('SPEC') # 코마캡에없음
 Tickerlist.remove('ETHBTC') # 인덱스
 Tickerlist.remove('DOP1') # 코개코에 없음
 Tickerlist.remove('MAX') # 코개코에 없음
-Tickerlist.remove('NEIROETH') # 티커 정리 전 임시로 제거
+# Tickerlist.remove('NEIROETH') # 티커 정리 전 임시로 제거
 
 # 단위 작은 티커 제거
 Tickerlist.remove('10000LADYS')
