@@ -44,7 +44,7 @@ Tickerlist.remove('1000BEER')
 Tickerlist.remove('1000000BABYDOGE')
 Tickerlist.remove('1000APU')
 Tickerlist.remove('1000000PEIPEI')
-
+Tickerlist.remove('1000CAT')
 
 
 # 제거한 티커 표준맞춰서 다시 추가
@@ -70,6 +70,7 @@ Tickerlist.append('BEER')
 Tickerlist.append('BABYDOGE')
 Tickerlist.append('APU')
 Tickerlist.append('PEIPEI')
+Tickerlist.append('CAT')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
