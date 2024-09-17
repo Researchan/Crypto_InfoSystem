@@ -71,6 +71,10 @@ Tickerlist.append('BEAM')
 Tickerlist.remove('RONIN')
 Tickerlist.append('RON')
 
+# BABYDOGE 정리
+Tickerlist.remove('1MBABYDOGE')
+Tickerlist.append('BABYDOGE')
+
 #RNDR 티커 정리/
 # Tickerlist.remove('RNDR')
 # Tickerlist.append('RENDER')

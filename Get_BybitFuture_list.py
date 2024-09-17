@@ -19,7 +19,6 @@ Tickerlist.remove('SPEC') # 코마캡에없음
 Tickerlist.remove('ETHBTC') # 인덱스
 Tickerlist.remove('DOP1') # 코개코에 없음
 Tickerlist.remove('MAX') # 코개코에 없음
-# Tickerlist.remove('NEIROETH') # 티커 정리 전 임시로 제거
 
 # 단위 작은 티커 제거
 Tickerlist.remove('10000LADYS')
@@ -45,6 +44,7 @@ Tickerlist.remove('1000000BABYDOGE')
 Tickerlist.remove('1000APU')
 Tickerlist.remove('1000000PEIPEI')
 Tickerlist.remove('1000CAT')
+Tickerlist.remove('1000NEIROCTO') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
 
 
 # 제거한 티커 표준맞춰서 다시 추가
@@ -71,6 +71,7 @@ Tickerlist.append('BABYDOGE')
 Tickerlist.append('APU')
 Tickerlist.append('PEIPEI')
 Tickerlist.append('CAT')
+Tickerlist.append('NEIRO')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
