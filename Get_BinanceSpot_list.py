@@ -85,6 +85,10 @@ Tickerlist.append('RON')
 Tickerlist.remove('RNDR')
 Tickerlist.append('RENDER')
 
+#RNDR 티커 정리/
+Tickerlist.remove('1MBABYDOGE')
+Tickerlist.append('BABYDOGE')
+
 #정렬
 Tickerlist.sort()
 
