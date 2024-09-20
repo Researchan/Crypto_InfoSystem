@@ -22,7 +22,7 @@ Tickerlist.remove('MAX') # 코개코에 없음
 
 # 단위 작은 티커 제거
 Tickerlist.remove('10000LADYS')
-Tickerlist.remove('10000NFT')
+# Tickerlist.remove('10000NFT') #상폐
 Tickerlist.remove('1000BONK')
 Tickerlist.remove('1000BTT')
 Tickerlist.remove('1000FLOKI')
@@ -49,7 +49,7 @@ Tickerlist.remove('1000NEIROCTO') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
 
 # 제거한 티커 표준맞춰서 다시 추가
 Tickerlist.append('LADYS')
-Tickerlist.append('NFT')
+# Tickerlist.append('NFT') # 상폐
 Tickerlist.append('BONK')
 Tickerlist.append('BTT')
 Tickerlist.append('FLOKI')
