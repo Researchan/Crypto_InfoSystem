@@ -41,7 +41,7 @@ for key, value in Bybit_OI_Dict.items():
 
 #페어 이름정보 변경 (수동)
 Bybit_New_OI_Dict['LADYS'] = Bybit_New_OI_Dict.pop('10000LADYS')
-Bybit_New_OI_Dict['NFT'] = Bybit_New_OI_Dict.pop('10000NFT')
+# Bybit_New_OI_Dict['NFT'] = Bybit_New_OI_Dict.pop('10000NFT') # 상폐된듯.
 Bybit_New_OI_Dict['BONK'] = Bybit_New_OI_Dict.pop('1000BONK')
 Bybit_New_OI_Dict['BTT'] = Bybit_New_OI_Dict.pop('1000BTT')
 Bybit_New_OI_Dict['FLOKI'] = Bybit_New_OI_Dict.pop('1000FLOKI')
