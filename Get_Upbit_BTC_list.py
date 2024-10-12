@@ -22,7 +22,8 @@ try:
     Tickerlist.remove('GAME2') #CoinGecko에 정보없음.
     Tickerlist.remove('USDT') #테더삭제
     Tickerlist.remove('OCEAN') #삭제
-    
+    # Tickerlist.remove('SKY') 
+    # Tickerlist.remove('USDS')
     Tickerlist = set(Tickerlist)
     Tickerlist = list(Tickerlist)
     Tickerlist.sort()
