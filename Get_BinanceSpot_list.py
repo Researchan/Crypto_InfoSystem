@@ -16,6 +16,7 @@ for i in exBNTickers:
         API_Tickerlist.append(coinname)
 
 #기존에 상장폐지된 리스트 수동으로 제거 (바이낸스가 API에서 여전히 제공해서 수동으로 제거해야함)
+#왜 지들이 리브랜딩 해놓고 처 안지우냐 짜증나게
 delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP', 
                'AION', 'ANC', 'ANY', 'AUD', 'AUTO', 'BCC', 'BCHABC', 'BCHDOWN', 'BCHUP', 
                'BEAM', 'BEAR', 'BETH', 'BKRW', 'BNBBEAR', 'BNBBULL', 'BNBDOWN', 'BNBUP', 
@@ -29,7 +30,8 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'USDS', 'USDSB', 'UST', 'VEN', 'XLMDOWN', 'XLMUP', 'XRPBEAR', 'XRPBULL', 
                'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP',
                'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD', 'ANT', 'DOCK', 'GAL', 'MDX', 'POLS',
-               'EPX', 'EURI', 'REEF', 'BOND']
+               'EPX', 'EURI', 'REEF', 'BOND','ORN']
+
 
 
 
@@ -53,7 +55,8 @@ Tickerlist.remove('XEM')
 Tickerlist.remove('AGIX') # FET합병
 Tickerlist.remove('OCEAN') # FET 합병
 Tickerlist.remove('SCR') # 임시 보류
-Tickerlist.remove('BNSOL') # 임시 보류
+Tickerlist.remove('BNSOL')
+Tickerlist.remove('LUMIA') #ORN 리브랜딩, 코개코가 안줘서 잠시 없앰.
 
 #LUNA는 LUNA2로 티커이름 통일하겠음.
 Tickerlist.remove('LUNA')

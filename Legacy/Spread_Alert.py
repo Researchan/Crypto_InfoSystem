@@ -1,8 +1,8 @@
 import ccxt.pro as ccxtpro
 import asyncio
 import jandimodule
-import Get_Tickerlists
-import Get_BinanceBybitTicker
+import Legacy.Get_Tickerlists as Get_Tickerlists
+import Legacy.Get_BinanceBybitTicker as Get_BinanceBybitTicker
 import time
 
 sleeptime = 20
