@@ -58,6 +58,8 @@ Tickerlist.remove('1000SATS')
 Tickerlist.append('SATS')
 Tickerlist.remove('1000RATS')
 Tickerlist.append('RATS')
+Tickerlist.remove('1000CAT')
+Tickerlist.append('CAT')
 
 #DODO티커 정리
 Tickerlist.remove('DODOX')
