@@ -39,7 +39,7 @@ Tickerlist.remove('10000000AIDOGE')
 Tickerlist.remove('10000COQ')
 # Tickerlist.remove('1000IQ50') 상폐.
 Tickerlist.remove('1000000MOG')
-Tickerlist.remove('1000BEER')
+# Tickerlist.remove('1000BEER') # 갓비트 컷ㅋㅋ 상폐 개좆같은 MM새끼들 ㅋㅋ
 Tickerlist.remove('1000000BABYDOGE')
 Tickerlist.remove('1000APU')
 Tickerlist.remove('1000000PEIPEI')
