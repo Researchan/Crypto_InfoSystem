@@ -71,7 +71,7 @@ Tickerlist.append('AIDOGE')
 Tickerlist.append('COQ')
 # Tickerlist.append('IQ50') #상폐
 Tickerlist.append('MOG')
-Tickerlist.append('BEER')
+# Tickerlist.append('BEER')
 Tickerlist.append('BABYDOGE')
 Tickerlist.append('APU')
 Tickerlist.append('PEIPEI')
