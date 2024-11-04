@@ -20,6 +20,7 @@ Tickerlist.remove('ETHBTC') # 인덱스
 Tickerlist.remove('DOP1') # 코개코에 없음
 Tickerlist.remove('MAX') # 코개코에 없음
 Tickerlist.remove('HPOS10I') # 코개코 코마캡 둘 다 없네.
+Tickerlist.remove('UNFI') # 이거 왜 바빗 계속 보내주냐..
 
 # 단위 작은 티커 제거
 Tickerlist.remove('10000LADYS')

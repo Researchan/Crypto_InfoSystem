@@ -39,6 +39,7 @@ Tickerlist.remove('GLMR/USDT:USDT')
 Tickerlist.remove('WAVES/USDT:USDT')
 Tickerlist.remove('AGIX/USDT:USDT') #AGIX 상폐
 Tickerlist.remove('OCEAN/USDT:USDT') #OCEAN 상폐
+Tickerlist.remove('UNFI/USDT:USDT') #OCEAN 상폐
 Tickerlist.sort()
 
 
