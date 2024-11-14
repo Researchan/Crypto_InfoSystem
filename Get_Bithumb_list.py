@@ -16,8 +16,8 @@ for i in exBithumbTickers:
 Tickerlist = BTClist + KRWlist
 
 #아치루트 제거후 ALT로 변경
-# Tickerlist.remove('ArchLoot')
-# Tickerlist.append('ALT')
+Tickerlist.remove('ArchLoot')
+Tickerlist.append('AL')
 
 #AXL 티커 조정
 Tickerlist.remove('WAXL')
