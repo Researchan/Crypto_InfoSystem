@@ -61,6 +61,10 @@ Tickerlist.remove('1000RATS')
 Tickerlist.append('RATS')
 Tickerlist.remove('1000CAT')
 Tickerlist.append('CAT')
+Tickerlist.remove('1000000MOG')
+Tickerlist.append('MOG')
+Tickerlist.remove('1000X')
+Tickerlist.append('X')
 
 #DODO티커 정리
 Tickerlist.remove('DODOX')
