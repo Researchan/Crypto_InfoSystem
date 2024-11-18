@@ -16,6 +16,7 @@ for i in exBybitTickers:
 
 
 Tickerlist.remove('SPEC') # 코마캡에없음
+Tickerlist.remove('RIFSOL') # 코마캡에없음 잠시 보류
 Tickerlist.remove('ETHBTC') # 인덱스
 Tickerlist.remove('DOP1') # 코개코에 없음
 Tickerlist.remove('MAX') # 코개코에 없음
