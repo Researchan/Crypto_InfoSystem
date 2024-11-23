@@ -40,6 +40,7 @@ Tickerlist.remove('WAVES/USDT:USDT')
 Tickerlist.remove('AGIX/USDT:USDT') #AGIX 상폐
 Tickerlist.remove('OCEAN/USDT:USDT') #OCEAN 상폐
 Tickerlist.remove('UNFI/USDT:USDT') #UNFI 상폐
+Tickerlist.remove('KLAY/USDT:USDT') #UNFI 상폐
 Tickerlist.sort()
 
 
@@ -53,7 +54,7 @@ for i in Tickerlist:
     OI_Dict[str(i)] = round(res[0]['openInterestValue'])
     
     # OI정보 보내주지 않는 페어는 오류나게 됨.
-    # print(i, ' : ', OI_Dict[str(i)])
+    print(i, ' : ', OI_Dict[str(i)])
 
 New_OI_Dict = {}
 

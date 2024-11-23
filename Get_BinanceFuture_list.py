@@ -41,6 +41,7 @@ Tickerlist.remove('WAVES')
 Tickerlist.remove('AGIX') #AGIX 상폐
 Tickerlist.remove('OCEAN') #OCEAN 상폐
 Tickerlist.remove('UNFI') #상폐당한거 또 왜 안없애냐.
+Tickerlist.remove('KLAY') #상폐당한거 또 왜 안없애냐.
 
 #단위작은 페어 삭제후 재 등록.
 Tickerlist.remove('1000FLOKI')
