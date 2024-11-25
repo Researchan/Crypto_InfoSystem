@@ -31,7 +31,7 @@ Tickerlist.append('AXL')
 Tickerlist.remove('LWA')
 Tickerlist.remove('GRACY')
 Tickerlist.remove('USDT')
-Tickerlist.remove('XENT') # ENTC 리브랜딩. 안나옴 제외.
+# Tickerlist.remove('XENT') # ENTC 리브랜딩. 안나옴 제외. /결국 상폐당함
 
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
