@@ -68,6 +68,8 @@ Tickerlist.remove('1000X')
 Tickerlist.append('X')
 Tickerlist.remove('1000CHEEMS')
 Tickerlist.append('CHEEMS')
+Tickerlist.remove('1000WHY')
+Tickerlist.append('WHY')
 
 #DODO티커 정리
 Tickerlist.remove('DODOX')
