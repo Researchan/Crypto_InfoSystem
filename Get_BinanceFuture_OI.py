@@ -74,6 +74,7 @@ New_OI_Dict['RATS'] = New_OI_Dict.pop('1000RATS')
 New_OI_Dict['BONK'] = New_OI_Dict.pop('1000BONK')
 New_OI_Dict['MOG'] = New_OI_Dict.pop('1000000MOG')
 New_OI_Dict['X'] = New_OI_Dict.pop('1000X')
+New_OI_Dict['CHEEMS'] = New_OI_Dict.pop('1000CHEEMS')
 New_OI_Dict['DODO'] = New_OI_Dict.pop('DODOX') #DODO 바낸 페어 이름.
 New_OI_Dict['BEAM'] = New_OI_Dict.pop('BEAMX') #MeritCircle 리브랜딩
 New_OI_Dict['RON'] = New_OI_Dict.pop('RONIN') #MeritCircle 리브랜딩

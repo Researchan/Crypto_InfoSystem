@@ -51,6 +51,7 @@ Tickerlist.remove('1000MUMU') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
 Tickerlist.remove('10000WHY') #솔직히 이런 억지밈코 상장 지겹다 이젠.
 Tickerlist.remove('1000CATS')
 Tickerlist.remove('1000X')
+Tickerlist.remove('1000000CHEEMS')
 
 
 # 제거한 티커 표준맞춰서 다시 추가
@@ -82,7 +83,7 @@ Tickerlist.append('MUMU')
 Tickerlist.append('WHY')
 Tickerlist.append('CATS')
 Tickerlist.append('X')
-
+Tickerlist.append('CHEEMS')
 
 Tickerset = set(Tickerlist)
 Tickerlist = list(Tickerset)
