@@ -8,87 +8,162 @@ exBybit = ccxt.bybit({
 exBybitTickersInfo = exBybit.fetchTickers() # 티커 딕셔너리 가져옴
 exBybitTickers = exBybitTickersInfo.keys() # 티커 키만 받아오기 (이름만)
 
-#Bybit 티커 조정
+#1 Bybit 티커 받아오기 (USDC, Deilivery, ETF 제거)
 Tickerlist = []
 for i in exBybitTickers:
     if 'USDT:USDT' in i:
-        Tickerlist.append(i[0:-10])
+        Tickerlist.append(i)
+    #print(i)
+
+#2 잘못된 티커, 조회 안되는 티커, 조회 안할 티커 삭제
+Tickerlist.remove('SPEC/USDT:USDT') # 코마캡에없음
+Tickerlist.remove('RIFSOL/USDT:USDT') # 코마캡에없음 잠시 보류
+Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
+Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음
+Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음
+Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡 둘 다 없네.
+        
+#마지막 가격정보 불러오기
+lastprices = exBybit.fetch_tickers(Tickerlist)
+
+#OI 딕셔너리 생성
+Bybit_OI_Dict ={}
+Bybit_New_OI_Dict = {}
+
+#원하는 티커에 대해서 OI정보 받아오기 + 가격 * OIvolume = USD Value 계산.
+for i in Tickerlist:
+    res = exBybit.fetch_open_interest_history(i, timeframe='5m', params={ 
+            'limit':'1',
+        })
+    Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue']) 
+
+#OI Dice에서 이름 형식 정리.
+for key, value in Bybit_OI_Dict.items():
+    new_key = key[0:-10]
+    Bybit_New_OI_Dict[new_key] = value
+
+New_Tickerlist = []
+for i in Tickerlist:
+    New_Tickerlist.append(i[0:-10])
+
+New_Tickerlist = set(New_Tickerlist)
+New_Tickerlist = list(New_Tickerlist)
+
+# 티커 형식 정리
+Bybit_New_OI_Dict['LADYS'] = Bybit_New_OI_Dict.pop('10000LADYS')
+New_Tickerlist.remove('10000LADYS')
+New_Tickerlist.append('LADYS')
+
+Bybit_New_OI_Dict['BONK'] = Bybit_New_OI_Dict.pop('1000BONK')
+New_Tickerlist.remove('1000BONK')
+New_Tickerlist.append('BONK')
+
+Bybit_New_OI_Dict['BTT'] = Bybit_New_OI_Dict.pop('1000BTT')
+New_Tickerlist.remove('1000BTT')
+New_Tickerlist.append('BTT')
+
+Bybit_New_OI_Dict['FLOKI'] = Bybit_New_OI_Dict.pop('1000FLOKI')
+New_Tickerlist.remove('1000FLOKI')
+New_Tickerlist.append('FLOKI')
+
+Bybit_New_OI_Dict['LUNC'] = Bybit_New_OI_Dict.pop('1000LUNC')
+New_Tickerlist.remove('1000LUNC')
+New_Tickerlist.append('LUNC')
+
+Bybit_New_OI_Dict['PEPE'] = Bybit_New_OI_Dict.pop('1000PEPE')
+New_Tickerlist.remove('1000PEPE')
+New_Tickerlist.append('PEPE')
+
+Bybit_New_OI_Dict['SHIB'] = Bybit_New_OI_Dict.pop('SHIB1000')
+New_Tickerlist.remove('SHIB1000')
+New_Tickerlist.append('SHIB')
+
+Bybit_New_OI_Dict['XEC'] = Bybit_New_OI_Dict.pop('1000XEC')
+New_Tickerlist.remove('1000XEC')
+New_Tickerlist.append('XEC')
+
+Bybit_New_OI_Dict['SATS'] = Bybit_New_OI_Dict.pop('10000SATS')
+New_Tickerlist.remove('10000SATS')
+New_Tickerlist.append('SATS')
+
+Bybit_New_OI_Dict['RATS'] = Bybit_New_OI_Dict.pop('1000RATS')
+New_Tickerlist.remove('1000RATS')
+New_Tickerlist.append('RATS')
+
+Bybit_New_OI_Dict['WEN'] = Bybit_New_OI_Dict.pop('10000WEN')
+New_Tickerlist.remove('10000WEN')
+New_Tickerlist.append('WEN')
+
+Bybit_New_OI_Dict['TURBO'] = Bybit_New_OI_Dict.pop('1000TURBO')
+New_Tickerlist.remove('1000TURBO')
+New_Tickerlist.append('TURBO')
+
+Bybit_New_OI_Dict['AIDOGE'] = Bybit_New_OI_Dict.pop('10000000AIDOGE')
+New_Tickerlist.remove('10000000AIDOGE')
+New_Tickerlist.append('AIDOGE')
+
+Bybit_New_OI_Dict['COQ'] = Bybit_New_OI_Dict.pop('10000COQ')
+New_Tickerlist.remove('10000COQ')
+New_Tickerlist.append('COQ')
+
+Bybit_New_OI_Dict['MOG'] = Bybit_New_OI_Dict.pop('1000000MOG')
+New_Tickerlist.remove('1000000MOG')
+New_Tickerlist.append('MOG')
+
+Bybit_New_OI_Dict['BABYDOGE'] = Bybit_New_OI_Dict.pop('1000000BABYDOGE')
+New_Tickerlist.remove('1000000BABYDOGE')
+New_Tickerlist.append('BABYDOGE')
+
+Bybit_New_OI_Dict['APU'] = Bybit_New_OI_Dict.pop('1000APU')
+New_Tickerlist.remove('1000APU')
+New_Tickerlist.append('APU')
+
+Bybit_New_OI_Dict['PEIPEI'] = Bybit_New_OI_Dict.pop('1000000PEIPEI')
+New_Tickerlist.remove('1000000PEIPEI')
+New_Tickerlist.append('PEIPEI')
+
+Bybit_New_OI_Dict['CAT'] = Bybit_New_OI_Dict.pop('1000CAT') #캣츠랑 헷갈려
+New_Tickerlist.remove('1000CAT')
+New_Tickerlist.append('CAT')
+
+Bybit_New_OI_Dict['NEIRO'] = Bybit_New_OI_Dict.pop('1000NEIROCTO')
+New_Tickerlist.remove('1000NEIROCTO') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
+New_Tickerlist.append('NEIRO')
+
+Bybit_New_OI_Dict['MUMU'] = Bybit_New_OI_Dict.pop('1000MUMU')
+New_Tickerlist.remove('1000MUMU')
+New_Tickerlist.append('MUMU')
+
+Bybit_New_OI_Dict['WHY'] = Bybit_New_OI_Dict.pop('10000WHY')
+New_Tickerlist.remove('10000WHY')
+New_Tickerlist.append('WHY')
+
+Bybit_New_OI_Dict['CATS'] = Bybit_New_OI_Dict.pop('1000CATS') #캣이랑 헷갈려
+New_Tickerlist.remove('1000CATS')
+New_Tickerlist.append('CATS')
+
+Bybit_New_OI_Dict['X'] = Bybit_New_OI_Dict.pop('1000X')
+New_Tickerlist.remove('1000X')
+New_Tickerlist.append('X')
+
+Bybit_New_OI_Dict['CHEEMS'] = Bybit_New_OI_Dict.pop('1000000CHEEMS')
+New_Tickerlist.remove('1000000CHEEMS')
+New_Tickerlist.append('CHEEMS')
+
+Bybit_New_OI_Dict['TOSHI'] = Bybit_New_OI_Dict.pop('1000TOSHI')
+New_Tickerlist.remove('1000TOSHI')
+New_Tickerlist.append('TOSHI')
+
+New_Tickerlist.sort()
+Tickerlist = New_Tickerlist
 
 
-Tickerlist.remove('SPEC') # 코마캡에없음
-Tickerlist.remove('RIFSOL') # 코마캡에없음 잠시 보류
-Tickerlist.remove('ETHBTC') # 인덱스
-Tickerlist.remove('DOP1') # 코개코에 없음
-Tickerlist.remove('MAX') # 코개코에 없음
-Tickerlist.remove('HPOS10I') # 코개코 코마캡 둘 다 없네.
-
-# 단위 작은 티커 제거
-Tickerlist.remove('10000LADYS')
-# Tickerlist.remove('10000NFT') #상폐
-Tickerlist.remove('1000BONK')
-Tickerlist.remove('1000BTT')
-Tickerlist.remove('1000FLOKI')
-Tickerlist.remove('1000LUNC')
-Tickerlist.remove('1000PEPE')
-Tickerlist.remove('1000XEC')
-Tickerlist.remove('SHIB1000')
-# Tickerlist.remove('10000STARL') #상폐
-Tickerlist.remove('10000SATS')
-Tickerlist.remove('1000RATS')
-Tickerlist.remove('10000WEN')
-Tickerlist.remove('1000TURBO')
-Tickerlist.remove('10000000AIDOGE')
-Tickerlist.remove('10000COQ')
-# Tickerlist.remove('1000IQ50') 상폐.
-Tickerlist.remove('1000000MOG')
-# Tickerlist.remove('1000BEER') # 갓비트 컷ㅋㅋ 상폐 개좆같은 MM새끼들 ㅋㅋ
-Tickerlist.remove('1000000BABYDOGE')
-Tickerlist.remove('1000APU')
-Tickerlist.remove('1000000PEIPEI')
-Tickerlist.remove('1000CAT')
-Tickerlist.remove('1000NEIROCTO') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
-Tickerlist.remove('1000MUMU') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
-Tickerlist.remove('10000WHY') #솔직히 이런 억지밈코 상장 지겹다 이젠.
-Tickerlist.remove('1000CATS')
-Tickerlist.remove('1000X')
-Tickerlist.remove('1000000CHEEMS')
-
-
-# 제거한 티커 표준맞춰서 다시 추가
-Tickerlist.append('LADYS')
-# Tickerlist.append('NFT') # 상폐
-Tickerlist.append('BONK')
-Tickerlist.append('BTT')
-Tickerlist.append('FLOKI')
-Tickerlist.append('LUNC')
-Tickerlist.append('PEPE')
-Tickerlist.append('SHIB')
-Tickerlist.append('XEC')
-# Tickerlist.append('STARL') #상폐
-Tickerlist.append('SATS')
-Tickerlist.append('RATS')
-Tickerlist.append('WEN')
-Tickerlist.append('TURBO')
-Tickerlist.append('AIDOGE')
-Tickerlist.append('COQ')
-# Tickerlist.append('IQ50') #상폐
-Tickerlist.append('MOG')
-# Tickerlist.append('BEER')
-Tickerlist.append('BABYDOGE')
-Tickerlist.append('APU')
-Tickerlist.append('PEIPEI')
-Tickerlist.append('CAT')
-Tickerlist.append('NEIRO')
-Tickerlist.append('MUMU')
-Tickerlist.append('WHY')
-Tickerlist.append('CATS')
-Tickerlist.append('X')
-Tickerlist.append('CHEEMS')
-
-Tickerset = set(Tickerlist)
-Tickerlist = list(Tickerset)
-Tickerlist.sort()
+#OI 내림차순
+sorted_OI_Dict = dict(sorted(Bybit_New_OI_Dict.items(), key=lambda item: item[1], reverse=True))
 
 # for i in Tickerlist:
+#     print(i)
+
+# for i in sorted_OI_Dict:
 #     print(i)
 

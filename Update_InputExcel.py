@@ -7,8 +7,8 @@ import Get_Upbit_BTC_list
 import Get_Upbit_KRW_list
 import Get_BinanceSpot_list
 import Get_OkxFuture_list
-import Get_BinanceFuture_OI
-import Get_BybitFuture_OI
+# import Get_BinanceFuture_OI
+# import Get_BybitFuture_OI
 
 import pandas as pd
 from openpyxl import load_workbook
@@ -24,8 +24,8 @@ try:
     Bybit_Future_list = Get_BybitFuture_list.Tickerlist
     Okx_Future_list = Get_OkxFuture_list.Tickerlist
 
-    Binance_OI = Get_BinanceFuture_OI.sorted_OI_Dict
-    Bybit_OI = Get_BybitFuture_OI.sorted_OI_Dict
+    Binance_OI = Get_BinanceFuture_list.sorted_OI_Dict
+    Bybit_OI = Get_BybitFuture_list.sorted_OI_Dict
 
     # 각 거래소 상장리스트 합산하여 전체 리스트 생성 및 정렬
     Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list
