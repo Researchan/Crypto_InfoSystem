@@ -22,6 +22,7 @@ Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
 Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음
 Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음
 Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡 둘 다 없네.
+Tickerlist.remove('ME/USDT:USDT') # 코개코 없음 매직에덴
         
 #마지막 가격정보 불러오기
 lastprices = exBybit.fetch_tickers(Tickerlist)
