@@ -145,6 +145,10 @@ New_OI_Dict['BABYDOGE'] = New_OI_Dict.pop('1MBABYDOGE')
 New_Tickerlist.remove('1MBABYDOGE')
 New_Tickerlist.append('BABYDOGE')
 
+New_OI_Dict['RAY'] = New_OI_Dict.pop('RAYSOL') #레이디움은 왜 바이낸스도 바이비트도 다 티커가 다를까.
+New_Tickerlist.remove('RAYSOL')
+New_Tickerlist.append('RAY')
+
 New_Tickerlist.sort()
 Tickerlist = New_Tickerlist
 
