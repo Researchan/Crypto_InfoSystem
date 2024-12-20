@@ -95,6 +95,9 @@ Tickerlist.append('RENDER')
 Tickerlist.remove('1MBABYDOGE')
 Tickerlist.append('BABYDOGE')
 
+Tickerlist.remove('1000CAT')
+Tickerlist.append('CAT')
+
 #정렬
 Tickerlist.sort()
 
