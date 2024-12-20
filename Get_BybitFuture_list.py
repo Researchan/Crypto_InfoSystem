@@ -36,7 +36,9 @@ for i in Tickerlist:
     res = exBybit.fetch_open_interest_history(i, timeframe='5m', params={ 
             'limit':'1',
         })
-    Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue']) 
+    #print(i)
+    Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue'])
+    #print(res)
 
 #OI Dice에서 이름 형식 정리.
 for key, value in Bybit_OI_Dict.items():
