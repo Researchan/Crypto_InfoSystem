@@ -43,6 +43,7 @@ Tickerlist.remove('UNFI/USDT:USDT')
 Tickerlist.remove('KLAY/USDT:USDT')
 Tickerlist.remove('REN/USDT:USDT')
 Tickerlist.remove('KEY/USDT:USDT')
+Tickerlist.remove('BOND/USDT:USDT')
 Tickerlist.sort()
 
 
