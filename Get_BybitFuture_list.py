@@ -162,6 +162,10 @@ Bybit_New_OI_Dict['RAY'] = Bybit_New_OI_Dict.pop('RAYDIUM') #바이낸스 바이
 New_Tickerlist.remove('RAYDIUM')
 New_Tickerlist.append('RAY')
 
+Bybit_New_OI_Dict['QUBIC'] = Bybit_New_OI_Dict.pop('10000QUBIC') #바이낸스 바이비트 다 문제야
+New_Tickerlist.remove('10000QUBIC')
+New_Tickerlist.append('QUBIC')
+
 New_Tickerlist.sort()
 Tickerlist = New_Tickerlist
 
