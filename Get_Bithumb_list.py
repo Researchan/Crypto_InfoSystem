@@ -29,7 +29,7 @@ Tickerlist.append('AXL')
 
 #코마캡 코개코도 상장안된 잡페어
 Tickerlist.remove('LWA')
-Tickerlist.remove('GRACY')
+# Tickerlist.remove('GRACY') 빗썸단독상장 개잡코, 코마캡 코개코 생겨서 넣음.
 Tickerlist.remove('USDT')
 # Tickerlist.remove('XENT') # ENTC 리브랜딩. 안나옴 제외. /결국 상폐당함
 

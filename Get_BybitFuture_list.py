@@ -21,8 +21,9 @@ Tickerlist.remove('RIFSOL/USDT:USDT') # 코마캡에없음 잠시 보류
 Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
 Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음
 Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음
-Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡 둘 다 없네.
-Tickerlist.remove('ME/USDT:USDT') # 코개코 없음 매직에덴
+# Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡에는 BITCOIN으로 되어있는데, 헷갈릴까봐 이런 이름으로 상장하는듯함.
+# Tickerlist.remove('ME/USDT:USDT') # 코개코 없음 매직에덴. 이젠 생겼으니 다시 넣기.
+Tickerlist.remove('BIO/USDT:USDT') # 코개코 없음 PRE마켓인데 왜 잡히지?
         
 #마지막 가격정보 불러오기
 lastprices = exBybit.fetch_tickers(Tickerlist)

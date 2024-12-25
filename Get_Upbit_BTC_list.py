@@ -21,7 +21,7 @@ try:
 
     # Tickerlist.remove('LWA') #코인개코에 정보없음. 이제 생김
     Tickerlist.remove('GAME2') #CoinGecko에 정보없음. 얘는 여전히 없음
-    Tickerlist.remove('BOUNTY') #코개코랑 코마캡에 없음
+    # Tickerlist.remove('BOUNTY') #코개코랑 코마캡에 없음
     # Tickerlist.remove('SKY') 
     # Tickerlist.remove('USDS')
     Tickerlist = set(Tickerlist)
