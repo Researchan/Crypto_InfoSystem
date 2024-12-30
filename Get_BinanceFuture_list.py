@@ -44,6 +44,7 @@ Tickerlist.remove('KLAY/USDT:USDT')
 Tickerlist.remove('REN/USDT:USDT')
 Tickerlist.remove('KEY/USDT:USDT')
 Tickerlist.remove('BOND/USDT:USDT')
+Tickerlist.remove('BLZ/USDT:USDT')
 Tickerlist.sort()
 
 

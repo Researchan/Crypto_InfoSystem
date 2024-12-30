@@ -31,7 +31,7 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP',
                'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD', 'ANT', 'DOCK', 'GAL', 'MDX', 'POLS',
                'EPX', 'EURI', 'REEF', 'BOND','ORN', 'UNFI', 'OOKI', 'FOR', 'VGX', 'KP3R',
-               'CVP', 'KLAY']
+               'CVP', 'KLAY', 'BLZ']
 
 
 
