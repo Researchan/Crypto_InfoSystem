@@ -45,6 +45,10 @@ Tickerlist.remove('REN/USDT:USDT')
 Tickerlist.remove('KEY/USDT:USDT')
 Tickerlist.remove('BOND/USDT:USDT')
 Tickerlist.remove('BLZ/USDT:USDT')
+Tickerlist.remove('LOOM/USDT:USDT')
+Tickerlist.remove('MAVIA/USDT:USDT')
+Tickerlist.remove('ORBS/USDT:USDT')
+Tickerlist.remove('XEM/USDT:USDT')
 Tickerlist.sort()
 
 
@@ -59,7 +63,7 @@ for i in Tickerlist:
     })
     OI_Dict[str(i)] = round(res[0]['openInterestValue'])
     
-    # OI정보 보내주지 않는 페어는 오류나게 됨.
+    # # OI정보 보내주지 않는 페어는 오류나게 됨.
     # print(i, ' : ', OI_Dict[str(i)])
 
 #8 OI정보 저장된 곳 티커 정리하기
