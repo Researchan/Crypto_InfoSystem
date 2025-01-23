@@ -1,4 +1,5 @@
 import jandimodule
+import traceback
 
 import Get_BinanceFuture_list
 import Get_Bithumb_list
@@ -99,7 +100,9 @@ try:
     # 엑셀시트의 각 데이터 프레임을 반복해서 검색
     for _, row in df_excel.iterrows():
         ticker = row['Ticker'] # 엑셀파일에서, 행이름이 'Ticker'인 열의 데이터를 1행씩 가져와서 ticker변수에 할당
+        # print(ticker)
         Coin_Infos[ticker]['CG_id'] = row['CG_id'] # 불러온 Ticker를 가지고 Coin_Infos Dictionary에서 검색해서, 있으면 해당 키의 CG_id 필드에 CG_id필드 정보 추가.
+        # print(Coin_Infos[ticker]['CG_id'])
         Coin_Infos[ticker]['CMC_id'] = row['CMC_id'] # 같은 방식으로 CMC_id도 추가
         
     # 새로운 데이터프레임 생성
@@ -153,4 +156,7 @@ try:
 
 except Exception as e:
     print(e)
+    print(traceback.format_exc())
+    if e == 'nan':
+        pass
     jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
