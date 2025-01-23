@@ -157,6 +157,6 @@ try:
 except Exception as e:
     print(e)
     print(traceback.format_exc())
-    if e == 'nan':
-        pass
+    # if e == 'nan':
+    #     pass
     jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
