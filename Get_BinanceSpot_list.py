@@ -31,7 +31,7 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP',
                'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD', 'ANT', 'DOCK', 'GAL', 'MDX', 'POLS',
                'EPX', 'EURI', 'REEF', 'BOND','ORN', 'UNFI', 'OOKI', 'FOR', 'VGX', 'KP3R',
-               'CVP', 'KLAY', 'BLZ']
+               'CVP', 'KLAY', 'BLZ', 'DAR']
 
 
 
@@ -55,9 +55,9 @@ Tickerlist.remove('WAVES')
 Tickerlist.remove('XEM')
 Tickerlist.remove('AGIX') # FET합병
 Tickerlist.remove('OCEAN') # FET 합병
-Tickerlist.remove('SCR') # 임시 보류
+# Tickerlist.remove('SCR') # 임시 보류
 Tickerlist.remove('BNSOL')
-Tickerlist.remove('LUMIA') #ORN 리브랜딩, 코개코가 안줘서 잠시 없앰.
+# Tickerlist.remove('LUMIA') #ORN 리브랜딩, 코개코가 안줘서 잠시 없앰.
 
 #LUNA는 LUNA2로 티커이름 통일하겠음.
 Tickerlist.remove('LUNA')

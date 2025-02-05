@@ -49,6 +49,7 @@ Tickerlist.remove('LOOM/USDT:USDT')
 Tickerlist.remove('MAVIA/USDT:USDT')
 Tickerlist.remove('ORBS/USDT:USDT')
 Tickerlist.remove('XEM/USDT:USDT')
+Tickerlist.remove('DAR/USDT:USDT') #D로 리브랜딩
 Tickerlist.sort()
 
 
