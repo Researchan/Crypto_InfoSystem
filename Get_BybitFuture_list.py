@@ -16,11 +16,10 @@ for i in exBybitTickers:
     #print(i)
 
 #2 잘못된 티커, 조회 안되는 티커, 조회 안할 티커 삭제
-Tickerlist.remove('SPEC/USDT:USDT') # 코마캡에없음
-Tickerlist.remove('RIFSOL/USDT:USDT') # 코마캡에없음 잠시 보류
+# Tickerlist.remove('SPEC/USDT:USDT') # 코마캡에없음, 생겨서 넣음
 Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
-Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음
-Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음
+# Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음, 근데 이젠 상폐당함. 그래서 안지워도 됨.
+# Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음, 생겨서 넣음.
 # Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡에는 BITCOIN으로 되어있는데, 헷갈릴까봐 이런 이름으로 상장하는듯함.
 # Tickerlist.remove('ME/USDT:USDT') # 코개코 없음 매직에덴. 이젠 생겼으니 다시 넣기.
 # Tickerlist.remove('BIO/USDT:USDT') # 코개코 없음 PRE마켓인데 왜 잡히지?
@@ -165,6 +164,12 @@ New_Tickerlist.append('RAY')
 Bybit_New_OI_Dict['QUBIC'] = Bybit_New_OI_Dict.pop('10000QUBIC') #바이낸스 바이비트 다 문제야
 New_Tickerlist.remove('10000QUBIC')
 New_Tickerlist.append('QUBIC')
+
+# 코마캡에 없어서 잠시 보류했는데, 몇달째 없는 줄 알았더니 이거 그냥 RIF인데 바이비트가 기상장 코인이랑 티커 겹쳐서 못넣는중. 
+Bybit_New_OI_Dict['RIF'] = Bybit_New_OI_Dict.pop('RIFSOL') #바이낸스 바이비트 다 문제야
+New_Tickerlist.remove('RIFSOL')
+New_Tickerlist.append('RIF')
+
 
 New_Tickerlist.sort()
 Tickerlist = New_Tickerlist
