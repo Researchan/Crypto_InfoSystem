@@ -17,10 +17,28 @@ df = pd.read_excel(input_file_name)
 # 엑셀 파일에 있는 id들을 ','로 구분하여 문자열로 만듦
 #coingecko_ids = ",".join(df['CG_id'].tolist())
 coingecko_ids = ",".join(df['CG_id'].fillna('').astype(str).tolist()) # CG_id가 없는 필드때문에 이렇게 사용해야함
+
+id_list = coingecko_ids.split(',')
+
+id_list1 = id_list[:500]
+id_list2 = id_list[500:]
+
+ids1_str = ",".join(id_list1)  # 최대 500개
+ids2_str = ",".join(id_list2)  # 500개 이후 나머지
+
 # Coingecko API 호출에 사용할 파라미터
-coingecko_params = {
+coingecko1_params = {
     'vs_currency': 'usd',
-    'ids': coingecko_ids,
+    'ids': ids1_str,
+    'order': 'market_cap_desc',
+    'per_page': 200,
+    'page': 1,
+    'sparkline': False
+}
+
+coingecko2_params = {
+    'vs_currency': 'usd',
+    'ids': ids2_str,
     'order': 'market_cap_desc',
     'per_page': 200,
     'page': 1,
@@ -30,10 +48,12 @@ coingecko_params = {
 # 모든 코인의 정보를 저장할 딕셔너리 생성
 coingecko_coins_data = {}
 
-# Coingecko API 호출 및 데이터 처리
+# Coingecko API 호출 및 데이터 처리1
 for _ in range(3):  # 3페이지까지 조회
     try:
-        response = requests.get(coingecko_url, params=coingecko_params)
+        response = requests.get(coingecko_url, params=coingecko1_params)
+        # print(response)
+        # print(response.status_code)
         response_json = response.json()
 
         # API 호출 결과가 빈 리스트인 경우, 더 이상 정보가 없으므로 반복문 종료
@@ -48,11 +68,40 @@ for _ in range(3):  # 3페이지까지 조회
             }
 
         # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
-        coingecko_params['page'] += 1
+        coingecko1_params['page'] += 1
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
         print(response_json)
         print("Error: Failed to retrieve Coingecko data", e)
+        jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
+        break
+
+# Coingecko API 호출 및 데이터 처리2
+for _ in range(3):  # 3페이지까지 조회
+    try:
+        response = requests.get(coingecko_url, params=coingecko2_params)
+        # print(response)
+        # print(response.status_code)
+        response_json = response.json()
+
+        # API 호출 결과가 빈 리스트인 경우, 더 이상 정보가 없으므로 반복문 종료
+        if not response_json:
+            break
+
+        # 모든 코인의 정보를 딕셔너리에 추가
+        for coin_info in response_json:
+            coingecko_coins_data[coin_info['id']] = {
+                'market_cap': coin_info['market_cap'],
+                'FDV': coin_info['fully_diluted_valuation']
+            }
+
+        # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
+        coingecko2_params['page'] += 1
+    except Exception as e:
+        # API 호출이 실패한 경우 에러 메시지 출력
+        print(response_json)
+        print("Error: Failed to retrieve Coingecko data", e)
+        jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
         break
 
 try:
