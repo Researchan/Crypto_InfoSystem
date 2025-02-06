@@ -52,6 +52,7 @@ Tickerlist.remove('XEM/USDT:USDT')
 Tickerlist.remove('DAR/USDT:USDT') #D로 리브랜딩
 # Tickerlist.remove('REFF/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.remove('OMG/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
+Tickerlist.remove('FTM/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.sort()
 
 
@@ -61,6 +62,8 @@ New_OI_Dict = {}
 
 #7 OI정보 받아와서 저장.
 for i in Tickerlist:
+    # # OI정보 보내주지 않는 페어는 오류나게 됨. 오류나는 페어 확인
+    # print(i)
     res = exBNfuture.fetch_open_interest_history(i, timeframe='5m', params={
         'limit':'1',
     })
