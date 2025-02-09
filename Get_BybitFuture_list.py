@@ -170,6 +170,10 @@ Bybit_New_OI_Dict['RIF'] = Bybit_New_OI_Dict.pop('RIFSOL') #바이낸스 바이�
 New_Tickerlist.remove('RIFSOL')
 New_Tickerlist.append('RIF')
 
+Bybit_New_OI_Dict['TST'] = Bybit_New_OI_Dict.pop('TSTBSC') #시간이 갈 수록 코인 수가 너무 많아져서 이런식으로 계속 티커를 조정해줘야하네.
+New_Tickerlist.remove('TSTBSC')
+New_Tickerlist.append('TST')
+
 
 New_Tickerlist.sort()
 Tickerlist = New_Tickerlist

@@ -98,6 +98,9 @@ Tickerlist.append('BABYDOGE')
 Tickerlist.remove('1000CAT')
 Tickerlist.append('CAT')
 
+Tickerlist.remove('1000CHEEMS') #선물은 상장되어있었네.
+Tickerlist.append('CHEEMS')
+
 #정렬
 Tickerlist.sort()
 
