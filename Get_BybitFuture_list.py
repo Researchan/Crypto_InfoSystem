@@ -161,12 +161,16 @@ Bybit_New_OI_Dict['RAY'] = Bybit_New_OI_Dict.pop('RAYDIUM') #바이낸스 바이
 New_Tickerlist.remove('RAYDIUM')
 New_Tickerlist.append('RAY')
 
-Bybit_New_OI_Dict['QUBIC'] = Bybit_New_OI_Dict.pop('10000QUBIC') #바이낸스 바이비트 다 문제야
+Bybit_New_OI_Dict['QUBIC'] = Bybit_New_OI_Dict.pop('10000QUBIC')
 New_Tickerlist.remove('10000QUBIC')
 New_Tickerlist.append('QUBIC')
 
+Bybit_New_OI_Dict['ELON'] = Bybit_New_OI_Dict.pop('10000ELON')
+New_Tickerlist.remove('10000ELON')
+New_Tickerlist.append('ELON')
+
 # 코마캡에 없어서 잠시 보류했는데, 몇달째 없는 줄 알았더니 이거 그냥 RIF인데 바이비트가 기상장 코인이랑 티커 겹쳐서 못넣는중. 
-Bybit_New_OI_Dict['RIF'] = Bybit_New_OI_Dict.pop('RIFSOL') #바이낸스 바이비트 다 문제야
+Bybit_New_OI_Dict['RIF'] = Bybit_New_OI_Dict.pop('RIFSOL')
 New_Tickerlist.remove('RIFSOL')
 New_Tickerlist.append('RIF')
 
