@@ -11,13 +11,13 @@ exBybitTickers = exBybitTickersInfo.keys() # 티커 키만 받아오기 (이름�
 #1 Bybit 티커 받아오기 (USDC, Deilivery, ETF 제거)
 Tickerlist = []
 for i in exBybitTickers:
-    if 'USDT:USDT' in i:
+    if i[-9:] == 'USDT:USDT':
         Tickerlist.append(i)
-    #print(i)
+    # print(i)
 
 #2 잘못된 티커, 조회 안되는 티커, 조회 안할 티커 삭제
 # Tickerlist.remove('SPEC/USDT:USDT') # 코마캡에없음, 생겨서 넣음
-Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
+# Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
 # Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음, 근데 이젠 상폐당함. 그래서 안지워도 됨.
 # Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음, 생겨서 넣음.
 # Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡에는 BITCOIN으로 되어있는데, 헷갈릴까봐 이런 이름으로 상장하는듯함.
@@ -25,7 +25,9 @@ Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
 # Tickerlist.remove('BIO/USDT:USDT') # 코개코 없음 PRE마켓인데 왜 잡히지?
         
 #마지막 가격정보 불러오기
+# print(Tickerlist)
 lastprices = exBybit.fetch_tickers(Tickerlist)
+# print(lastprices)
 
 #OI 딕셔너리 생성
 Bybit_OI_Dict ={}
@@ -36,7 +38,7 @@ for i in Tickerlist:
     res = exBybit.fetch_open_interest_history(i, timeframe='5m', params={ 
             'limit':'1',
         })
-    #print(i)
+    # print(i)
     Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue'])
     # print(res)
 
