@@ -17,12 +17,13 @@ for i in exBybitTickers:
 
 #2 잘못된 티커, 조회 안되는 티커, 조회 안할 티커 삭제
 # Tickerlist.remove('SPEC/USDT:USDT') # 코마캡에없음, 생겨서 넣음
-# Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
+Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
 # Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음, 근데 이젠 상폐당함. 그래서 안지워도 됨.
 # Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음, 생겨서 넣음.
 # Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡에는 BITCOIN으로 되어있는데, 헷갈릴까봐 이런 이름으로 상장하는듯함.
 # Tickerlist.remove('ME/USDT:USDT') # 코개코 없음 매직에덴. 이젠 생겼으니 다시 넣기.
 # Tickerlist.remove('BIO/USDT:USDT') # 코개코 없음 PRE마켓인데 왜 잡히지?
+# Tickerlist.remove('BIO/USDT:USDT') # 
         
 #마지막 가격정보 불러오기
 # print(Tickerlist)
@@ -179,6 +180,10 @@ New_Tickerlist.append('RIF')
 Bybit_New_OI_Dict['TST'] = Bybit_New_OI_Dict.pop('TSTBSC') #시간이 갈 수록 코인 수가 너무 많아져서 이런식으로 계속 티커를 조정해줘야하네.
 New_Tickerlist.remove('TSTBSC')
 New_Tickerlist.append('TST')
+
+Bybit_New_OI_Dict['LAYER'] = Bybit_New_OI_Dict.pop('SOLAYER') #시간이 갈 수록 코인 수가 너무 많아져서 이런식으로 계속 티커를 조정해줘야하네.
+New_Tickerlist.remove('SOLAYER')
+New_Tickerlist.append('LAYER')
 
 
 New_Tickerlist.sort()
