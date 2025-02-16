@@ -185,6 +185,11 @@ Bybit_New_OI_Dict['LAYER'] = Bybit_New_OI_Dict.pop('SOLAYER') #시간이 갈 수
 New_Tickerlist.remove('SOLAYER')
 New_Tickerlist.append('LAYER')
 
+Bybit_New_OI_Dict['RON'] = Bybit_New_OI_Dict.pop('RONIN') #시간이 갈 수록 코인 수가 너무 많아져서 이런식으로 계속 티커를 조정해줘야하네.
+New_Tickerlist.remove('RONIN')
+New_Tickerlist.append('RON')
+
+
 
 New_Tickerlist.sort()
 Tickerlist = New_Tickerlist
