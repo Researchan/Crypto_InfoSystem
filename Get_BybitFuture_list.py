@@ -172,10 +172,10 @@ Bybit_New_OI_Dict['ELON'] = Bybit_New_OI_Dict.pop('10000ELON')
 New_Tickerlist.remove('10000ELON')
 New_Tickerlist.append('ELON')
 
-# 코마캡에 없어서 잠시 보류했는데, 몇달째 없는 줄 알았더니 이거 그냥 RIF인데 바이비트가 기상장 코인이랑 티커 겹쳐서 못넣는중. 
-Bybit_New_OI_Dict['RIF'] = Bybit_New_OI_Dict.pop('RIFSOL')
-New_Tickerlist.remove('RIFSOL')
-New_Tickerlist.append('RIF')
+# 코마캡에 없어서 잠시 보류했는데, 몇달째 없는 줄 알았더니 이거 그냥 RIF인데 바이비트가 기상장 코인이랑 티커 겹쳐서 못넣는중. 이거 아예 다른 코인이라서 주의 해야함
+# Bybit_New_OI_Dict['RIF'] = Bybit_New_OI_Dict.pop('RIFSOL')
+# New_Tickerlist.remove('RIFSOL')
+# New_Tickerlist.append('RIF')
 
 Bybit_New_OI_Dict['TST'] = Bybit_New_OI_Dict.pop('TSTBSC') #시간이 갈 수록 코인 수가 너무 많아져서 이런식으로 계속 티커를 조정해줘야하네.
 New_Tickerlist.remove('TSTBSC')
