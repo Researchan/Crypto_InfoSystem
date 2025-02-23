@@ -31,7 +31,7 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'XRPDOWN', 'XRPUP', 'XTZDOWN', 'XTZUP', 'XZC', 'YFIDOWN', 'YFII', 'YFIUP',
                'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD', 'ANT', 'DOCK', 'GAL', 'MDX', 'POLS',
                'EPX', 'EURI', 'REEF', 'BOND','ORN', 'UNFI', 'OOKI', 'FOR', 'VGX', 'KP3R',
-               'CVP', 'KLAY', 'BLZ', 'DAR', 'KEY', 'OAX', 'REEF']
+               'CVP', 'KLAY', 'BLZ', 'DAR', 'KEY', 'OAX', 'REEF', 'AKRO','GFT']
 
 
 
@@ -53,6 +53,8 @@ Tickerlist.remove('OMG')
 Tickerlist.remove('WNXM')
 Tickerlist.remove('WAVES')
 Tickerlist.remove('XEM')
+Tickerlist.remove('MATIC') #POL로 변했는데 자꾸 이 티커도 정보를 주네 짜증나게. 바이낸스 병신.
+Tickerlist.remove('FTM') #S로 변했는데 자꾸 이 티커도 정보를 주네 짜증나게. 바이낸스 병신.
 Tickerlist.remove('AGIX') # FET합병
 Tickerlist.remove('OCEAN') # FET 합병
 # Tickerlist.remove('SCR') # 임시 보류

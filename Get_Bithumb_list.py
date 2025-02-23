@@ -32,6 +32,7 @@ Tickerlist.remove('LWA')
 # Tickerlist.remove('GRACY') 빗썸단독상장 개잡코, 코마캡 코개코 생겨서 넣음.
 Tickerlist.remove('USDT')
 # Tickerlist.remove('XENT') # ENTC 리브랜딩. 안나옴 제외. /결국 상폐당함
+Tickerlist.remove('FLZ') #빗썸 단독상장 개잡코인데 FDV 3B 이라서 짜증나서 제외함. 어차피 재단만 갖고있는 쓰레기
 
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
