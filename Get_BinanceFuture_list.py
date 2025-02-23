@@ -49,10 +49,12 @@ Tickerlist.remove('LOOM/USDT:USDT')
 Tickerlist.remove('MAVIA/USDT:USDT')
 Tickerlist.remove('ORBS/USDT:USDT')
 Tickerlist.remove('XEM/USDT:USDT')
+Tickerlist.remove('AMB/USDT:USDT')
 Tickerlist.remove('DAR/USDT:USDT') #D로 리브랜딩
 Tickerlist.remove('REEF/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.remove('OMG/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.remove('FTM/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
+Tickerlist.remove('STMX/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.sort()
 
 
