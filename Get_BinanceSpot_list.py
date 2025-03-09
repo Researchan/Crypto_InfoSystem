@@ -15,7 +15,7 @@ for i in exBNTickers:
         coinname = i.split('/')[0]
         API_Tickerlist.append(coinname)
 
-#기존에 상장폐지된 리스트 수동으로 제거 (바이낸스가 API에서 여전히 제공해서 수동으로 제거해야함)
+#기존에 상장폐지된 리스트 수동으로 제거 (바이낸스가 API에서 여전히 제공해서 수동으로 제거해야함 근데 이 api가 있을텐데..)
 #왜 지들이 리브랜딩 해놓고 처 안지우냐 짜증나게
 delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP', 
                'AION', 'ANC', 'ANY', 'AUD', 'AUTO', 'BCC', 'BCHABC', 'BCHDOWN', 'BCHUP', 
