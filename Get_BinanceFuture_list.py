@@ -56,10 +56,6 @@ Tickerlist.remove('OMG/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘
 Tickerlist.remove('FTM/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.remove('STMX/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.remove('LIT/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
-Tickerlist.remove('MBL/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
-Tickerlist.remove('CVC/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
-Tickerlist.remove('MVL/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
-Tickerlist.remove('STPT/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
 Tickerlist.sort()
 
 
