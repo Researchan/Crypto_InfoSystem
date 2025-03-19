@@ -59,8 +59,10 @@ Tickerlist.remove('FTM') #S로 변했는데 자꾸 이 티커도 정보를 주�
 Tickerlist.remove('AGIX') # FET합병
 Tickerlist.remove('OCEAN') # FET 합병
 # Tickerlist.remove('SCR') # 임시 보류
+Tickerlist.remove('XUSD') # Stable제외
+Tickerlist.remove('FORM') # 코개코가 안줘서 임시제외
 Tickerlist.remove('BNSOL')
-Tickerlist.remove('EPIC') #리브랜딩인데 잠깐 냅두겠음.
+# Tickerlist.remove('EPIC') #리브랜딩인데 잠깐 냅두겠음.
 # Tickerlist.remove('LUMIA') #ORN 리브랜딩, 코개코가 안줘서 잠시 없앰.
 
 #LUNA는 LUNA2로 티커이름 통일하겠음.

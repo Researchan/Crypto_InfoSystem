@@ -23,7 +23,8 @@ Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
 # Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡에는 BITCOIN으로 되어있는데, 헷갈릴까봐 이런 이름으로 상장하는듯함.
 # Tickerlist.remove('ME/USDT:USDT') # 코개코 없음 매직에덴. 이젠 생겼으니 다시 넣기.
 # Tickerlist.remove('BIO/USDT:USDT') # 코개코 없음 PRE마켓인데 왜 잡히지?
-Tickerlist.remove('RED/USDT:USDT') # 보류
+# Tickerlist.remove('RED/USDT:USDT') # 보류
+# Tickerlist.remove('RED/USDT:USDT') # 보류
         
 #마지막 가격정보 불러오기
 # print(Tickerlist)
