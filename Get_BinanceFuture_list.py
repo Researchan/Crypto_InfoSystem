@@ -165,6 +165,10 @@ New_OI_Dict['RAY'] = New_OI_Dict.pop('RAYSOL') #레이디움은 왜 바이낸스
 New_Tickerlist.remove('RAYSOL')
 New_Tickerlist.append('RAY')
 
+New_OI_Dict['BROCCOLI'] = New_OI_Dict.pop('BROCCOLI714') #아 진짜 병신같네 바이낸스가 어쩌다가 이렇게 됐을까 네이로부터 진짜
+New_Tickerlist.remove('BROCCOLI714')
+New_Tickerlist.append('BROCCOLI')
+
 New_Tickerlist.sort()
 Tickerlist = New_Tickerlist
 
