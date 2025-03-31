@@ -32,7 +32,7 @@ delete_list = ['1INCHDOWN', '1INCHUP', 'AAVEDOWN', 'AAVEUP', 'ADADOWN', 'ADAUP',
                'MC', 'DREP', 'BTS', 'MOB', 'PERL', 'WTC', 'BUSD', 'ANT', 'DOCK', 'GAL', 'MDX', 'POLS',
                'EPX', 'EURI', 'REEF', 'BOND','ORN', 'UNFI', 'OOKI', 'FOR', 'VGX', 'KP3R',
                'CVP', 'KLAY', 'BLZ', 'DAR', 'KEY', 'OAX', 'REEF', 'AKRO','GFT','AMB','REN','WRX',
-               'STMX','LIT']
+               'STMX','LIT', 'BNX', 'COMBO', 'AERGO']
 
 
 
@@ -60,7 +60,7 @@ Tickerlist.remove('AGIX') # FET합병
 Tickerlist.remove('OCEAN') # FET 합병
 # Tickerlist.remove('SCR') # 임시 보류
 Tickerlist.remove('XUSD') # Stable제외
-Tickerlist.remove('FORM') # 코개코가 안줘서 임시제외
+# Tickerlist.remove('FORM') # 코개코가 안줘서 임시제외
 Tickerlist.remove('BNSOL')
 # Tickerlist.remove('EPIC') #리브랜딩인데 잠깐 냅두겠음.
 # Tickerlist.remove('LUMIA') #ORN 리브랜딩, 코개코가 안줘서 잠시 없앰.
