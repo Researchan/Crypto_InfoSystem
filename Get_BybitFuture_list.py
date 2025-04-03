@@ -18,6 +18,7 @@ for i in exBybitTickers:
 #2 잘못된 티커, 조회 안되는 티커, 조회 안할 티커 삭제
 # Tickerlist.remove('SPEC/USDT:USDT') # 코마캡에없음, 생겨서 넣음
 Tickerlist.remove('ETHBTC/USDT:USDT') # 인덱스
+Tickerlist.remove('XAUT/USDT:USDT') # 금 페깅코인이라.
 # Tickerlist.remove('DOP1/USDT:USDT') # 코개코에 없음, 근데 이젠 상폐당함. 그래서 안지워도 됨.
 # Tickerlist.remove('MAX/USDT:USDT') # 코개코에 없음, 생겨서 넣음.
 # Tickerlist.remove('HPOS10I/USDT:USDT') # 코개코 코마캡에는 BITCOIN으로 되어있는데, 헷갈릴까봐 이런 이름으로 상장하는듯함.
