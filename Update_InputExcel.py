@@ -8,7 +8,6 @@ import Get_Upbit_BTC_list
 import Get_Upbit_KRW_list
 import Get_BinanceSpot_list
 import Get_OkxFuture_list
-import Get_CoinbaseSpot_list
 # import Get_BinanceFuture_OI
 # import Get_BybitFuture_OI
 
@@ -20,7 +19,7 @@ try:
     Upbit_KRW_list = Get_Upbit_KRW_list.Tickerlist
     Upbit_BTC_list = Get_Upbit_BTC_list.Tickerlist
     Bithumb_list = Get_Bithumb_list.Tickerlist
-    Coinbase_Spot_list = Get_CoinbaseSpot_list.Tickerlist
+    # Coinbase_Spot_list = Get_CoinbaseSpot_list.Tickerlist
     Binance_Spot_list = Get_BinanceSpot_list.Tickerlist
     Binance_Future_list = Get_BinanceFuture_list.Tickerlist
     Bybit_Future_list = Get_BybitFuture_list.Tickerlist
@@ -30,7 +29,7 @@ try:
     Bybit_OI = Get_BybitFuture_list.sorted_OI_Dict
 
     # 각 거래소 상장리스트 합산하여 전체 리스트 생성 및 정렬
-    Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + Coinbase_Spot_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list
+    Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list
     Coin_list = set(Coin_list)
     Coin_list = list(Coin_list)
     Coin_list.sort()
@@ -43,7 +42,6 @@ try:
             'Upbit_KRW':None,
             'Upbit_BTC':None,
             'Bithumb':None,
-            'Coinbase_Spot':None,
             'Binance_Spot':None,
             'Binance_Future':None,
             'Bybit_Future':None,
@@ -68,11 +66,6 @@ try:
             Coin_Infos[i]['Bithumb'] = 'O'    
         elif i not in Bithumb_list:
             Coin_Infos[i]['Bithumb'] = 'X'
-            
-        if i in Coinbase_Spot_list:
-            Coin_Infos[i]['Coinbase_Spot'] = 'O'
-        elif i not in Coinbase_Spot_list:
-            Coin_Infos[i]['Coinbase_Spot'] = 'X'
             
         if i in Binance_Spot_list:
             Coin_Infos[i]['Binance_Spot'] = 'O'
@@ -119,7 +112,7 @@ try:
     # 여기서의 ticker 변수는, Dict 자료의 key값을 의미함. 즉 위의 ticker와 헷갈리지 말기. 위의 for문안의 ticker는 소멸된다.
     for ticker, info in sorted(Coin_Infos.items()):
         new_row = {'Ticker': ticker, 'CG_id': info['CG_id'], 'CMC_id':info['CMC_id'],
-                'Upbit_KRW': info['Upbit_KRW'], 'Upbit_BTC': info['Upbit_BTC'], 'Bithumb': info['Bithumb'], 'Coinbase_Spot': info['Coinbase_Spot'], 'Binance_Spot': info['Binance_Spot'], 
+                'Upbit_KRW': info['Upbit_KRW'], 'Upbit_BTC': info['Upbit_BTC'], 'Bithumb': info['Bithumb'], 'Binance_Spot': info['Binance_Spot'], 
                 'Binance_Future': info['Binance_Future'], 'Bybit_Future': info['Bybit_Future'], 'Okx_Future': info['Okx_Future'],
                 'Binance_OI' : info['Binance_OI'], 'Bybit_OI' : info['Bybit_OI']}
         new_data.append(new_row)
@@ -148,10 +141,9 @@ try:
     worksheet.column_dimensions['J'].width = 15
     worksheet.column_dimensions['K'].width = 15
     worksheet.column_dimensions['L'].width = 15
-    worksheet.column_dimensions['M'].width = 15
 
-    # A열부터 M열까지 가운데 정렬
-    for column_letter in 'ABCDEFGHIJKLM':
+    # A열부터 L열까지 가운데 정렬
+    for column_letter in 'ABCDEFGHIJKL':
         for cell in worksheet[column_letter]:
             cell.alignment = Alignment(horizontal='center', vertical='center')
 

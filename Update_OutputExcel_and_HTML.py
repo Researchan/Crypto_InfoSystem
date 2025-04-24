@@ -135,7 +135,6 @@ try:
         Upbit_KRW = row['Upbit_KRW'] 
         Upbit_BTC = row['Upbit_BTC']
         Bithumb = row['Bithumb']
-        Coinbase_Spot = row['Coinbase_Spot']
         Binance_Spot = row['Binance_Spot']
         Binance_Future = row['Binance_Future']
         Bybit_Future = row['Bybit_Future']
@@ -152,13 +151,13 @@ try:
         # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
         coin_data_list.append([Ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, 
                                 Binance_OI, Bybit_OI,
-                                Upbit_KRW, Upbit_BTC, Bithumb, Coinbase_Spot, Binance_Spot,
+                                Upbit_KRW, Upbit_BTC, Bithumb, Binance_Spot,
                                 Binance_Future, Bybit_Future, Okx_Future
                                ])
 
     # 데이터를 DataFrame으로 변환. 이는 각 열 이름
     columns = ['Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV',
-                'Binance_OI', 'Bybit_OI', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot', 'Binance_Spot',
+                'Binance_OI', 'Bybit_OI', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Spot',
                 'Binance_Future', 'Bybit_Future', 'Okx_Future'
                ]
     
@@ -207,7 +206,7 @@ try:
     df['Binance_OI'] = df['Binance_OI'].apply(lambda x: f"${int(x):,}")
     df['Bybit_OI'] = df['Bybit_OI'].apply(lambda x: f"${int(x):,}")
 
-    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot', 'Binance_Spot', 
+    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Spot', 
                              'Binance_Future', 'Bybit_Future', 'Okx_Future',
                              'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 
                              'Binance_OI', 'Bybit_OI'])
@@ -216,7 +215,6 @@ try:
         'Upbit_KRW' : 'Ub_KRW',
         'Upbit_BTC' : 'Ub_BTC',
         'Bithumb' : 'Bithumb',
-        'Coinbase_Spot' : 'CB_Spot',
         'Binance_Spot' : 'BN_Spot',
         'Binance_Future' : 'BN_USDM',
         'Bybit_Future' : 'BB_USDM',
@@ -250,36 +248,378 @@ try:
                     padding: 0;
                     }}
                 .dataframe {{
-                    border-collapse: collapse;
-                    width: 100%;
+                    width: 95%;
+                    height: 80%;
                     }}
-                .dataframe th {{
-                    background-color: #f2f2f2;
-                    padding: 8px;
+                .dataTables_wrapper {{
+                    width: 95%;
+                    margin: auto;
+                }}
+                h1 {{
+                    color: blue;
+                    font-size: 24px;
+                    text-align:center;
+                }}
+                label.checkbox-label {{
+                margin-right: 10px;
+                }}
+                
+                th{{
+                text-align:center;
+                }}
+                
+                th select{{
+                display: block;
+                margin: 0 auto;
+                }}
+                
+                tbody tr td:nth-child(3),tbody tr td:nth-child(4),
+                tbody tr td:nth-child(5),tbody tr td:nth-child(6),
+                tbody tr td:nth-child(7),tbody tr td:nth-child(8), 
+                tbody tr td:nth-child(9),tbody tr td:nth-child(10),
+                {{
                     text-align: center;
-                    }}
-                .dataframe td {{
-                    padding: 8px;
-                    text-align: center;
-                    }}
-                .dataframe tr:nth-child(even) {{
-                    background-color: #f9f9f9;
-                    }}
-                .dataframe tr:hover {{
-                    background-color: #f1f1f1;
-                    }}
+                }}
             </style>
+            
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+            <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+            
         </head>
         <body>
-        ''')
-        f.write(html)
-        f.write('''
+            <h1>Researchan's listing Info Page</h1>
+            <div class="dataTables_wrapper">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn2" checked> 업빗 KRW
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn3" checked> 업빗 BTC
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn4" checked> 빗썸
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn5" checked> 바이낸스 현물
+                </label>                
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn6" checked> 바이낸스 선물
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn7" checked> 바이비트 선물
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn8" checked> OKX 선물
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn9" checked> CG_MC
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn10" checked> CG_FDV
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn11" checked> CMC_MC
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn12" checked> CMC_FDV
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn13" checked> OI_Binance
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn14" checked> OI_Bybit
+                </label>
+                {table}
+            </div>
+            <script>
+                $(document).ready( function () 
+                {{ 
+                    // 체크박스 상태에 따라 컬럼 보이기/숨기기
+                    $('#toggleColumn2').on('change', function () 
+                    {{
+                        table.column(2).visible(this.checked);
+                    }});
+                    $('#toggleColumn3').on('change', function () 
+                    {{
+                        table.column(3).visible(this.checked);
+                    }});
+                    $('#toggleColumn4').on('change', function () 
+                    {{
+                        table.column(4).visible(this.checked);
+                    }});
+                    $('#toggleColumn5').on('change', function () 
+                    {{
+                        table.column(5).visible(this.checked);
+                    }});
+                    $('#toggleColumn6').on('change', function () 
+                    {{
+                        table.column(6).visible(this.checked);
+                    }});
+                    $('#toggleColumn7').on('change', function () 
+                    {{
+                        table.column(7).visible(this.checked);
+                    }});
+                    $('#toggleColumn8').on('change', function () 
+                    {{
+                        table.column(8).visible(this.checked);
+                    }});
+                    $('#toggleColumn9').on('change', function () 
+                    {{
+                        table.column(9).visible(this.checked);
+                    }});
+                    $('#toggleColumn10').on('change', function () 
+                    {{
+                        table.column(10).visible(this.checked);
+                    }});
+                    $('#toggleColumn11').on('change', function () 
+                    {{
+                        table.column(11).visible(this.checked);
+                    }});
+                    $('#toggleColumn12').on('change', function () 
+                    {{
+                        table.column(12).visible(this.checked);
+                    }});
+                    $('#toggleColumn13').on('change', function () 
+                    {{
+                        table.column(13).visible(this.checked);
+                    }});
+                    $('#toggleColumn14').on('change', function () 
+                    {{
+                        table.column(14).visible(this.checked);
+                    }});
+                    
+                    
+                    var table = $('.dataframe').DataTable(
+                    {{    
+                        initComplete: function () 
+                        {{
+                            // 3열에 드롭다운 메뉴 추가
+                            this.api().columns(2).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );
+
+                            // 4열에 드롭다운 메뉴 추가
+                            this.api().columns(3).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );
+                            
+                            // 5열에 드롭다운 메뉴 추가
+                            this.api().columns(4).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );
+                            
+                            // 6열에 드롭다운 메뉴 추가          
+                            this.api().columns(5).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );
+                            
+                            // 7열에 드롭다운 메뉴 추가          
+                            this.api().columns(6).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );
+                
+                            // 8열에 드롭다운 메뉴 추가          
+                            this.api().columns(7).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );   
+                
+                            // 9열에 드롭다운 메뉴 추가          
+                            this.api().columns(8).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );   
+                
+                        }},
+                        
+                        "searching": true,
+                        "paging": false,
+                        "info": false,
+                        "lengthChange": false,
+                        "scrollY": '80vh',
+                        "scrollX": true,
+                        "scrollCollapse": true,
+                        "fixedHeader": true,
+                        "autoWidth": false,
+                        "order": [[ 1, "asc" ]],  // 2nd column as the initial sorting column
+                        "columnDefs": 
+                        [{{
+                            "searchable": false,
+                            "orderable": false,
+                            "targets": 0 
+                        }}],
+                        "columns": 
+                        [
+                            {{ "width": "10px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "50px" }},
+                            {{ "width": "80px" }},
+                            {{ "width": "80px" }},
+                            {{ "width": "80px" }},
+                            {{ "width": "80px" }},
+                            {{ "width": "80px" }},
+                            {{ "width": "80px" }},
+                        ]
+                    }});
+
+                    // This will add numbers on the leftmost column
+                    table.on( 'order.dt search.dt', function () 
+                    {{
+                        table.column(0, {{search:'applied', order:'applied'}}).nodes().each( function (cell, i) 
+                        {{cell.innerHTML = i+1;}});
+                    }}).draw();
+                }});
+            </script>
         </body>
         </html>
-        ''')
+        '''.format(table=html))
 
-    print(f"HTML file has been generated and saved as {output_html_name}.")
+    print(f"Data retrieval successful and saved to {output_html_name}!")
 
 except Exception as e:
-    print("Error: Failed to retrieve data", e)
+    print(e)
     jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
