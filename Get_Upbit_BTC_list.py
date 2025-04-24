@@ -1,35 +1,46 @@
 import ccxt
 import jandimodule
 
+Tickerlist = []  # 모듈 레벨에서 Tickerlist 변수 정의
+
 try:
     exUpbit = ccxt.upbit({})
-    exUpbitTickersInfo = exUpbit.fetchTickers() # 티커 딕셔너리 가져옴
-    exUpbitTickers = exUpbitTickersInfo.keys() # 티커 키만 받아오기 (이름만)
-
-    Tickerlist = []
-    for i in exUpbitTickers:
-        if i[-3:] == 'BTC':
-            Tickerlist.append(i[0:-4])
-
-    # Tokamak이 TON이랑 겹침. 또한 오름차순 정렬시 소문자 O를 엑셀이 구분하기때문에 전부 대문자로 변경
-    #Tickerlist.remove('Tokamak Network')
-    #Tickerlist.append('TOKAMAK')
-
     
-    Tickerlist.remove('USDT') #테더삭제
-    Tickerlist.remove('OCEAN') #삭제
-
-    # Tickerlist.remove('LWA') #코인개코에 정보없음. 이제 생김
-    Tickerlist.remove('GAME2') #CoinGecko에 정보없음. 얘는 여전히 없음
-    # Tickerlist.remove('BOUNTY') #코개코랑 코마캡에 없음
-    # Tickerlist.remove('SKY') 
-    # Tickerlist.remove('USDS')
+    # 모든 티커를 한 번에 가져오지 않고, BTC 마켓만 가져옵니다
+    markets = exUpbit.load_markets()
+    for symbol in markets:
+        if symbol.endswith('/BTC'):
+            ticker = symbol.split('/')[0]
+            Tickerlist.append(ticker)
+    
+    # 제외할 토큰 목록
+    tokens_to_remove = [
+        'USDT',  # 테더
+        'OCEAN',  # 삭제
+        'GAME2',  # CoinGecko에 정보없음
+    ]
+    
+    # 제외된 토큰 출력
+    # print("\n제외된 토큰 목록:")
+    # for token in sorted(tokens_to_remove):
+    #     if token in Tickerlist:
+    #         print(f"- {token}")
+    
+    # 토큰 제거
+    for token in tokens_to_remove:
+        if token in Tickerlist:
+            Tickerlist.remove(token)
+    
+    # 중복 제거 및 정렬
     Tickerlist = set(Tickerlist)
     Tickerlist = list(Tickerlist)
     Tickerlist.sort()
-
-    # for i in Tickerlist:
-    #     print(i)
+    
+    # print(f"\n총 {len(Tickerlist)}개의 BTC 페어가 있습니다:")
+    # for ticker in Tickerlist:
+    #     print(ticker)
     
 except Exception as e:
-    jandimodule.Exchange_Listing_send_message_to_jandi("upbit BTC오류 : " + str(e))
+    error_message = f"업비트 BTC 데이터 수집 중 오류 발생: {str(e)}"
+    print(error_message)
+    jandimodule.Exchange_Listing_send_message_to_jandi(error_message)
