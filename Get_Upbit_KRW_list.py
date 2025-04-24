@@ -31,7 +31,7 @@ try:
     Tickerlist = list(Tickerlist)
     Tickerlist.sort()
 
-    print(f"\n총 {len(Tickerlist)}개의 KRW 페어가 있습니다:")
+    # print(f"\n총 {len(Tickerlist)}개의 KRW 페어가 있습니다:")
     # for i in Tickerlist:
     #     print(i)
 
