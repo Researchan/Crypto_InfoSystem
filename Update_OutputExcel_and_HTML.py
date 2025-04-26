@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import jandimodule
+import time  # time 모듈 추가
 
 input_file_name = 'ListingDatas.xlsx'
 output_xlsx_name = 'Dataoutput.xlsx'
@@ -69,12 +70,21 @@ for _ in range(3):  # 3페이지까지 조회
 
         # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
         coingecko1_params['page'] += 1
+        
+        # API 호출 간 30초 대기 (기존 5초에서 변경)
+        print("다음 API 호출 전 30초 대기 중...")
+        time.sleep(30)
+        
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
         print(response_json)
         print("Error: Failed to retrieve Coingecko data", e)
         jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
         break
+
+# 첫 번째 그룹과 두 번째 그룹 사이에 추가 대기 시간 (30초로 증가)
+print("두 번째 API 호출 그룹 전 30초 대기 중...")
+time.sleep(30)
 
 # Coingecko API 호출 및 데이터 처리2
 for _ in range(3):  # 3페이지까지 조회
@@ -97,12 +107,20 @@ for _ in range(3):  # 3페이지까지 조회
 
         # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
         coingecko2_params['page'] += 1
+        
+        # API 호출 간 30초 대기 (기존 5초에서 변경)
+        print("다음 API 호출 전 30초 대기 중...")
+        time.sleep(30)
+        
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
         print(response_json)
         print("Error: Failed to retrieve Coingecko data", e)
         jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
         break
+
+# 코인게코 API 호출 완료 후 코인마켓캡 API 호출 전 추가 대기 시간 (3초)
+time.sleep(3)
 
 try:
     # CoinMarketCap API 호출에 사용할 파라미터
@@ -135,12 +153,15 @@ try:
         Upbit_KRW = row['Upbit_KRW'] 
         Upbit_BTC = row['Upbit_BTC']
         Bithumb = row['Bithumb']
+        Coinbase_Spot = row['Coinbase_Spot']
         Binance_Spot = row['Binance_Spot']
         Binance_Future = row['Binance_Future']
         Bybit_Future = row['Bybit_Future']
         Okx_Future = row['Okx_Future']
+        HL_Future = row['HL_Future']
         Binance_OI = row['Binance_OI']
         Bybit_OI = row['Bybit_OI']
+        HL_OI = row['HL_OI']  # 하이퍼리퀴드 OI 추가
 
         cg_market_cap = coingecko_coins_data.get(cg_id, {}).get('market_cap', float('nan'))
         cg_fdv = coingecko_coins_data.get(cg_id, {}).get('FDV', float('nan'))
@@ -150,15 +171,16 @@ try:
 
         # 받아온 데이터 리스트에 포함 (리스트 안에 리스트 구조)
         coin_data_list.append([Ticker, cg_id, cmc_id, cg_market_cap, cg_fdv, cmc_market_cap, cmc_fdv, 
-                                Binance_OI, Bybit_OI,
-                                Upbit_KRW, Upbit_BTC, Bithumb, Binance_Spot,
-                                Binance_Future, Bybit_Future, Okx_Future
+                                Binance_OI, Bybit_OI, HL_OI,  # HL_OI 추가
+                                Upbit_KRW, Upbit_BTC, Bithumb, Coinbase_Spot,
+                                Binance_Spot, Binance_Future, Bybit_Future, Okx_Future, HL_Future
                                ])
 
     # 데이터를 DataFrame으로 변환. 이는 각 열 이름
     columns = ['Ticker', 'CG_id', 'CMC_id', 'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV',
-                'Binance_OI', 'Bybit_OI', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Spot',
-                'Binance_Future', 'Bybit_Future', 'Okx_Future'
+                'Binance_OI', 'Bybit_OI', 'HL_OI',  # HL_OI 추가
+                'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot',
+                'Binance_Spot', 'Binance_Future', 'Bybit_Future', 'Okx_Future', 'HL_Future'
                ]
     
     #위에 coin_data_list와 columns에서 지정한 열 합쳐서 총 자료 생성. 순서 일치해야함
@@ -205,26 +227,30 @@ try:
     df['CMC_FDV'] = df['CMC_FDV'].apply(lambda x: f"${int(x):,}")
     df['Binance_OI'] = df['Binance_OI'].apply(lambda x: f"${int(x):,}")
     df['Bybit_OI'] = df['Bybit_OI'].apply(lambda x: f"${int(x):,}")
+    df['HL_OI'] = df['HL_OI'].apply(lambda x: f"${int(x):,}")  # HL_OI 통화 형식 추가
 
-    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Binance_Spot', 
-                             'Binance_Future', 'Bybit_Future', 'Okx_Future',
+    df = df.reindex(columns=['Ticker', 'Upbit_KRW', 'Upbit_BTC', 'Bithumb', 'Coinbase_Spot', 'Binance_Spot', 
+                             'Binance_Future', 'Bybit_Future', 'Okx_Future', 'HL_Future',
                              'CG_MarketCap', 'CG_FDV', 'CMC_MarketCap', 'CMC_FDV', 
-                             'Binance_OI', 'Bybit_OI'])
+                             'Binance_OI', 'Bybit_OI', 'HL_OI'])  # HL_OI 추가
 
     df.rename(columns={
         'Upbit_KRW' : 'Ub_KRW',
         'Upbit_BTC' : 'Ub_BTC',
         'Bithumb' : 'Bithumb',
+        'Coinbase_Spot' : 'CB_Spot',
         'Binance_Spot' : 'BN_Spot',
         'Binance_Future' : 'BN_USDM',
         'Bybit_Future' : 'BB_USDM',
         'Okx_Future' : 'OKX_Perp',
+        'HL_Future' : 'HL',  # HL_Perp에서 HL로 변경
         'CG_MarketCap': 'CG_MC',
         'CMC_MarketCap': 'CMC_MC',
         'CG_FDV': 'CG_FDV',
         'CMC_FDV': 'CMC_FDV',
         'Binance_OI' : 'Binance_OI',
         'Bybit_OI' : 'Bybit_OI',
+        'HL_OI' : 'HL_OI',
         }, inplace=True)
 
     # 행 번호를 별도의 열로 만들기
@@ -300,34 +326,43 @@ try:
                     <input type="checkbox" id="toggleColumn4" checked> 빗썸
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn5" checked> 바이낸스 현물
+                    <input type="checkbox" id="toggleColumn5" checked> 코인베이스 현물
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn6" checked> 바이낸스 현물
                 </label>                
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn6" checked> 바이낸스 선물
+                    <input type="checkbox" id="toggleColumn7" checked> 바이낸스 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn7" checked> 바이비트 선물
+                    <input type="checkbox" id="toggleColumn8" checked> 바이비트 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn8" checked> OKX 선물
+                    <input type="checkbox" id="toggleColumn9" checked> OKX 선물
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn9" checked> CG_MC
+                    <input type="checkbox" id="toggleColumn10" checked> HL
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn10" checked> CG_FDV
+                    <input type="checkbox" id="toggleColumn11" checked> CG_MC
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn11" checked> CMC_MC
+                    <input type="checkbox" id="toggleColumn12" checked> CG_FDV
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn12" checked> CMC_FDV
+                    <input type="checkbox" id="toggleColumn13" checked> CMC_MC
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn13" checked> OI_Binance
+                    <input type="checkbox" id="toggleColumn14" checked> CMC_FDV
                 </label>
                 <label class="checkbox-label">
-                    <input type="checkbox" id="toggleColumn14" checked> OI_Bybit
+                    <input type="checkbox" id="toggleColumn15" checked> OI_Binance
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn16" checked> OI_Bybit
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="toggleColumn17" checked> OI_HL
                 </label>
                 {table}
             </div>
@@ -386,6 +421,18 @@ try:
                     $('#toggleColumn14').on('change', function () 
                     {{
                         table.column(14).visible(this.checked);
+                    }});
+                    $('#toggleColumn15').on('change', function () 
+                    {{
+                        table.column(15).visible(this.checked);
+                    }});
+                    $('#toggleColumn16').on('change', function () 
+                    {{
+                        table.column(16).visible(this.checked);
+                    }});
+                    $('#toggleColumn17').on('change', function () 
+                    {{
+                        table.column(17).visible(this.checked);
                     }});
                     
                     
@@ -467,8 +514,8 @@ try:
                                     select.append( '<option value="'+d+'">'+d+'</option>' )
                                 }} );
                             }} );
-                            
-                            // 6열에 드롭다운 메뉴 추가          
+
+                            // 6열에 드롭다운 메뉴 추가 (코인베이스)
                             this.api().columns(5).every( function () 
                             {{
                                 var column = this;
@@ -517,7 +564,7 @@ try:
                                     select.append( '<option value="'+d+'">'+d+'</option>' )
                                 }} );
                             }} );
-                
+                            
                             // 8열에 드롭다운 메뉴 추가          
                             this.api().columns(7).every( function () 
                             {{
@@ -541,10 +588,60 @@ try:
                                 {{
                                     select.append( '<option value="'+d+'">'+d+'</option>' )
                                 }} );
-                            }} );   
+                            }} );
                 
                             // 9열에 드롭다운 메뉴 추가          
                             this.api().columns(8).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );   
+
+                            // 10열에 드롭다운 메뉴 추가 (OKX)         
+                            this.api().columns(9).every( function () 
+                            {{
+                                var column = this;
+                                var select = $(
+                                '<select><option value="">전체</option></select>'
+                                )
+                                    .appendTo( $(column.header()) )
+                                    .on( 'change', function () 
+                                    {{
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    }} );
+
+                                column.data().unique().sort().each( function ( d, j ) 
+                                {{
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                }} );
+                            }} );   
+
+                            // 11열에 드롭다운 메뉴 추가 (HL)         
+                            this.api().columns(10).every( function () 
                             {{
                                 var column = this;
                                 var select = $(
@@ -588,21 +685,24 @@ try:
                         }}],
                         "columns": 
                         [
-                            {{ "width": "10px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "50px" }},
-                            {{ "width": "80px" }},
-                            {{ "width": "80px" }},
-                            {{ "width": "80px" }},
-                            {{ "width": "80px" }},
-                            {{ "width": "80px" }},
-                            {{ "width": "80px" }},
+                            {{ "width": "10px" }},  // 번호
+                            {{ "width": "50px" }},  // Ticker
+                            {{ "width": "50px" }},  // Ub_KRW
+                            {{ "width": "50px" }},  // Ub_BTC
+                            {{ "width": "50px" }},  // Bithumb
+                            {{ "width": "50px" }},  // CB_Spot
+                            {{ "width": "50px" }},  // BN_Spot
+                            {{ "width": "50px" }},  // BN_USDM
+                            {{ "width": "50px" }},  // BB_USDM
+                            {{ "width": "50px" }},  // OKX_Perp
+                            {{ "width": "50px" }},  // HL
+                            {{ "width": "80px" }},  // CG_MC
+                            {{ "width": "80px" }},  // CG_FDV
+                            {{ "width": "80px" }},  // CMC_MC
+                            {{ "width": "80px" }},  // CMC_FDV
+                            {{ "width": "80px" }},  // Binance_OI
+                            {{ "width": "80px" }},  // Bybit_OI
+                            {{ "width": "80px" }},  // HL_OI
                         ]
                     }});
 
