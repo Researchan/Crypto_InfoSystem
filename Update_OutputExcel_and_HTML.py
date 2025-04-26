@@ -72,7 +72,7 @@ for _ in range(3):  # 3페이지까지 조회
         coingecko1_params['page'] += 1
         
         # API 호출 간 3초 대기
-        time.sleep(3)
+        time.sleep(5)
         
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
@@ -107,7 +107,7 @@ for _ in range(3):  # 3페이지까지 조회
         coingecko2_params['page'] += 1
         
         # API 호출 간 3초 대기
-        time.sleep(3)
+        time.sleep(5)
         
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
@@ -117,7 +117,7 @@ for _ in range(3):  # 3페이지까지 조회
         break
 
 # 코인게코 API 호출 완료 후 코인마켓캡 API 호출 전 추가 대기 시간 (3초)
-time.sleep(3)
+time.sleep(5)
 
 try:
     # CoinMarketCap API 호출에 사용할 파라미터
