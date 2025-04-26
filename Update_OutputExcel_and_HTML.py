@@ -71,8 +71,9 @@ for _ in range(3):  # 3페이지까지 조회
         # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
         coingecko1_params['page'] += 1
         
-        # API 호출 간 3초 대기
-        time.sleep(5)
+        # API 호출 간 30초 대기 (기존 5초에서 변경)
+        print("다음 API 호출 전 30초 대기 중...")
+        time.sleep(30)
         
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
@@ -81,8 +82,9 @@ for _ in range(3):  # 3페이지까지 조회
         jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
         break
 
-# 첫 번째 그룹과 두 번째 그룹 사이에 추가 대기 시간 (3초)
-time.sleep(3)
+# 첫 번째 그룹과 두 번째 그룹 사이에 추가 대기 시간 (30초로 증가)
+print("두 번째 API 호출 그룹 전 30초 대기 중...")
+time.sleep(30)
 
 # Coingecko API 호출 및 데이터 처리2
 for _ in range(3):  # 3페이지까지 조회
@@ -106,8 +108,9 @@ for _ in range(3):  # 3페이지까지 조회
         # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
         coingecko2_params['page'] += 1
         
-        # API 호출 간 3초 대기
-        time.sleep(5)
+        # API 호출 간 30초 대기 (기존 5초에서 변경)
+        print("다음 API 호출 전 30초 대기 중...")
+        time.sleep(30)
         
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
@@ -117,7 +120,7 @@ for _ in range(3):  # 3페이지까지 조회
         break
 
 # 코인게코 API 호출 완료 후 코인마켓캡 API 호출 전 추가 대기 시간 (3초)
-time.sleep(5)
+time.sleep(3)
 
 try:
     # CoinMarketCap API 호출에 사용할 파라미터
