@@ -8,6 +8,7 @@ import Get_Upbit_BTC_list
 import Get_Upbit_KRW_list
 import Get_BinanceSpot_list
 import Get_OkxFuture_list
+import Get_HL_list
 import Get_CoinbaseSpot_list
 # import Get_BinanceFuture_OI
 # import Get_BybitFuture_OI
@@ -25,12 +26,14 @@ try:
     Binance_Future_list = Get_BinanceFuture_list.Tickerlist
     Bybit_Future_list = Get_BybitFuture_list.Tickerlist
     Okx_Future_list = Get_OkxFuture_list.Tickerlist
+    HL_Future_list = Get_HL_list.Tickerlist
 
     Binance_OI = Get_BinanceFuture_list.sorted_OI_Dict
     Bybit_OI = Get_BybitFuture_list.sorted_OI_Dict
+    HL_OI = Get_HL_list.sorted_OI_Dict
 
     # 각 거래소 상장리스트 합산하여 전체 리스트 생성 및 정렬
-    Coin_list = Upbit_KRW_list + Upbit_BTC_list  + Bithumb_list + Coinbase_Spot_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list
+    Coin_list = Upbit_KRW_list + Upbit_BTC_list + Bithumb_list + Coinbase_Spot_list + Binance_Spot_list + Binance_Future_list + Bybit_Future_list + Okx_Future_list + HL_Future_list
     Coin_list = set(Coin_list)
     Coin_list = list(Coin_list)
     Coin_list.sort()
@@ -48,8 +51,10 @@ try:
             'Binance_Future':None,
             'Bybit_Future':None,
             'Okx_Future':None,
+            'HL_Future':None,
             'Binance_OI':None,
             'Bybit_OI':None,
+            'HL_OI':None,
             'CG_id':None,
             'CMC_id':None
         }
@@ -94,11 +99,19 @@ try:
         elif i not in Okx_Future_list:
             Coin_Infos[i]['Okx_Future'] = 'X'
             
+        if i in HL_Future_list:
+            Coin_Infos[i]['HL_Future'] = 'O'
+        elif i not in HL_Future_list:
+            Coin_Infos[i]['HL_Future'] = 'X'
+            
         if i in Binance_OI:
             Coin_Infos[i]['Binance_OI'] = Binance_OI[i]
             
         if i in Bybit_OI:
             Coin_Infos[i]['Bybit_OI'] = Bybit_OI[i]
+            
+        if i in HL_OI:
+            Coin_Infos[i]['HL_OI'] = HL_OI[i]
 
     # 기존 엑셀 파일 불러오기 + Read로 열기
     Input_excel_file = 'ListingDatas.xlsx'
@@ -120,8 +133,8 @@ try:
     for ticker, info in sorted(Coin_Infos.items()):
         new_row = {'Ticker': ticker, 'CG_id': info['CG_id'], 'CMC_id':info['CMC_id'],
                 'Upbit_KRW': info['Upbit_KRW'], 'Upbit_BTC': info['Upbit_BTC'], 'Bithumb': info['Bithumb'], 'Coinbase_Spot': info['Coinbase_Spot'], 'Binance_Spot': info['Binance_Spot'], 
-                'Binance_Future': info['Binance_Future'], 'Bybit_Future': info['Bybit_Future'], 'Okx_Future': info['Okx_Future'],
-                'Binance_OI' : info['Binance_OI'], 'Bybit_OI' : info['Bybit_OI']}
+                'Binance_Future': info['Binance_Future'], 'Bybit_Future': info['Bybit_Future'], 'Okx_Future': info['Okx_Future'], 'HL_Future': info['HL_Future'],
+                'Binance_OI': info['Binance_OI'], 'Bybit_OI': info['Bybit_OI'], 'HL_OI': info['HL_OI']}
         new_data.append(new_row)
 
     # 새로운 데이터를 기존 엑셀 파일에 추가. pandas사용.
@@ -149,9 +162,11 @@ try:
     worksheet.column_dimensions['K'].width = 15
     worksheet.column_dimensions['L'].width = 15
     worksheet.column_dimensions['M'].width = 15
+    worksheet.column_dimensions['N'].width = 15
+    worksheet.column_dimensions['O'].width = 15
 
-    # A열부터 M열까지 가운데 정렬
-    for column_letter in 'ABCDEFGHIJKLM':
+    # A열부터 O열까지 가운데 정렬
+    for column_letter in 'ABCDEFGHIJKLMNO':
         for cell in worksheet[column_letter]:
             cell.alignment = Alignment(horizontal='center', vertical='center')
 
