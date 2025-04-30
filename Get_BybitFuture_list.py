@@ -106,9 +106,9 @@ Bybit_New_OI_Dict['TURBO'] = Bybit_New_OI_Dict.pop('1000TURBO')
 New_Tickerlist.remove('1000TURBO')
 New_Tickerlist.append('TURBO')
 
-Bybit_New_OI_Dict['AIDOGE'] = Bybit_New_OI_Dict.pop('10000000AIDOGE')
-New_Tickerlist.remove('10000000AIDOGE')
-New_Tickerlist.append('AIDOGE')
+# Bybit_New_OI_Dict['AIDOGE'] = Bybit_New_OI_Dict.pop('10000000AIDOGE')
+# New_Tickerlist.remove('10000000AIDOGE')
+# New_Tickerlist.append('AIDOGE')
 
 Bybit_New_OI_Dict['COQ'] = Bybit_New_OI_Dict.pop('10000COQ')
 New_Tickerlist.remove('10000COQ')
