@@ -54,7 +54,8 @@ try:
         'RNDR': 'RENDER',     # RNDR이 RENDER로 리브랜딩됨
         'MATIC': 'POL',       # MATIC이 POL로 리브랜딩됨
         'MPL': 'SYRUP',       # MPL이 SYRUP으로 합병됨
-        'LIT': 'HEI'          # LIT이 HEI로 리브랜딩됨
+        'LIT': 'HEI',          # LIT이 HEI로 리브랜딩됨
+        'MANTLE': 'MNT'          # 티커 변경
     }
     
     # 제외된 토큰 출력
