@@ -25,6 +25,7 @@ try:
 
     Tickerlist.remove('GAME2') #CoinGecko에 정보없음.
     Tickerlist.remove('USDT') #테더삭제
+    Tickerlist.remove('HP')
     # Tickerlist.remove('BOUNTY') #코개코랑 코마캡에 없음 생김.
 
     Tickerlist = set(Tickerlist)

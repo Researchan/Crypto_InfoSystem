@@ -18,6 +18,7 @@ try:
         'USDT',  # 테더
         'OCEAN',  # 삭제
         'GAME2',  # CoinGecko에 정보없음
+        'HP',  # 쓰레기 컷
     ]
     
     # 제외된 토큰 출력
