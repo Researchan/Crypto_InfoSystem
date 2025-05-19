@@ -78,8 +78,8 @@ try:
 
     #7 OI정보 받아와서 저장.
     for i in Tickerlist:
-        # OI정보 보내주지 않는 페어는 오류나게 됨. 오류나는 페어 확인
-        print(i)
+        # # OI정보 보내주지 않는 페어는 오류나게 됨. 오류나는 페어 확인
+        # print(i)
         res = exBNfuture.fetch_open_interest_history(i, timeframe='5m', params={
             'limit':'1',
         })
