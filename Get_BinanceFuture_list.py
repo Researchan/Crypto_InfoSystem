@@ -181,6 +181,9 @@ try:
     New_Tickerlist.remove('BROCCOLI714')
     New_Tickerlist.append('BROCCOLI')
 
+    New_OI_Dict['BOB'] = New_OI_Dict.pop('1000000BOB') #아 진짜 병신같네 바이낸스가 어쩌다가 이렇게 됐을까 네이로부터 진짜
+    New_Tickerlist.remove('1000000BOB')
+    New_Tickerlist.append('BOB')
     New_Tickerlist.sort()
     Tickerlist = New_Tickerlist
 
