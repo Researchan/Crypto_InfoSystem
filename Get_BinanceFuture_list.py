@@ -68,6 +68,7 @@ try:
     Tickerlist.remove('NULS/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
     Tickerlist.remove('TROY/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
     Tickerlist.remove('VIDT/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
+    Tickerlist.remove('ALPACA/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
     # Tickerlist.remove('FORM/USDT:USDT') #빨리 정보 줘 코개코야
     Tickerlist.sort()
 
