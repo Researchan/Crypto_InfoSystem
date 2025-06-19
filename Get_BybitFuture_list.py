@@ -138,9 +138,9 @@ Bybit_New_OI_Dict['NEIRO'] = Bybit_New_OI_Dict.pop('1000NEIROCTO')
 New_Tickerlist.remove('1000NEIROCTO') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
 New_Tickerlist.append('NEIRO')
 
-Bybit_New_OI_Dict['MUMU'] = Bybit_New_OI_Dict.pop('1000MUMU')
-New_Tickerlist.remove('1000MUMU')
-New_Tickerlist.append('MUMU')
+# Bybit_New_OI_Dict['MUMU'] = Bybit_New_OI_Dict.pop('1000MUMU') # 상폐
+# New_Tickerlist.remove('1000MUMU')
+# New_Tickerlist.append('MUMU')
 
 Bybit_New_OI_Dict['WHY'] = Bybit_New_OI_Dict.pop('10000WHY')
 New_Tickerlist.remove('10000WHY')
