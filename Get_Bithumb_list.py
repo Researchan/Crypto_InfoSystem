@@ -40,6 +40,7 @@ Tickerlist.remove('FLZ') #빗썸 단독상장 개잡코인데 FDV 3B 이라서 �
 # Tickerlist.remove('HPO') 
 Tickerlist.remove('HP') #업비트랑 둘만 상장된 김치. 정보도 잘 없어서 제외
 # Tickerlist.remove('NPT') #네오핀 리브랜딩 해서 사라짐.
+Tickerlist.remove('MAY') #네오핀 리브랜딩. 김치라 그냥 삭제.
 
 Tickerlist = set(Tickerlist)
 Tickerlist = list(Tickerlist)
