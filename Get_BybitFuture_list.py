@@ -38,11 +38,26 @@ Bybit_New_OI_Dict = {}
 
 #원하는 티커에 대해서 OI정보 받아오기 + 가격 * OIvolume = USD Value 계산.
 for i in Tickerlist:
-    res = exBybit.fetch_open_interest_history(i, timeframe='5m', params={ 
-            'limit':'1',
-        })
-    # print(i)
-    Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestValue'])
+    try:
+        res = exBybit.fetch_open_interest_history(i, timeframe='5m', params={ 
+                'limit':'1',
+            })
+        # openInterestValue가 None이면 openInterestAmount * price로 계산
+        if res and len(res) > 0:
+            if res[0]['openInterestValue'] is not None:
+                Bybit_OI_Dict[i] = round(res[0]['openInterestValue'])
+            elif res[0]['openInterestAmount'] is not None:
+                # openInterestAmount * 현재 가격으로 계산
+                Bybit_OI_Dict[i] = round(lastprices[i]['last'] * res[0]['openInterestAmount'])
+            else:
+                print(f"문제 티커 발견 - {i}: openInterestValue와 openInterestAmount 모두 None")
+                continue
+        else:
+            print(f"문제 티커 발견 - {i}: 응답 데이터가 비어있음")
+            continue
+    except Exception as e:
+        print(f"오류 발생 티커 - {i}: {e}")
+        continue
     # print(res)
 
 #OI Dice에서 이름 형식 정리.
