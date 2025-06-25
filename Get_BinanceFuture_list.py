@@ -70,7 +70,7 @@ try:
     Tickerlist.remove('VIDT/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
     Tickerlist.remove('ALPACA/USDT:USDT') #제발 상폐하면 좀 정보좀 그만 줘라
     # Tickerlist.remove('FORM/USDT:USDT') #빨리 정보 줘 코개코야
-    Tickerlist.remove('NEWT/USDT:USDT') #매직뉴턴이라는 코인인데 상장한지 하루가 넘게 코개코 코마캡 둘 다 정보가 안올라옴. OI는 400만이 넘게 쌓였는데..시총도 모르겠네. 프리마켓이네.
+    # Tickerlist.remove('NEWT/USDT:USDT') #매직뉴턴이라는 코인인데 상장한지 하루가 넘게 코개코 코마캡 둘 다 정보가 안올라옴. OI는 400만이 넘게 쌓였는데..시총도 모르겠네. 프리마켓이네.
     Tickerlist.remove('PUMP/USDT:USDT') # 지들이 이름 바꿔놓고 예전꺼 계속주네 ㅂㅅ같이
     Tickerlist.sort()
 

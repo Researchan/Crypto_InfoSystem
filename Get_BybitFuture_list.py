@@ -26,7 +26,7 @@ Tickerlist.remove('XAUT/USDT:USDT') # 금 페깅코인이라.
 # Tickerlist.remove('BIO/USDT:USDT') # 코개코 없음 PRE마켓인데 왜 잡히지?
 # Tickerlist.remove('FORM/USDT:USDT') # 보류
 # Tickerlist.remove('RED/USDT:USDT') # 보류
-Tickerlist.remove('NEWT/USDT:USDT') # 보류프리마켓.
+# Tickerlist.remove('NEWT/USDT:USDT') # 보류프리마켓.
         
 #마지막 가격정보 불러오기
 # print(Tickerlist)
