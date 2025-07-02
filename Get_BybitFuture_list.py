@@ -27,6 +27,7 @@ Tickerlist.remove('XAUT/USDT:USDT') # 금 페깅코인이라.
 # Tickerlist.remove('FORM/USDT:USDT') # 보류
 # Tickerlist.remove('RED/USDT:USDT') # 보류
 # Tickerlist.remove('NEWT/USDT:USDT') # 보류프리마켓.
+Tickerlist.remove('FRAG/USDT:USDT') # 이 듣보는 상장한지 하루가 넘었는데 코마캡에 안나오네 ㅋㅋ
         
 #마지막 가격정보 불러오기
 # print(Tickerlist)
