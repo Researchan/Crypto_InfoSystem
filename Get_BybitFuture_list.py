@@ -147,9 +147,9 @@ Bybit_New_OI_Dict['PEIPEI'] = Bybit_New_OI_Dict.pop('1000000PEIPEI')
 New_Tickerlist.remove('1000000PEIPEI')
 New_Tickerlist.append('PEIPEI')
 
-Bybit_New_OI_Dict['CAT'] = Bybit_New_OI_Dict.pop('1000CAT') #캣츠랑 헷갈려
-New_Tickerlist.remove('1000CAT')
-New_Tickerlist.append('CAT')
+# Bybit_New_OI_Dict['CAT'] = Bybit_New_OI_Dict.pop('1000CAT') #캣츠랑 헷갈려... 결국 상폐.
+# New_Tickerlist.remove('1000CAT')
+# New_Tickerlist.append('CAT')
 
 Bybit_New_OI_Dict['NEIRO'] = Bybit_New_OI_Dict.pop('1000NEIROCTO')
 New_Tickerlist.remove('1000NEIROCTO') #바낸 표준 맞춰서 NEIRO로 바꿀 것.
