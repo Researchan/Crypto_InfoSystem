@@ -184,6 +184,59 @@ for _ in range(3):  # 3페이지까지 조회
         break
 
 print(f"🔍 CoinGecko API 호출 완료: 총 {len(coingecko_coins_data)}개 코인 정보 수신")
+
+# CoinGecko API 결과 분석
+print("=== CoinGecko API 결과 분석 ===")
+all_cg_ids = [id for id in df['CG_id'].fillna('').astype(str).tolist() if id.strip() != '']
+received_cg_ids = list(coingecko_coins_data.keys())
+failed_cg_ids = [id for id in all_cg_ids if id not in received_cg_ids]
+
+print(f"📤 요청한 CoinGecko ID: {len(all_cg_ids)}개")
+print(f"📥 수신한 CoinGecko ID: {len(received_cg_ids)}개")
+print(f"❌ 응답 없는 CoinGecko ID: {len(failed_cg_ids)}개")
+
+if failed_cg_ids:
+    print(f"🔍 응답 없는 CoinGecko ID들: {', '.join(failed_cg_ids[:10])}{'...' if len(failed_cg_ids) > 10 else ''}")
+
+# 시가총액 정보가 없는 CoinGecko 코인들 분석
+cg_no_marketcap = []
+for cg_id, data in coingecko_coins_data.items():
+    if not data.get('market_cap') or pd.isna(data.get('market_cap')):
+        cg_no_marketcap.append(cg_id)
+
+print(f"💰 시가총액 정보 없는 CoinGecko 코인: {len(cg_no_marketcap)}개")
+if cg_no_marketcap:
+    print(f"🔍 시가총액 정보 없는 코인들: {', '.join(cg_no_marketcap[:10])}{'...' if len(cg_no_marketcap) > 10 else ''}")
+
+# CoinGecko 문제가 있으면 슬랙 알림
+if failed_cg_ids or cg_no_marketcap:
+    slack_message = "🔍 **CoinGecko API 문제 발견** 🔍\n\n"
+    
+    if failed_cg_ids:
+        slack_message += f"❌ **응답 없는 ID** ({len(failed_cg_ids)}개):\n"
+        for i in range(0, min(len(failed_cg_ids), 15), 5):
+            batch = failed_cg_ids[i:i+5]
+            slack_message += "• " + ", ".join(batch) + "\n"
+        if len(failed_cg_ids) > 15:
+            slack_message += f"• ... 외 {len(failed_cg_ids) - 15}개\n"
+        slack_message += "\n"
+    
+    if cg_no_marketcap:
+        slack_message += f"💰 **시가총액 정보 없음** ({len(cg_no_marketcap)}개):\n"
+        for i in range(0, min(len(cg_no_marketcap), 15), 5):
+            batch = cg_no_marketcap[i:i+5]
+            slack_message += "• " + ", ".join(batch) + "\n"
+        if len(cg_no_marketcap) > 15:
+            slack_message += f"• ... 외 {len(cg_no_marketcap) - 15}개\n"
+    
+    slack_message += "\n📋 **CoinGecko ID 확인 또는 API 상태 점검이 필요합니다.**"
+    
+    try:
+        SlackModule.Exchange_Listing_send_message_to_slack(slack_message)
+        print("✅ CoinGecko 문제 알림을 슬랙으로 전송했습니다.")
+    except Exception as e:
+        print(f"❌ CoinGecko 문제 슬랙 알림 전송 실패: {e}")
+
 print("=== CoinMarketCap API 호출 시작 ===")
 
 # 코인게코 API 호출 완료 후 코인마켓캡 API 호출 전 추가 대기 시간 (3초)
@@ -226,6 +279,60 @@ try:
         # 모든 코인의 정보를 딕셔너리에 추가
         coinmarketcap_coins_data = response_json['data']
         print(f"💰 CoinMarketCap API 호출 성공: {len(coinmarketcap_coins_data)}개 코인 정보 수신")
+        
+        # CoinMarketCap API 결과 분석
+        print("=== CoinMarketCap API 결과 분석 ===")
+        all_cmc_ids = valid_cmc_ids
+        received_cmc_ids = list(coinmarketcap_coins_data.keys())
+        failed_cmc_ids = [id for id in all_cmc_ids if id not in received_cmc_ids]
+        
+        print(f"📤 요청한 CoinMarketCap ID: {len(all_cmc_ids)}개")
+        print(f"📥 수신한 CoinMarketCap ID: {len(received_cmc_ids)}개")
+        print(f"❌ 응답 없는 CoinMarketCap ID: {len(failed_cmc_ids)}개")
+        
+        if failed_cmc_ids:
+            print(f"🔍 응답 없는 CoinMarketCap ID들: {', '.join(failed_cmc_ids[:10])}{'...' if len(failed_cmc_ids) > 10 else ''}")
+        
+        # 시가총액 정보가 없는 CoinMarketCap 코인들 분석
+        cmc_no_marketcap = []
+        for cmc_id, data in coinmarketcap_coins_data.items():
+            marketcap = data.get('quote', {}).get('USD', {}).get('market_cap')
+            if not marketcap or pd.isna(marketcap):
+                cmc_no_marketcap.append(cmc_id)
+        
+        print(f"💰 시가총액 정보 없는 CoinMarketCap 코인: {len(cmc_no_marketcap)}개")
+        if cmc_no_marketcap:
+            print(f"🔍 시가총액 정보 없는 코인들: {', '.join(cmc_no_marketcap[:10])}{'...' if len(cmc_no_marketcap) > 10 else ''}")
+        
+        # CoinMarketCap 문제가 있으면 슬랙 알림
+        if failed_cmc_ids or cmc_no_marketcap:
+            slack_message = "💰 **CoinMarketCap API 문제 발견** 💰\n\n"
+            
+            if failed_cmc_ids:
+                slack_message += f"❌ **응답 없는 ID** ({len(failed_cmc_ids)}개):\n"
+                for i in range(0, min(len(failed_cmc_ids), 15), 5):
+                    batch = failed_cmc_ids[i:i+5]
+                    slack_message += "• " + ", ".join(batch) + "\n"
+                if len(failed_cmc_ids) > 15:
+                    slack_message += f"• ... 외 {len(failed_cmc_ids) - 15}개\n"
+                slack_message += "\n"
+            
+            if cmc_no_marketcap:
+                slack_message += f"💰 **시가총액 정보 없음** ({len(cmc_no_marketcap)}개):\n"
+                for i in range(0, min(len(cmc_no_marketcap), 15), 5):
+                    batch = cmc_no_marketcap[i:i+5]
+                    slack_message += "• " + ", ".join(batch) + "\n"
+                if len(cmc_no_marketcap) > 15:
+                    slack_message += f"• ... 외 {len(cmc_no_marketcap) - 15}개\n"
+            
+            slack_message += "\n📋 **CoinMarketCap ID 확인 또는 API 상태 점검이 필요합니다.**"
+            
+            try:
+                SlackModule.Exchange_Listing_send_message_to_slack(slack_message)
+                print("✅ CoinMarketCap 문제 알림을 슬랙으로 전송했습니다.")
+            except Exception as e:
+                print(f"❌ CoinMarketCap 문제 슬랙 알림 전송 실패: {e}")
+            
     else:
         print("⚠️ 유효한 CMC_id가 없어 CoinMarketCap API 호출을 건너뜁니다.")
         coinmarketcap_coins_data = {}
@@ -1454,4 +1561,4 @@ except Exception as e:
         '''.format(table=html))
 
     print(f"✅ 오류 발생에도 불구하고 HTML이 {output_html_name}에 저장되었습니다!")
-    print("🎯 오류 상황에서도 처리 완료!")
+    print("�� 오류 상황에서도 처리 완료!")
