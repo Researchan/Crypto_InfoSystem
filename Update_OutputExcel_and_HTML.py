@@ -15,6 +15,60 @@ coinmarketcap_api_key = 'a8c9a257-d8ad-43d4-84a8-a5a75d9a6ee4' #순호님
 # 엑셀 파일에서 ids 정보를 가져옴
 df = pd.read_excel(input_file_name)
 
+# API ID 누락 검사 및 알림
+print(f"=== 데이터 분석 시작 ===")
+print(f"전체 코인 수: {len(df)}개")
+
+missing_cg_ids = []
+missing_cmc_ids = []
+
+for _, row in df.iterrows():
+    ticker = row['Ticker']
+    cg_id = row['CG_id']
+    cmc_id = row['CMC_id']
+    
+    # CoinGecko ID 누락 검사
+    if pd.isna(cg_id) or str(cg_id).strip() == '' or str(cg_id) == 'nan':
+        missing_cg_ids.append(ticker)
+    
+    # CoinMarketCap ID 누락 검사
+    if pd.isna(cmc_id) or cmc_id == 0 or str(cmc_id).strip() == '' or str(cmc_id) == 'nan':
+        missing_cmc_ids.append(ticker)
+
+print(f"CoinGecko ID 누락: {len(missing_cg_ids)}개")
+print(f"CoinMarketCap ID 누락: {len(missing_cmc_ids)}개")
+
+# 누락된 ID가 있으면 슬랙으로 알림
+if missing_cg_ids or missing_cmc_ids:
+    slack_message = "⚠️ **API ID 누락 알림** ⚠️\n\n"
+    
+    if missing_cg_ids:
+        slack_message += f"🔍 **CoinGecko ID 누락** ({len(missing_cg_ids)}개):\n"
+        # 5개씩 줄바꿈해서 보기 좋게 표시
+        for i in range(0, len(missing_cg_ids), 5):
+            batch = missing_cg_ids[i:i+5]
+            slack_message += "• " + ", ".join(batch) + "\n"
+        slack_message += "\n"
+    
+    if missing_cmc_ids:
+        slack_message += f"💰 **CoinMarketCap ID 누락** ({len(missing_cmc_ids)}개):\n"
+        # 5개씩 줄바꿈해서 보기 좋게 표시
+        for i in range(0, len(missing_cmc_ids), 5):
+            batch = missing_cmc_ids[i:i+5]
+            slack_message += "• " + ", ".join(batch) + "\n"
+    
+    slack_message += "\n📋 **API ID 등록이 필요한 코인들입니다.**"
+    
+    try:
+        SlackModule.Exchange_Listing_send_message_to_slack(slack_message)
+        print("✅ 누락된 API ID 알림을 슬랙으로 전송했습니다.")
+    except Exception as e:
+        print(f"❌ 슬랙 알림 전송 실패: {e}")
+else:
+    print("✅ 모든 코인의 API ID가 정상적으로 등록되어 있습니다.")
+
+print("=== CoinGecko API 호출 시작 ===")
+
 # 엑셀 파일에 있는 id들을 ','로 구분하여 문자열로 만듦
 #coingecko_ids = ",".join(df['CG_id'].tolist())
 coingecko_ids = ",".join(df['CG_id'].fillna('').astype(str).tolist()) # CG_id가 없는 필드때문에 이렇게 사용해야함
@@ -26,6 +80,8 @@ id_list2 = id_list[500:]
 
 ids1_str = ",".join(id_list1)  # 최대 500개
 ids2_str = ",".join(id_list2)  # 500개 이후 나머지
+
+print(f"CoinGecko 요청 ID 수: 그룹1({len(id_list1)}개), 그룹2({len(id_list2)}개)")
 
 # Coingecko API 호출에 사용할 파라미터
 coingecko1_params = {
@@ -50,15 +106,18 @@ coingecko2_params = {
 coingecko_coins_data = {}
 
 # Coingecko API 호출 및 데이터 처리1
+page_count = 0
 for _ in range(3):  # 3페이지까지 조회
     try:
+        page_count += 1
+        print(f"CoinGecko 그룹1 - 페이지 {page_count} 호출 중...")
         response = requests.get(coingecko_url, params=coingecko1_params)
-        # print(response)
-        # print(response.status_code)
+        print(f"응답 상태: {response.status_code}")
         response_json = response.json()
 
         # API 호출 결과가 빈 리스트인 경우, 더 이상 정보가 없으므로 반복문 종료
         if not response_json:
+            print("더 이상 데이터가 없어 그룹1 호출을 종료합니다.")
             break
 
         # 모든 코인의 정보를 딕셔너리에 추가
@@ -67,6 +126,8 @@ for _ in range(3):  # 3페이지까지 조회
                 'market_cap': coin_info['market_cap'],
                 'FDV': coin_info['fully_diluted_valuation']
             }
+        
+        print(f"그룹1 페이지 {page_count}에서 {len(response_json)}개 코인 정보 수신 (누적: {len(coingecko_coins_data)}개)")
 
         # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
         coingecko1_params['page'] += 1
@@ -77,9 +138,8 @@ for _ in range(3):  # 3페이지까지 조회
         
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
-        print(response_json)
-        print("Error: Failed to retrieve Coingecko data", e)
-        SlackModule.Exchange_Listing_send_message_to_slack(str(e))
+        print(f"❌ CoinGecko 그룹1 호출 실패: {e}")
+        SlackModule.Exchange_Listing_send_message_to_slack(f"CoinGecko 그룹1 API 오류: {str(e)}")
         break
 
 # 첫 번째 그룹과 두 번째 그룹 사이에 추가 대기 시간 (30초로 증가)
@@ -87,15 +147,18 @@ print("두 번째 API 호출 그룹 전 30초 대기 중...")
 time.sleep(30)
 
 # Coingecko API 호출 및 데이터 처리2
+page_count = 0
 for _ in range(3):  # 3페이지까지 조회
     try:
+        page_count += 1
+        print(f"CoinGecko 그룹2 - 페이지 {page_count} 호출 중...")
         response = requests.get(coingecko_url, params=coingecko2_params)
-        # print(response)
-        # print(response.status_code)
+        print(f"응답 상태: {response.status_code}")
         response_json = response.json()
 
         # API 호출 결과가 빈 리스트인 경우, 더 이상 정보가 없으므로 반복문 종료
         if not response_json:
+            print("더 이상 데이터가 없어 그룹2 호출을 종료합니다.")
             break
 
         # 모든 코인의 정보를 딕셔너리에 추가
@@ -104,6 +167,8 @@ for _ in range(3):  # 3페이지까지 조회
                 'market_cap': coin_info['market_cap'],
                 'FDV': coin_info['fully_diluted_valuation']
             }
+        
+        print(f"그룹2 페이지 {page_count}에서 {len(response_json)}개 코인 정보 수신 (누적: {len(coingecko_coins_data)}개)")
 
         # 다음 페이지로 이동하기 위해 'page' 파라미터를 증가시킴
         coingecko2_params['page'] += 1
@@ -114,10 +179,12 @@ for _ in range(3):  # 3페이지까지 조회
         
     except Exception as e:
         # API 호출이 실패한 경우 에러 메시지 출력
-        print(response_json)
-        print("Error: Failed to retrieve Coingecko data", e)
-        SlackModule.Exchange_Listing_send_message_to_slack(str(e))
+        print(f"❌ CoinGecko 그룹2 호출 실패: {e}")
+        SlackModule.Exchange_Listing_send_message_to_slack(f"CoinGecko 그룹2 API 오류: {str(e)}")
         break
+
+print(f"🔍 CoinGecko API 호출 완료: 총 {len(coingecko_coins_data)}개 코인 정보 수신")
+print("=== CoinMarketCap API 호출 시작 ===")
 
 # 코인게코 API 호출 완료 후 코인마켓캡 API 호출 전 추가 대기 시간 (3초)
 time.sleep(3)
@@ -137,6 +204,8 @@ try:
     # 빈 문자열 제거해서 API 호출용 문자열 생성
     valid_cmc_ids = [id for id in safe_cmc_ids if id != '']
     
+    print(f"CoinMarketCap 요청 ID 수: {len(valid_cmc_ids)}개")
+    
     if len(valid_cmc_ids) > 0:
         # CoinMarketCap API 호출에 사용할 파라미터
         coinmarketcap_params = {
@@ -148,15 +217,17 @@ try:
             'X-CMC_PRO_API_KEY': coinmarketcap_api_key,
         }
 
+        print("CoinMarketCap API 호출 중...")
         # CoinMarketCap API 호출 및 데이터 처리
         response = requests.get(coinmarketcap_url, params=coinmarketcap_params, headers=coinmarketcap_headers)
+        print(f"응답 상태: {response.status_code}")
         response_json = response.json()
 
         # 모든 코인의 정보를 딕셔너리에 추가
         coinmarketcap_coins_data = response_json['data']
-        print(f"CoinMarketCap API 호출 성공: {len(coinmarketcap_coins_data)}개 코인 정보 수신")
+        print(f"💰 CoinMarketCap API 호출 성공: {len(coinmarketcap_coins_data)}개 코인 정보 수신")
     else:
-        print("유효한 CMC_id가 없어 CoinMarketCap API 호출을 건너뜁니다.")
+        print("⚠️ 유효한 CMC_id가 없어 CoinMarketCap API 호출을 건너뜁니다.")
         coinmarketcap_coins_data = {}
 
     # 코인별로 데이터를 정리하여 저장할 리스트 생성
@@ -232,12 +303,44 @@ try:
         money_format = writer.book.add_format({'num_format': '$#,##0'})
         worksheet.set_column('D:I', 15, money_format)
 
-    print(f"Data retrieval successful and saved to {output_xlsx_name}!")
+        print(f"Data retrieval successful and saved to {output_xlsx_name}!")
+    
+    # 최종 데이터 처리 결과 요약
+    print("=== 데이터 처리 결과 요약 ===")
+    
+    # 실제로 데이터를 얻은 코인 수 계산
+    cg_success_count = 0
+    cmc_success_count = 0
+    
+    for _, row in df_combined.iterrows():
+        # CoinGecko 성공 체크 (market cap이 NaN이 아닌 경우)
+        if pd.notna(row['CG_MarketCap']) and row['CG_MarketCap'] != 0:
+            cg_success_count += 1
+        
+        # CoinMarketCap 성공 체크 (market cap이 NaN이 아닌 경우)
+        if pd.notna(row['CMC_MarketCap']) and row['CMC_MarketCap'] != 0:
+            cmc_success_count += 1
+    
+    print(f"🔍 CoinGecko: {cg_success_count}/{len(df)}개 코인 시가총액 정보 획득 ({cg_success_count/len(df)*100:.1f}%)")
+    print(f"💰 CoinMarketCap: {cmc_success_count}/{len(df)}개 코인 시가총액 정보 획득 ({cmc_success_count/len(df)*100:.1f}%)")
+    print(f"📊 전체 처리된 코인: {len(df_combined)}개")
+    
+    # 성공률이 낮은 경우 슬랙으로 알림
+    if cg_success_count < len(df) * 0.8 or cmc_success_count < len(df) * 0.8:
+        warning_message = f"⚠️ **시가총액 정보 획득율 낮음** ⚠️\n\n"
+        warning_message += f"🔍 CoinGecko: {cg_success_count}/{len(df)}개 ({cg_success_count/len(df)*100:.1f}%)\n"
+        warning_message += f"💰 CoinMarketCap: {cmc_success_count}/{len(df)}개 ({cmc_success_count/len(df)*100:.1f}%)\n\n"
+        warning_message += "API 응답 상태나 네트워크 연결을 확인해보세요."
+        
+        try:
+            SlackModule.Exchange_Listing_send_message_to_slack(warning_message)
+        except Exception as e:
+            print(f"❌ 성공률 경고 슬랙 알림 전송 실패: {e}")
 
 
 
 
-    ######## HTML 생성중 #########
+######## HTML 생성중 #########
     
     
     
@@ -747,14 +850,19 @@ try:
         </html>
         '''.format(table=html))
 
-    print(f"Data retrieval successful and saved to {output_html_name}!")
+    print(f"✅ HTML 파일이 {output_html_name}에 성공적으로 저장되었습니다!")
+    print("🎯 모든 처리가 성공적으로 완료되었습니다!")
 
 except Exception as e:
     # API 호출이 실패한 경우 에러 메시지 출력하지만 프로그램 중단하지 않음
-    print(f"CoinMarketCap API 호출 중 오류 발생: {e}")
-    SlackModule.Exchange_Listing_send_message_to_slack(f"CoinMarketCap API 오류: {str(e)}")
+    print(f"❌ CoinMarketCap API 호출 중 오류 발생: {e}")
+    print("📋 CoinGecko 데이터만으로 엑셀 파일을 생성합니다...")
+    SlackModule.Exchange_Listing_send_message_to_slack(f"❌ CoinMarketCap API 오류: {str(e)}\n\nCoinGecko 데이터만으로 처리를 계속합니다.")
     # coinmarketcap_coins_data는 빈 딕셔너리로 초기화
     coinmarketcap_coins_data = {}
+    
+    print("=== 오류 발생으로 인한 대체 처리 시작 ===")
+    print(f"사용 가능한 CoinGecko 데이터: {len(coingecko_coins_data)}개")
     
     # 오류가 발생해도 데이터 처리는 계속 진행
     # 코인별로 데이터를 정리하여 저장할 리스트 생성
@@ -825,6 +933,21 @@ except Exception as e:
         worksheet.set_column('D:I', 15, money_format)
 
     print(f"오류 발생에도 불구하고 데이터가 {output_xlsx_name}에 저장되었습니다!")
+    
+    # 오류 상황에서의 데이터 처리 결과 요약
+    print("=== 오류 상황 데이터 처리 결과 요약 ===")
+    
+    # 실제로 데이터를 얻은 코인 수 계산
+    cg_success_count = 0
+    
+    for _, row in df_combined.iterrows():
+        # CoinGecko 성공 체크 (market cap이 NaN이 아닌 경우)
+        if pd.notna(row['CG_MarketCap']) and row['CG_MarketCap'] != 0:
+            cg_success_count += 1
+    
+    print(f"🔍 CoinGecko: {cg_success_count}/{len(df)}개 코인 시가총액 정보 획득 ({cg_success_count/len(df)*100:.1f}%)")
+    print(f"💰 CoinMarketCap: 0/{len(df)}개 코인 시가총액 정보 획득 (0.0%) - API 오류로 인해 데이터 없음")
+    print(f"📊 전체 처리된 코인: {len(df_combined)}개")
     
     # HTML 생성도 계속 진행
     # 생성된 엑셀 데이터 읽어오기
@@ -1330,4 +1453,5 @@ except Exception as e:
         </html>
         '''.format(table=html))
 
-    print(f"오류 발생에도 불구하고 HTML이 {output_html_name}에 저장되었습니다!")
+    print(f"✅ 오류 발생에도 불구하고 HTML이 {output_html_name}에 저장되었습니다!")
+    print("🎯 오류 상황에서도 처리 완료!")

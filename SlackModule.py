@@ -1,7 +1,7 @@
 import requests
 
 # 슬랙 웹훅 주소
-Webhook_Address = "https://hooks.slack.com/services/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"
+Webhook_Address = "https://hooks.slack.com/services/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"
 
 def Exchange_Listing_send_message_to_slack(message):
     """
