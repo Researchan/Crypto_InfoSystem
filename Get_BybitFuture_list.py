@@ -210,9 +210,9 @@ try:
     New_Tickerlist.remove('RONIN')
     New_Tickerlist.append('RON')
 
-    # Bybit_New_OI_Dict['PUMP'] = Bybit_New_OI_Dict.pop('PUMPBTC') #시간이 갈 수록 코인 수가 너무 많아져서 이런식으로 계속 티커를 조정해줘야하네.
-    # New_Tickerlist.remove('PUMPBTC')
-    # New_Tickerlist.append('PUMP')
+    Bybit_New_OI_Dict['PUMP'] = Bybit_New_OI_Dict.pop('PUMPFUN') #시간이 갈 수록 코인 수가 너무 많아져서 이런식으로 계속 티커를 조정해줘야하네.
+    New_Tickerlist.remove('PUMPBTC')
+    New_Tickerlist.append('PUMP')
 
 
 
