@@ -1,5 +1,5 @@
 import ccxt
-import jandimodule
+import SlackModule
 import re
 
 try:
@@ -100,4 +100,4 @@ try:
 except Exception as e:
     error_message = f"코인베이스 데이터 수집 중 오류 발생: {str(e)}"
     print(error_message)
-    jandimodule.Exchange_Listing_send_message_to_jandi(error_message) 
+    SlackModule.Exchange_Listing_send_message_to_slack(error_message) 

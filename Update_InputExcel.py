@@ -1,4 +1,4 @@
-import jandimodule
+import SlackModule
 import traceback
 
 import Get_BinanceFuture_list
@@ -182,4 +182,4 @@ except Exception as e:
     print(traceback.format_exc())
     # if e == 'nan':
     #     pass
-    jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
+    SlackModule.Exchange_Listing_send_message_to_slack(str(e))

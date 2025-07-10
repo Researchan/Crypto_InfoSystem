@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-import jandimodule
+import SlackModule
 import time  # time 모듈 추가
 
 input_file_name = 'ListingDatas.xlsx'
@@ -79,7 +79,7 @@ for _ in range(3):  # 3페이지까지 조회
         # API 호출이 실패한 경우 에러 메시지 출력
         print(response_json)
         print("Error: Failed to retrieve Coingecko data", e)
-        jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
+        SlackModule.Exchange_Listing_send_message_to_slack(str(e))
         break
 
 # 첫 번째 그룹과 두 번째 그룹 사이에 추가 대기 시간 (30초로 증가)
@@ -116,7 +116,7 @@ for _ in range(3):  # 3페이지까지 조회
         # API 호출이 실패한 경우 에러 메시지 출력
         print(response_json)
         print("Error: Failed to retrieve Coingecko data", e)
-        jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
+        SlackModule.Exchange_Listing_send_message_to_slack(str(e))
         break
 
 # 코인게코 API 호출 완료 후 코인마켓캡 API 호출 전 추가 대기 시간 (3초)
@@ -722,4 +722,4 @@ try:
 
 except Exception as e:
     print(e)
-    jandimodule.Exchange_Listing_send_message_to_jandi(str(e))
+    SlackModule.Exchange_Listing_send_message_to_slack(str(e))

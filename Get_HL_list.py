@@ -1,5 +1,5 @@
 import ccxt
-import jandimodule
+import SlackModule
 import time
 
 # 다른 파일에서 import할 변수
@@ -163,4 +163,4 @@ try:
 except Exception as e:
     error_message = f"HyperLiquid 데이터 수집 중 오류 발생: {str(e)}"
     print(error_message)
-    jandimodule.Exchange_Listing_send_message_to_jandi(error_message) 
+    SlackModule.Exchange_Listing_send_message_to_slack(error_message) 
